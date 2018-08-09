@@ -7,7 +7,7 @@ class Header extends PureComponent{
       <div className="new-requests">
         <div>
           <span className="requests">
-            REQUESTS
+            REQUESTSe
           </span>
         </div>
 
