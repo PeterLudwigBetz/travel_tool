@@ -3,32 +3,32 @@ import { shallow } from 'enzyme';
 import NavBar from '../index';
 
 // describe what we are testing
-describe("Render NavBar component", () => {
+describe('Render NavBar component', () => {
   const props = {
     onNotificationToggle: jest.fn(),
-    avatar: "avatar"
+    avatar: 'avatar'
   };
   // make our assertions and what we expect to happen
-  it("should match snapshot", () => {
+  it('should match snapshot', () => {
     const wrapper = shallow(<NavBar {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it("should render the navbar as expected", () => {
+  it('should render the navbar as expected', () => {
     const wrapper = shallow(<NavBar {...props} />);
     expect(wrapper.length).toBe(1);
   });
 
-  it("should render the OnNotification click as exepected", () => {
+  it('should render the OnNotification click as exepected', () => {
     const wrapper = shallow(<NavBar {...props} />);
     let NotificationToggleSpy = jest.spyOn(
       wrapper.instance().props,
-      "onNotificationToggle"
+      'onNotificationToggle'
     );
     wrapper
-      .find("#notification")
+      .find('#notification')
       .first()
-      .simulate("click");
+      .simulate('click');
     expect(NotificationToggleSpy).toHaveBeenCalled();
   });
 });

@@ -3,14 +3,14 @@ import { shallow } from 'enzyme';
 import SearchBar from '../index';
 
 // describe what we are testing
-describe("Render SearchBar component", () => {
+describe('Render SearchBar component', () => {
   // make our assertions and what we expect to happen
-  it("should match snapshot", () => {
+  it('should match snapshot', () => {
     const wrapper = shallow(<SearchBar />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it("should render the searchbar as expected", () => {
+  it('should render the searchbar as expected', () => {
     const wrapper = shallow(<SearchBar />);
     expect(wrapper.length).toBe(1);
   });
