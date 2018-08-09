@@ -11,7 +11,7 @@ exports[`should render request header correctly 1`] = `
       <span
         className="requests"
       >
-        REQUESTS
+        REQUESTSe
       </span>
     </div>
     <div>
