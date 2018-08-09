@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import './buttonGroup.scss';
+import './_buttonGroup.scss';
 
 class ButtonGroup extends PureComponent {
   render() {
