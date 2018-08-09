@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Button from '../Buttons';
+import Button from '../index';
 
 // describe what we are testing
 describe("Render SearchBar component", () => {

@@ -17,6 +17,7 @@ const pendingNotifications = notifications.filter(notification => {
 
 export default class NotificationPane extends PureComponent {
   render() {
+
     return (
       <div className="nav-pane">
         <NotificationHeader />

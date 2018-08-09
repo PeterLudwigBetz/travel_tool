@@ -5,6 +5,7 @@ import closeBtn from '../../images/close-btn.svg';
 
 export default class NotificationHeader extends PureComponent {
   render() {
+
     return (
       <div className="notifications-header">
         <div className="notifications-header__title">

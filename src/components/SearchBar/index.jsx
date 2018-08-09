@@ -13,7 +13,6 @@ import './SearchBar.scss';
  *
  */
 
-
 class SearchBar extends PureComponent {
   render() {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Login } from '../Login';
-import TextLink from '../../../components/text-link/TextLink';
+import TextLink from '../../../components/TextLink';
 
 const props = {
   setCurrentUser: () => {},
@@ -22,7 +22,7 @@ describe('Login Component', () => {
     });
 
   it('should be find the Login button', () => {
-    expect(wrapper.find('button').exists).toBeTruthy();   
+    expect(wrapper.find('button').exists).toBeTruthy();
   });
 
   it('should redirect to andela micro service when login is Clicked', () => {

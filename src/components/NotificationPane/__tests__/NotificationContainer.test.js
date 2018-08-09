@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme'; 
+import { shallow } from 'enzyme';
 import NotificationContainer from '../NotificationContainer';
 import testImage from '../../../images/logo.svg';
 

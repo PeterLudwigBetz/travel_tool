@@ -8,6 +8,7 @@ import unreadMessageIcon from '../../images/unread-message.svg';
 export default class NotificationItem extends PureComponent {
   renderNotificationItemMetaInfo = () => {
     const { isPending, messageOpened } = this.props;
+
     return (
       <div className="notification--item__info__bottom">
         <span className="t-hours-ago">

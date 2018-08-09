@@ -1,5 +1,5 @@
 import React from 'react';
-import TextLink from '../TextLink';
+import TextLink from '../index';
 
 const props = {
     imageSrc: '',

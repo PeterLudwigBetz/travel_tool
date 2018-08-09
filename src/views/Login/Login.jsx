@@ -8,9 +8,9 @@ import symbolG from '../../images/Google-white.svg';
 import videoSymbol from '../../images/video.svg';
 import fileSymbol from '../../images/file.svg';
 import './Login.scss';
-import TextLink from '../../components/text-link/TextLink';
+import TextLink from '../../components/TextLink';
 import { authenticationMessage } from '../../helper/toast';
-import Button from '../../components/buttons/Buttons';
+import Button from '../../components/Buttons';
 
 export class Login extends Component {
   componentDidMount() {
@@ -51,7 +51,7 @@ export class Login extends Component {
                 </p>
                 <Button
                   id="login"
-                  onClick={this.login} 
+                  onClick={this.login}
                   imageSrc={symbolG} altText="Google Symbol" imageClass="login-page__google-white" buttonType="button"
                   buttonClass="mdl-button mdl-js-button mdl-button--raised mdl-button--colored login-page__login-btn">
                   <span className="login-page__login-to-get-started-text">

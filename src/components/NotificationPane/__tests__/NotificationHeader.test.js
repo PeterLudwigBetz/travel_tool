@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';// eslint-disable-line
 
 import NotificationHeader from '../NotificationHeader';
 
-
 describe('Notification Header Component', () => {
   it('should render successfully', () => {
     const wrapper = shallow(<NotificationHeader />);

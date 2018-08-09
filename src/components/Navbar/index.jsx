@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import travela from '../../images/travela.svg';
 import icon from '../../images/drop-down-icon.svg';
 import notification from '../../images/notification.svg';
-import SearchBar from '../search-bar/SearchBar';
-import Button from '../buttons/Buttons';
-import ImageLink from '../image-link/ImageLink';
+import SearchBar from '../SearchBar';
+import Button from '../Buttons';
+import ImageLink from '../ImageLink';
 import './NavBar.scss';
 
 /**
@@ -59,7 +59,7 @@ class NavBar extends PureComponent {
           </span>
         </span>
         <span>
-          <Button 
+          <Button
             imageSrc={icon} altText="Dropdown Icon" buttonId="demo-menu-lower-right" imageClass="navbar__mdl-Icon" buttonType="button" 
             buttonClass="mdl-button mdl-js-button mdl-button--icon mdl-Icons" />
           <div className="navbar__mdl-list">

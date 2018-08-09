@@ -16,7 +16,7 @@ export default class NotificationContainer extends PureComponent {
           messageOpened={notification.messageOpened}
           image={image}
         />
-      )    
+      )
     );
   };
 
@@ -26,7 +26,6 @@ export default class NotificationContainer extends PureComponent {
     const number = title === 'Pending Approvals'
       ? pendingNotifications.length
       : generalNotifications.length;
-
     return (
       <div className="notification-container">
         <div className={`notification-container__header--${customClass}`}>
