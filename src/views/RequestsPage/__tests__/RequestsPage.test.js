@@ -124,4 +124,24 @@ describe('<RequestsPage>', () => {
     // expect(window.location.replace).toHaveBeenCalledWith('/');
     expect(history.push).toHaveBeenCalledWith('/');
   });
+
+  it('toggles modal state when close modal button is clicked', (done) => {
+    const wrapper = mount(
+      <MemoryRouter>
+        <RequestsPage {...props} />
+      </MemoryRouter>
+    );
+    wrapper
+      .find('.btn-new-request')
+      .simulate('click');
+    const newState = wrapper
+      .find(RequestsPage)
+      .instance()
+      .state;
+    process.nextTick(() => {
+      expect(newState.hideNewRequestModal).toBe(false);
+      done();
+    });
+
+  });
 });
