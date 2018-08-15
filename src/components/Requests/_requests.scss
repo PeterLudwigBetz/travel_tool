@@ -1,7 +1,7 @@
-$white-color : #FFF ;
-$primary-color: #3359DB;
-$border-color: #E4E4E4;
-$table-font-color: #4F4F4F !important;
+$white-color: #fff;
+$primary-color: #3359db;
+$border-color: #e4e4e4;
+$table-font-color: #4f4f4f !important;
 $font-medium: 'DIN Pro Medium';
 $font-normal: 'DIN Pro';
 
@@ -28,28 +28,29 @@ $font-normal: 'DIN Pro';
     @include request__status($primary-color);
   }
   &--rejected {
-    @include request__status(#FF5359);
+    @include request__status(#ff5359);
   }
   &--approved {
-    @include request__status(#49AAAF);
+    @include request__status(#49aaaf);
   }
 }
 
 .table {
   &__body:before {
-    content: "";
+    content: '';
     display: block;
     height: 3px;
   }
 
   &__container {
-// margin: 25px 0 0 61px;
-    background-color: #F8F8F8;
+    // margin: 25px 0 0 61px;
+    background-color: #f8f8f8;
   }
 
-  &__data {
+  &__data{
     padding: 13px 30px !important;
-    border-color: #E4E4E4 !important;
+    border-color: #e4e4e4 !important;
+    cursor: pointer;
   }
 
   &__row {
@@ -58,7 +59,7 @@ $font-normal: 'DIN Pro';
     text-align: center;
 
     &:hover {
-      box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
+      box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
       background-color: $white-color !important;
     }
   }
@@ -68,7 +69,7 @@ $font-normal: 'DIN Pro';
     font-family: $font-medium;
     width: 72px !important;
     color: $table-font-color;
-    border-bottom: 1px solid #EBEBEB;
+    border-bottom: 1px solid #ebebeb;
     padding: 13px 30px !important;
 
     &--last {
@@ -85,7 +86,7 @@ $font-normal: 'DIN Pro';
     border-style: none;
     border-collapse: separate;
     border-spacing: 0 6px;
-    background-color: #F8F8F8;
+    background-color: #f8f8f8;
 
     &--empty {
       @extend .table__requests;
@@ -109,6 +110,24 @@ $font-normal: 'DIN Pro';
     color: #999;
     margin-left: 39px;
   }
+
+  &__modal-bar {
+    // height: 66px;
+    // width: 50%;
+    border: 1px solid #e4e4e4;
+    border-radius: 18px;
+    box-sizing: border-box;
+    margin: 5px 0 5px 30px;
+  }
+  &__modal-bar-text {
+    height: 17px;
+    width: 87px;
+    color: #4f4f4f;
+    font-family: 'DIN Pro';
+    font-size: 13px;
+    font-weight: 500;
+    // line-height: 17px;
+    text-align: center;
+    margin: 5px;
+  }
 }
-
-

@@ -1,8 +1,31 @@
-import React, { PureComponent } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+// import { Editor } from '@tinymce/tinymce-react';
+import Modal from '../modal/Modal';
+import RequestDetailsModal from '../../views/RequestsModal/RequestsModal';
+// import Oval from '../../images/Oval.png';
+// import Oval2 from '../../images/Oval2.png';
 import './_requests.scss';
 
-class Requests extends PureComponent {
+class Requests extends Component {
+  state = {
+    clickedRequestId: null,
+    hideRequestDetailModal: true
+  };
+
+  onCloseRequestDetailsModal = () => {
+    this.setState({
+      hideRequestDetailModal: true
+    });
+  };
+
+  handleClickRequest = requestId => {
+    this.setState({
+      clickedRequestId: requestId,
+      hideRequestDetailModal: false
+    });
+  };
+
   renderNoRequests() {
     return (
       <div className="table__requests--empty">
@@ -37,7 +60,14 @@ class Requests extends PureComponent {
     return (
       <tr key={request.id} className="table__row">
         <td className="mdl-data-table__cell--non-numeric table__requests__destination table__data">
-          {request.id}
+          <div
+            onKeyPress={() => {}}
+            onClick={() => this.handleClickRequest(request.id)}
+            role="button"
+            tabIndex="0"
+          >
+            {request.id}
+          </div>
         </td>
         <td className="mdl-data-table__cell--non-numeric table__data">
           {request.destination}
@@ -52,12 +82,11 @@ class Requests extends PureComponent {
           {request.startDate}
         </td>
         <td className="mdl-data-table__cell--non-numeric table__requests__status table__data">
-          { this.renderRequestStatus(request) }
+          {this.renderRequestStatus(request)}
         </td>
       </tr>
     );
   }
-
 
   renderTableHead() {
     return (
@@ -86,23 +115,43 @@ class Requests extends PureComponent {
 
   render() {
     const { requests } = this.props;
+    const { hideRequestDetailModal, clickedRequestId } = this.state;
     return (
-      <div className="table__container">
-        {
-          requests.length
-            ? (
+      <Fragment>
+        <div>
+          <div className="table__container">
+            {requests.length ? (
               <table className="mdl-data-table mdl-js-data-table table__requests">
                 <thead>
-                  { this.renderTableHead() }
+                  {this.renderTableHead()}
                 </thead>
                 <tbody className="table__body">
-                  { requests.map(request => this.renderRequest(request)) }
+                  {requests.map(request => this.renderRequest(request))}
                 </tbody>
               </table>
-            )
-            : this.renderNoRequests()
-        }
-      </div>
+            ) : (
+              this.renderNoRequests()
+            )}
+
+            <Modal
+              toggleModal={this.onCloseRequestDetailsModal}
+              className={hideRequestDetailModal ? 'invisible' : 'visible'}
+              title={clickedRequestId}
+              symbol="#"
+              description="Request Details"
+              modalBar={(
+                <span className="table__modal-bar">
+                  <span className="table__modal-bar-text">
+Manager stage
+                  </span>
+                </span>
+)}
+            >
+              <RequestDetailsModal />
+            </Modal>
+          </div>
+        </div>
+      </Fragment>
     );
   }
 }

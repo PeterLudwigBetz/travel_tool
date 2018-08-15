@@ -1,0 +1,251 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render RequestsModal component should match snapshot 1`] = `
+<div>
+  <div>
+    <div
+      className="modal__modal_dialog"
+    >
+      <img
+        alt="avatar"
+        className="modal__oval"
+        src="Oval.png"
+      />
+      <span
+        className="modal__text-size"
+      >
+        Silm Momoh
+      </span>
+      <div
+        className="modal__modal3"
+      >
+        Product Designer, Apprenticeship
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      className="modal__travel-place"
+    >
+      <span
+        className="modal__dialog1"
+      >
+        Request to travel to: Nairobi
+      </span>
+      <span
+        className="modal__dialog-from"
+      >
+        From: Lagos
+      </span>
+    </div>
+    <div
+      className="modal__modal1"
+    >
+      <span
+        className="modal__date-submitted"
+      >
+        Date submitted
+      </span>
+      <span
+        className="modal__departure-date"
+      >
+        Target departure date
+      </span>
+      <span
+        className="modal__target-return-date"
+      >
+        Target return date
+      </span>
+    </div>
+  </div>
+  <div>
+    <div
+      className="modal__modal1"
+    >
+      <span
+        className="modal__date-date"
+      >
+        02 Aug 2018
+      </span>
+      <span
+        className="modal__date-date"
+      >
+        11 Aug 2018
+      </span>
+      <span
+        className="modal__date-date2"
+      >
+        05 Sept 2018
+      </span>
+    </div>
+  </div>
+  <div>
+    <div
+      className="modal__button-below"
+    >
+      <span
+        className="modal__dialog-btn"
+      >
+        <button
+          className="modal__button-submitted-text bg"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "",
+              "color": "",
+            }
+          }
+          type="button"
+        >
+          Approve
+        </button>
+      </span>
+      <span
+        className="modal__dialog-btn"
+      >
+        <button
+          className="modal__button-rejected-text bgg"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "",
+              "color": "",
+            }
+          }
+          type="button"
+        >
+          Reject
+        </button>
+      </span>
+    </div>
+    <div
+      className="modal__modal1"
+    >
+      <span
+        className="modal__mdl-icons"
+      >
+        <img
+          alt="avatar"
+          className="modal__oval-copy"
+          src="Oval2.png"
+        />
+        <span
+          className="modal__add-comment"
+        >
+          Add a comment
+        </span>
+      </span>
+    </div>
+  </div>
+  <form
+    className="modal__editor"
+    onSubmit={[Function]}
+  >
+    <Editor
+      id="my-id"
+      init={
+        Object {
+          "body_class": "mce-notification.mce-in mce-tinymce mce-container mce-panel mce-ico",
+          "body_id": "#mceu_0 #mceu_1 #mceu_2",
+          "branding": false,
+          "menubar": false,
+          "plugins": "lists",
+          "selector": "textarea",
+          "skin": "lightgray",
+          "statusbar": false,
+          "toolbar": "bold italic underline   numlist bullist   outdent indent",
+        }
+      }
+      initialValue="<p style='color:#999999; font-size: 15px;	font-family: DIN Pro;	line-height: 20px; text-align: left; margin:20px 8px;'>Write a comment</p>"
+      onChange={[Function]}
+    />
+    <div
+      className="modal__modal1"
+    >
+      <span
+        className="modal__dialog"
+      >
+        <button
+          className="modal__post-btn post-btn-text"
+          type="submit"
+        >
+          Post
+        </button>
+      </span>
+    </div>
+  </form>
+  <div
+    className="modal__modal1"
+  >
+    <span
+      className="modal__mdl-icons"
+    >
+      <img
+        alt="avatar"
+        className="modal__oval-copy"
+        src="Oval2.png"
+      />
+      <span
+        className="modal__user-name"
+      >
+        Jolomi Otumara
+      </span>
+      <span
+        className="modal__approval-status"
+      >
+        approved your travel request.
+      </span>
+      <span
+        className="modal__hours-status"
+      >
+        5 hours ago
+      </span>
+    </span>
+  </div>
+  <div>
+    <hr />
+    <div
+      className="modal__modal1"
+    >
+      <span
+        className="modal__mdl-icons"
+      >
+        <img
+          alt="avatar"
+          className="modal__oval-copy"
+          src="Oval2.png"
+        />
+        <span
+          className="modal__user-name"
+        >
+          Jolomi Otumara.
+        </span>
+        <span
+          className="modal__hours-status"
+        >
+          5 hours ago
+        </span>
+        <span
+          className="modal__dialog"
+        >
+          <button
+            className="modal__delete-btn"
+            type="button"
+          >
+            Delete
+          </button>
+        </span>
+      </span>
+    </div>
+    <div
+      className="modal__modal2"
+    >
+      <div
+        className="modal__status-update"
+      >
+        I thought we agreed you would be travelling Next Month?
+      </div>
+    </div>
+  </div>
+</div>
+`;

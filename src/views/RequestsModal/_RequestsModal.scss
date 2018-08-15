@@ -1,0 +1,298 @@
+.mce-notification.mce-in {
+  display: none;
+}
+
+#mceu7 {
+  height: 20px;
+  width: 115px;
+  color: #999999;
+  font-family: 'DIN Pro';
+  font-size: 15px;
+  line-height: 20px;
+  text-align: right;
+}
+
+#mceu_2-button {
+  margin-right: 8px;
+  color: #999999;
+}
+
+#mceu_4 {
+  margin-right: 8px;
+}
+#mceu_7 {
+  border-color: #e4e4e4;
+  border-width: 0;
+  border-radius: 2px;
+  box-shadow: inset 0 -1px 0 0 #f8f8f8;
+}
+#mceu_12 {
+  border-color: #e4e4e4;
+  border-width: 50px;
+}
+.mce-panel {
+  border: 0;
+  border-width: 0;
+}
+.mce-ico::before {
+  height: 16px;
+  width: 16px;
+  color: #999999;
+}
+
+.modal {
+  &__modal_dialog {
+    margin: 10px;
+  }
+  &__modal1 {
+    margin: 10px 10px 20px 10px;
+  }
+
+  &__dialog {
+    margin: 5px 50px 10px 0;
+  }
+  &__dialog-btn {
+    margin: 5px 20px 10px 0;
+  }
+  &__dialog2 {
+    margin: 40px;
+  }
+  &__dialog3 {
+    margin-right: 82px;
+  }
+  &__modal2 {
+    margin-bottom: 30px;
+    width: 100%;
+    padding-left: 47px;
+    border-bottom: none;
+    box-sizing: border-box;
+  }
+  &__oval {
+    height: 50px;
+    width: 50px;
+    margin: 15px 19px 0 0;
+  }
+  &__oval-copy {
+    height: 30px;
+    width: 30px;
+    margin: 0 5px 0 -10px;
+  }
+  &__add-comment {
+    height: 20px;
+    width: 105px;
+    color: #999999;
+    font-family: 'DIN Pro';
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0 0 0 5px;
+  }
+  &__text-size {
+    height: 20px;
+    width: 85px;
+    color: #4f4f4f;
+    font-family: 'DIN Pro';
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0 0 0 0;
+  }
+  &__modal3 {
+    height: 18px;
+    color: #999999;
+    font-family: 'DIN Pro';
+    font-size: 14px;
+    line-height: 18px;
+    margin: -15px 0 0 70px;
+  }
+  &__dialog1 {
+    height: 20px;
+    width: 194px;
+    color: #4f4f4f;
+    font-family: 'DIN Pro';
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 5px 50px 10px 0;
+  }
+  &__dialog-from {
+    height: 20px;
+    width: 89px;
+    color: #4f4f4f;
+    font-family: 'DIN Pro';
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 5px 50px 10px 0;
+  }
+  &__travel-place {
+    margin: 40px 5px 20px 5px;
+  }
+  &__date-submitted {
+    height: 18px;
+    width: 95px;
+    color: #999999;
+    font-family: 'DIN Pro';
+    font-size: 14px;
+    line-height: 18px;
+    margin: 5px 50px 10px 0;
+  }
+  &__departure-date {
+    height: 18px;
+    width: 137px;
+    color: #999999;
+    font-family: 'DIN Pro';
+    font-size: 14px;
+    line-height: 18px;
+    margin: 5px 50px 10px 0;
+  }
+  &__date-date {
+    height: 20px;
+    width: 82px;
+    color: #4f4f4f;
+    font-family: 'DIN Pro';
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-right: 62px;
+  }
+  &__date-date2 {
+    height: 20px;
+    width: 86px;
+    color: #4f4f4f;
+    font-family: 'DIN Pro';
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-left: 45px;
+  }
+
+  &__button-submitted-text {
+    box-sizing: border-box;
+    height: 29px;
+    width: 94px;
+    border: 1px solid #d4d4d4;
+    border-radius: 1px;
+    background-color: #ffffff;
+    color: #4f4f4f;
+    font-family: 'DIN Pro';
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: center;
+  }
+
+  &__button-rejected-text {
+    box-sizing: border-box;
+    height: 29px;
+    width: 81px;
+    border: 1px solid #d4d4d4;
+    border-radius: 1px;
+    background-color: #ffffff;
+    color: #4f4f4f;
+    font-family: 'DIN Pro';
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: center;
+  }
+  button:focus {
+    outline: none;
+  }
+  &__button-below {
+    margin: 10px 10px 70px 10px;
+  }
+
+  &__target-return-date {
+    height: 18px;
+    width: 115px;
+    color: #999999;
+    font-family: 'DIN Pro';
+    font-size: 14px;
+    line-height: 18px;
+    margin: 5px 50px 10px 0;
+  }
+
+  &__editor {
+    height: 125px;
+    width: 80%;
+    margin: 0 0 90px 0;
+    // border-radius: 2px;
+    // background-color: #FFFFFF;
+  }
+
+  &__post-btn {
+    box-sizing: border-box;
+    height: 29px;
+    width: 70px;
+    border: 1px solid #d4d4d4;
+    border-radius: 1px;
+    background-color: #ffffff;
+    color: #999999;
+    font-family: 'DIN Pro';
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: center;
+    margin: 20px 0 20px -8px;
+  }
+  &__approval-status {
+    height: 20px;
+    width: 307px;
+    color: #4f4f4f;
+    font-family: 'DIN Pro';
+    font-size: 15px;
+    line-height: 20px;
+    margin-right: 5px;
+  }
+  &__hours-status {
+    height: 20px;
+    width: 78px;
+    color: #bcbcbc;
+    font-family: 'DIN Pro';
+    font-size: 15px;
+    line-height: 20px;
+    text-align: right;
+  }
+  &__user-name {
+    height: 20px;
+    width: 107px;
+    color: #3359db;
+    font-family: 'DIN Pro';
+    font-size: 15px;
+    line-height: 20px;
+    margin-right: 5px;
+  }
+  &__delete-btn {
+    height: 15px;
+    width: 35px;
+    color: #999999;
+    font-family: 'DIN Pro';
+    font-size: 12px;
+    line-height: 15px;
+    text-align: right;
+    padding: 0;
+    border: none;
+    background: none;
+    margin-left: 20px;
+  }
+  &__status-update {
+    height: 20px;
+    width: 384px;
+    color: #4f4f4f;
+    font-family: 'DIN Pro';
+    font-size: 15px;
+    line-height: 20px;
+    margin: -10px 5px 20px -10px;
+  }
+  hr {
+    position: absolute;
+    margin: -9px -9px -9px 0;
+    width: 90%;
+    height: 3px;
+    border: 1px solid #f8f8f8;
+    border-bottom: none;
+    box-sizing: border-box;
+  }
+  
+}

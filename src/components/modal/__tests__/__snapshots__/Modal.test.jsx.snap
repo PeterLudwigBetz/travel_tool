@@ -15,7 +15,14 @@ exports[`<Modal /> renders correctly 1`] = `
       <div
         className="modal-title-text"
       >
-        test modal
+        <span />
+        <span>
+          test modal
+        </span>
+        <span
+          className="modal-title-id"
+        />
+        <span />
       </div>
       <button
         className="modal-close"
@@ -35,7 +42,6 @@ exports[`<Modal /> renders correctly 1`] = `
         Test content
       </div>
     </div>
-    <hr />
   </div>
 </Fragment>
 `;
