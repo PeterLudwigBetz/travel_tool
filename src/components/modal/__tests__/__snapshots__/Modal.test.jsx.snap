@@ -3,39 +3,42 @@
 exports[`<Modal /> renders correctly 1`] = `
 <Fragment>
   <Overlay
-    className="test-class"
     click={[Function]}
-  />
-  <div
-    className="modal test-class"
   >
     <div
-      className="modal-title-bar"
+      className="modal undefined"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      tabIndex="0"
     >
       <div
-        className="modal-title-text"
+        className="modal-title-bar"
       >
-        test modal
+        <div
+          className="modal-title-text"
+        >
+          test modal
+        </div>
+        <button
+          className="modal-close"
+          onClick={[Function]}
+          type="button"
+        >
+          <img
+            alt="close"
+            src="close.svg"
+          />
+        </button>
       </div>
-      <button
-        className="modal-close"
-        onClick={[Function]}
-        type="button"
+      <div
+        className="modal-content"
       >
-        <img
-          alt="close"
-          src="close.svg"
-        />
-      </button>
-    </div>
-    <div
-      className="modal-content"
-    >
-      <div>
-        Test content
+        <div>
+          Test content
+        </div>
       </div>
     </div>
-    <hr />
-  </div>
+  </Overlay>
 </Fragment>
 `;

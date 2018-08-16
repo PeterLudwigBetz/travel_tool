@@ -6,7 +6,7 @@ import './_modal.scss';
 
 class Modal extends PureComponent {
   static propTypes = {
-    className: PropTypes.string.isRequired,
+    visibility: PropTypes.oneOf(['visible', 'invisible']).isRequired,
     title: PropTypes.string.isRequired,
     toggleModal: PropTypes.func.isRequired,
     children: PropTypes.oneOfType([
@@ -14,30 +14,44 @@ class Modal extends PureComponent {
       PropTypes.arrayOf(PropTypes.object)
     ]).isRequired
   }
+
+  renderModalHeader = () => {
+    const {title, toggleModal} = this.props;
+    return (
+      <div className="modal-title-bar">
+        <div className="modal-title-text">
+          {title}
+        </div>
+        <button
+          type="button"
+          onClick={toggleModal}
+          className="modal-close"
+        >
+          <img alt="close" src={closeButton} />
+        </button>
+      </div>
+    );
+  }
+
   render() {
-    const {children, className, toggleModal, title} = this.props;
+    const {children, visibility, toggleModal, title} = this.props;
 
     return (
       <Fragment>
-        <Overlay click={toggleModal} className={className} />
-        <div className={`modal ${className}`}>
-          <div className="modal-title-bar">
-            <div className="modal-title-text">
-              {title}
+        <Overlay click={toggleModal} className={visibility}>
+          <div
+            className={`modal ${visibility}`}
+            onClick={(e)=>{e.stopPropagation();}}
+            onKeyPress={()=>{}}
+            tabIndex="0"
+            role="button"
+          >
+            {this.renderModalHeader()}
+            <div className="modal-content">
+              { children }
             </div>
-            <button
-              type="button"
-              onClick={toggleModal}
-              className="modal-close"
-            >
-              <img alt="close" src={closeButton} />
-            </button>
           </div>
-          <div className="modal-content">
-            { children }
-          </div>
-          <hr />
-        </div>
+        </Overlay>
       </Fragment>
     );
   }

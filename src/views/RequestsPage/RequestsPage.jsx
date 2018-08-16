@@ -39,7 +39,6 @@ class RequestsPage extends Component {
   }
 
   toggleNewRequestModal = (e) => {
-    console.log('hey clicked')
     const { hideNewRequestModal } = this.state;
     this.setState({hideNewRequestModal: !hideNewRequestModal});
   }
@@ -117,11 +116,13 @@ class RequestsPage extends Component {
         {this.renderNavBar()}
         <Modal
           toggleModal={this.toggleNewRequestModal}
-          className={hideNewRequestModal? 'invisible': 'visible'}
+          visibility={hideNewRequestModal? 'invisible': 'visible'}
           title="New Travel Request"
         >
           <div>
-            Modal Content
+            <div>
+              Modal Content
+            </div>
           </div>
         </Modal>
         <section className="main-section">
