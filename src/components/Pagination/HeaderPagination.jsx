@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import icon from '../../images/drop-down-icon.svg';
-import './_headerPagination.scss';
+import './HeaderPagination.scss';
 
 class HeaderPagination extends PureComponent{
   render(){

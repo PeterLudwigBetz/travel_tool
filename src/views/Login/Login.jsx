@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import Cookies from 'cookies-js';
 import PropTypes from 'prop-types';
 import { setCurrentUser } from '../../redux/actionCreator';
 import travelaLogo from '../../images/travela-logo.svg';
@@ -11,12 +10,12 @@ import fileSymbol from '../../images/file.svg';
 import './Login.scss';
 import TextLink from '../../components/TextLink/TextLink';
 import { loginStatus } from '../../helper/userDetails';
-import Button from '../../components/buttons/Buttons';
+import Button from '../../components/Buttons/Buttons';
 
 export class Login extends Component {
-    componentDidMount() {
-      this.authenticated();
-    }
+  componentDidMount() {
+    this.authenticated();
+  }
 
   authenticated () {
     const { isAuthenticated, history, setCurrentUser } = this.props;
@@ -33,6 +32,7 @@ export class Login extends Component {
     }/login?redirect_url=${process.env.REACT_APP_AUTH_REDIRECT_URL}`;
     window.location.replace(url);
   }
+
 
   renderLandPageImage() {
     return(
@@ -52,8 +52,8 @@ export class Login extends Component {
         <TextLink
           imageSrc={videoSymbol}
           symbolClass="login-symbol__video"
-          textLinkClass="login-page__how-to-book-a-trip-link"
-          textClass="login-page__how-to-book-a-trip-text"
+          textLinkClass="login-page__link"
+          textClass="login-page__link-text"
           altText="Video Symbol"
           text="How to book a trip"
         />
@@ -61,8 +61,8 @@ export class Login extends Component {
         <TextLink
           imageSrc={fileSymbol}
           symbolClass="login-symbol__file"
-          textLinkClass="login-page__andela-travel-policy-link"
-          textClass="login-page__andela-travel-policy"
+          textLinkClass="login-page__link"
+          textClass="login-page__link-text"
           altText="File Symbol"
           text="Andela travel policy"
         />

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import './_notificationContainer.scss';
+import './NotificationContainer.scss';
 import image from '../../images/logo.svg';
 import NotificationItem from './NotificationItem';
 

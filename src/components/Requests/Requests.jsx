@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import './_requests.scss';
+import './Requests.scss';
 
 class Requests extends PureComponent {
   renderNoRequests() {

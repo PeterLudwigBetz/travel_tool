@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import './_notificationItem.scss';
+import './NotificationItem.scss';
 import readMessageIcon from '../../images/read-message.svg';
 import unreadMessageIcon from '../../images/unread-message.svg';
 

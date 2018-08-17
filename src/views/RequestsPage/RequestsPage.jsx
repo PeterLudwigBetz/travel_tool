@@ -1,14 +1,13 @@
 import React, { Component } from  'react';
 
-import './_index.scss';
+import './Index.scss';
 import upic from '../../images/upic.svg';
-
 import Requests from '../../components/Requests/Requests';
 import LeftSideBar from '../../components/LeftSideBar/LeftSideBar';
 import Pagination from '../../components/Pagination/Pagination';
 import requestsData from '../../components/Requests/requestsData';
-import NavBar from '../../components/nav-bar/NavBar';
-import NotificationPane from '../../components/notification-pane/NotificationPane';
+import NavBar from '../../components/NavBar/NavBar';
+import NotificationPane from '../../components/NotificationPane/NotificationPane';
 import RequestPanelHeader from '../../components/RequestPanelHeader/RequestPanelHeader';
 
 class RequestsPage extends Component {

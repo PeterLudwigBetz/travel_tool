@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
-import './_dropdownItems.scss';
+import './DropdownItems.scss';
 
 class DropdownItems extends PureComponent {
   render() {

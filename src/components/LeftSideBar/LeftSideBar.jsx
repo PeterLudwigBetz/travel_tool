@@ -4,7 +4,7 @@ import activeBookmarkIcon from '../../images/icons/bookmark_active.svg';
 import inactiveBookmarkIcon from '../../images/icons/bookmark_inactive.svg';
 import activeSettingsIcon from '../../images/icons/settings_active.svg';
 import inactiveSettingsIcon from '../../images/icons/settings_inactive.svg';
-import './_leftSideBar.scss';
+import './LeftSideBar.scss';
 
 class LeftSideBar extends Component {
 

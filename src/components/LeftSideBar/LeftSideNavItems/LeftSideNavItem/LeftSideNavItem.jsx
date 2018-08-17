@@ -1,8 +1,8 @@
 import React, { PureComponent, Fragment } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
-import DropdownHelper from '../DropdownItems/utils/dropdownHelper';
-import './_leftSideNavItem.scss';
+import DropdownHelper from '../DropdownItems/Utils/DropdownHelper';
+import './LeftSideNavItem.scss';
 
 export class LeftSideNavItem extends PureComponent {
   static propTypes = {

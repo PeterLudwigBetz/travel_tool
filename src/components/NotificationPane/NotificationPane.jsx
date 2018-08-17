@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import NotificationHeader from './NotificationHeader';
 import NotificationContainer from './NotificationContainer';
 
-import './_notificationPane.scss';
+import './NotificationPane.scss';
 
 import notifications from '../../mockData/notifications';
 

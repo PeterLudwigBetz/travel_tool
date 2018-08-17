@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ConnectedLogin from '../views/Login/Login';
 import RequestsPage from '../views/RequestsPage/RequestsPage';
-import RequireAuth from '../hoc/authHoc';
+import RequireAuth from '../hoc/AuthHoc';
 
 const Routes = () => (
   <Switch>

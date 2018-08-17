@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import activeDropdrownIcon from '../../../../../images/icons/dropdown_active.svg';
 import inactiveDropdownIcon from '../../../../../images/icons/dropdown_inactive.svg';
-import './_dropdownIcon.scss';
+import './DropdownIcon.scss';
 
 class DropdownIcon extends React.PureComponent {
   render() {

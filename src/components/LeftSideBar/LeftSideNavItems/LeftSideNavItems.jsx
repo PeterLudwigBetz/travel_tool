@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 import LeftSidebarNavItem from './LeftSideNavItem/LeftSideNavItem';
 import DropdownItem from './DropdownItems/DropdownItem/DropdownItem';
-import './_leftSideNavItems.scss';
+import './LeftSideNavItems.scss';
 
 
 class LeftSideNavItems extends PureComponent {

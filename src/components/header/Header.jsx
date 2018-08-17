@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import './_header.scss';
+import './Header.scss';
 
 class Header extends PureComponent{
   render(){

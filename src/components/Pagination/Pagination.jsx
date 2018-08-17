@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
-import './_pagination.scss';
+import './Pagination.scss';
 import PropTypes from 'prop-types';
 
 class Pagination extends PureComponent {

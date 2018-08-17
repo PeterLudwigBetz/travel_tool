@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import './buttonGroup.scss';
+import './ButtonGroup.scss';
 
 class ButtonGroup extends PureComponent {
   render() {
@@ -11,7 +11,7 @@ class ButtonGroup extends PureComponent {
 
         <button type="button" className="bg-btn bg-btn--with-badge">
           <span className="label">
-            Open Reqeusts
+            Open Requests
           </span>
           <span className="badge">
             3
