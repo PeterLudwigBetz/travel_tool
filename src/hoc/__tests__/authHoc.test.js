@@ -1,5 +1,5 @@
 import React from 'react';
-import Authenticate from '../authHoc';
+import Authenticate from '../AuthHoc';
 import RequestsPage from '../../views/RequestsPage/RequestsPage';
 
 const components = Authenticate(RequestsPage);
