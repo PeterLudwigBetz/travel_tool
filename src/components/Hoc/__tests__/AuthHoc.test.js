@@ -1,6 +1,6 @@
 import React from 'react';
 import Authenticate from '../AuthHoc';
-import RequestsPage from '../../views/RequestsPage/RequestsPage';
+import RequestsPage from '../../../views/RequestsPage/RequestsPage';
 
 const components = Authenticate(RequestsPage);
 

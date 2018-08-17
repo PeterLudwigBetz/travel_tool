@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import Header from '../Header/Header';
-import ButtonGroup from '../ButtonGroup/ButtonGroup';
+import Header from '../Header';
+import ButtonGroup from '../ButtonGroup';
 import HeaderPagination from '../Pagination/HeaderPagination';
 import './Request.scss';
 

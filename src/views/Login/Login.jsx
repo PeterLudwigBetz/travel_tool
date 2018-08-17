@@ -8,9 +8,9 @@ import symbolG from '../../images/Google-white.svg';
 import videoSymbol from '../../images/video.svg';
 import fileSymbol from '../../images/file.svg';
 import './Login.scss';
-import TextLink from '../../components/TextLink/TextLink';
+import TextLink from '../../components/TextLink';
 import { loginStatus } from '../../helper/userDetails';
-import Button from '../../components/Buttons/Buttons';
+import Button from '../../components/Buttons';
 
 export class Login extends Component {
   componentDidMount() {

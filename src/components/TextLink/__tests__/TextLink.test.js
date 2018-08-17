@@ -1,15 +1,15 @@
 import React from 'react';
-import TextLink from '../TextLink';
+import TextLink from '../index';
 
 const props = {
-    imageSrc: '',
-    textLinkClass: '',
-    textClass: '',
-    altText: '',
-    text: ''
+  imageSrc: '',
+  textLinkClass: '',
+  textClass: '',
+  altText: '',
+  text: ''
 
 };
 it('should render the text-link component', ()=>{
-const wrapper = shallow(<TextLink {...props} />);
-expect(wrapper.find('p')).toHaveLength(1);
+  const wrapper = shallow(<TextLink {...props} />);
+  expect(wrapper.find('p')).toHaveLength(1);
 });
