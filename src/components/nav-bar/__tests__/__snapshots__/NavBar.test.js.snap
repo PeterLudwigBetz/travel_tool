@@ -51,20 +51,14 @@ exports[`Render NavBar component should match snapshot 1`] = `
         className="navbar__user-icon navbar__nav-size"
       >
         <div>
-          <span
-            className="navbar__mdl-icons"
-          >
-            <ImageLink
-              altText="Andela Logo"
-              imageClass="navbar__mdl-upic"
-              imageSrc="avatar"
-            />
-            <span
-              className="navbar__text-size"
-            >
-              Silm Momoh
-            </span>
-          </span>
+          <UserAvatar
+            altText="Andela Logo"
+            dynamicText="Silm Momoh"
+            imageClass="navbar__mdl-upic"
+            imageSrc="avatar"
+            spanClass="navbar__mdl-icons"
+            spanTextClass="navbar__text-size"
+          />
           <span>
             <Button
               altText="Dropdown Icon"

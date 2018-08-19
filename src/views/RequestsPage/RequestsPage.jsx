@@ -16,7 +16,6 @@ class RequestsPage extends Component {
   state = {
     hideNotificationPane: true,
     hideSideBar: false,
-    hideNewRequestModal: true
   }
   // FIX: Remove console statement and replace with actual function
   onPageChange (page) {
@@ -36,12 +35,6 @@ class RequestsPage extends Component {
       hideNotificationPane: true,
       hideSideBar: false
     });
-  }
-
-  toggleNewRequestModal = (e) => {
-    console.log('hey clicked')
-    const { hideNewRequestModal } = this.state;
-    this.setState({hideNewRequestModal: !hideNewRequestModal});
   }
 
   renderNavBar = () => {
@@ -101,7 +94,7 @@ class RequestsPage extends Component {
   }
 
   render() {
-    const { hideNotificationPane, hideSideBar, hideNewRequestModal } = this.state;
+    const { hideNotificationPane, hideSideBar} = this.state;
     let hideClass, leftPaddingClass;
     if(hideNotificationPane) {
       hideClass = 'hide';
@@ -115,15 +108,6 @@ class RequestsPage extends Component {
     return(
       <div className="requests-page">
         {this.renderNavBar()}
-        <Modal
-          toggleModal={this.toggleNewRequestModal}
-          className={hideNewRequestModal? 'invisible': 'visible'}
-          title="New Travel Request"
-        >
-          <div>
-            Modal Content
-          </div>
-        </Modal>
         <section className="main-section">
           {this.renderLeftSideBar(hideClass2)}
           <div className={`rp-requests ${leftPaddingClass}`}>

@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-// import { Editor } from '@tinymce/tinymce-react';
 import Modal from '../modal/Modal';
-import RequestDetailsModal from '../../views/RequestsModal/RequestsModal';
-// import Oval from '../../images/Oval.png';
-// import Oval2 from '../../images/Oval2.png';
+import RequestDetailsModal from '../RequestsModal/RequestsModal';
 import './_requests.scss';
 
 class Requests extends Component {
@@ -61,11 +58,7 @@ class Requests extends Component {
       <tr key={request.id} className="table__row">
         <td className="mdl-data-table__cell--non-numeric table__requests__destination table__data">
           <div
-            onKeyPress={() => {}}
-            onClick={() => this.handleClickRequest(request.id)}
-            role="button"
-            tabIndex="0"
-          >
+            onKeyPress={() => {}} onClick={() => this.handleClickRequest(request.id)} role="button" tabIndex="0">
             {request.id}
           </div>
         </td>
@@ -118,38 +111,24 @@ class Requests extends Component {
     const { hideRequestDetailModal, clickedRequestId } = this.state;
     return (
       <Fragment>
-        <div>
-          <div className="table__container">
-            {requests.length ? (
-              <table className="mdl-data-table mdl-js-data-table table__requests">
-                <thead>
-                  {this.renderTableHead()}
-                </thead>
-                <tbody className="table__body">
-                  {requests.map(request => this.renderRequest(request))}
-                </tbody>
-              </table>
-            ) : (
-              this.renderNoRequests()
-            )}
-
-            <Modal
-              toggleModal={this.onCloseRequestDetailsModal}
-              className={hideRequestDetailModal ? 'invisible' : 'visible'}
-              title={clickedRequestId}
-              symbol="#"
-              description="Request Details"
-              modalBar={(
-                <span className="table__modal-bar">
-                  <span className="table__modal-bar-text">
-Manager stage
-                  </span>
-                </span>
-)}
-            >
-              <RequestDetailsModal />
-            </Modal>
-          </div>
+        <div className="table__container">
+          {requests.length ? (
+            <table className="mdl-data-table mdl-js-data-table table__requests">
+              <thead>
+                {this.renderTableHead()}
+              </thead>
+              <tbody className="table__body">
+                {requests.map(request => this.renderRequest(request))}
+              </tbody>
+            </table> ) : (this.renderNoRequests())}
+          <Modal
+            toggleModal={this.onCloseRequestDetailsModal} visibility={hideRequestDetailModal?'invisible': 'visible'}
+            title={clickedRequestId} symbol="#" description="Request Details" modalBar={(
+              <div className="table__modal-bar-text">
+                Manager stage
+              </div>)}>
+            <RequestDetailsModal handleCreateComment={()=>{}} />
+          </Modal>
         </div>
       </Fragment>
     );

@@ -6,6 +6,7 @@ import travela from '../../images/travela.svg';
 import icon from '../../images/drop-down-icon.svg';
 import notification from '../../images/notification.svg';
 import SearchBar from '../search-bar/SearchBar';
+import UserAvatar from '../RequestsModal/UserAvatar';
 import Button from '../buttons/Buttons';
 import ImageLink from '../image-link/ImageLink';
 import './NavBar.scss';
@@ -52,12 +53,15 @@ class NavBar extends PureComponent {
     const { avatar } = this.props;
     return (
       <div>
-        <span className="navbar__mdl-icons">
+        {/* <span className="navbar__mdl-icons">
           <ImageLink imageSrc={avatar} altText="Andela Logo" imageClass="navbar__mdl-upic" />
           <span className="navbar__text-size">
             Silm Momoh
           </span>
-        </span>
+        </span> */}
+        <UserAvatar 
+          imageSrc={avatar} altText="Andela Logo" imageClass="navbar__mdl-upic" 
+          spanClass="navbar__mdl-icons" spanTextClass="navbar__text-size" dynamicText="Silm Momoh" />
         <span>
           <Button 
             imageSrc={icon} altText="Dropdown Icon" buttonId="demo-menu-lower-right" imageClass="navbar__mdl-Icon" buttonType="button" 

@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render RequestsModal component should match snapshot 1`] = `
+<Fragment>
+  <div>
+    <div
+      className="modal__user-info"
+    >
+      <ImageLink
+        altText="avatar"
+        imageClass="modal__oval"
+        imageSrc="Oval.png"
+      />
+      <span
+        className="modal__text-size"
+      >
+        Silm Momoh
+      </span>
+      <div
+        className="modal__modal3"
+      >
+        Product Designer, Apprenticeship
+      </div>
+    </div>
+  </div>
+  <div
+    className="modal__travel-place"
+  >
+    <span
+      className="modal__dialog1"
+    >
+      Request to travel to:
+      <span
+        className="modal__city-name"
+      >
+        Nairobi
+      </span>
+    </span>
+    <span
+      className="modal__dialog-from"
+    >
+      From:
+      <span
+        className="modal__city-name"
+      >
+        Lagos
+      </span>
+    </span>
+  </div>
+  <div
+    className="modal__modal-date"
+  >
+    <TravelLink
+      divClass="modal__travel-date"
+      dynamicDate="02 Aug 2018"
+      dynamicText="Date submitted"
+      innerClass="modal__travel-dates"
+      nextClass="modal__date-text"
+    />
+    <TravelLink
+      divClass="modal__travel-date"
+      dynamicDate="02 Aug 2018"
+      dynamicText="Date submitted"
+      innerClass="modal__travel-dates"
+      nextClass="modal__date-text"
+    />
+    <TravelLink
+      divClass="modal__travel-date"
+      dynamicDate="02 Aug 2018"
+      dynamicText="Date submitted"
+      innerClass="modal__travel-dates"
+      nextClass="modal__date-text"
+    />
+  </div>
+  <div>
+    <div
+      className="modal__button-below"
+    >
+      <span
+        className="modal__dialog-btn"
+      >
+        <button
+          className="modal__button-submitted-text bg"
+          id="buttonId"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "",
+              "color": "",
+            }
+          }
+          type="button"
+        >
+          Approve
+        </button>
+      </span>
+      <span
+        className="modal__dialog-btn"
+      >
+        <button
+          className="modal__button-rejected-text bgg"
+          id="buttonIdd"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "",
+              "color": "",
+            }
+          }
+          type="button"
+        >
+          Reject
+        </button>
+      </span>
+    </div>
+  </div>
+  <div>
+    <div
+      className="modal__modal1"
+    >
+      <UserAvatar
+        altText="avatar"
+        dynamicText="Add a comment"
+        imageClass="modal__oval-copy"
+        imageSrc="Oval2.png"
+        spanClass="modal__mdl-icons"
+        spanTextClass="modal__add-comment"
+      />
+    </div>
+  </div>
+  <CommentBox />
+  <div
+    className="modal__modal1"
+  >
+    <span
+      className="modal__mdl-icons"
+    >
+      <ImageLink
+        altText="avatar"
+        imageClass="modal__oval-copy"
+        imageSrc="Oval2.png"
+      />
+      <span
+        className="modal__user-name"
+      >
+        Jolomi Otumara
+      </span>
+      <span
+        className="modal__approval-status"
+      >
+        approved your travel request.
+      </span>
+      <span
+        className="modal__hours-status"
+      >
+        5 hours ago
+      </span>
+    </span>
+  </div>
+  <div
+    className="modal__modal1"
+  >
+    <hr />
+    <div
+      className="modal__mdl-icons"
+    >
+      <ImageLink
+        altText="avatar"
+        imageClass="modal__oval-copy"
+        imageSrc="Oval2.png"
+      />
+      <span
+        className="modal__user-name"
+      >
+        Jolomi Otumara.
+      </span>
+      <span
+        className="modal__hours-status"
+      >
+        5 hours ago
+      </span>
+      <span
+        className="modal__dialog"
+      >
+        <button
+          className="modal__delete-btn"
+          type="button"
+        >
+          Delete
+        </button>
+      </span>
+      <div
+        className="modal__modal2"
+      >
+        <div
+          className="modal__status-update"
+        >
+          I thought we agreed you would be travelling Next Month?
+        </div>
+      </div>
+    </div>
+  </div>
+</Fragment>
+`;

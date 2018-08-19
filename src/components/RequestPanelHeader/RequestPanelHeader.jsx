@@ -6,10 +6,9 @@ import './Request.scss';
 
 class RequestPanelHeader extends PureComponent {
   render() {
-    const {toggleNewRequestModal} = this.props;
     return (
       <div className="request-panel-header">
-        <Header toggleNewRequestModal={toggleNewRequestModal} />
+        <Header />
         <div className="open-requests">
           <ButtonGroup />
           <HeaderPagination />

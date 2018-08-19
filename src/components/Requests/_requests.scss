@@ -111,23 +111,14 @@ $font-normal: 'DIN Pro';
     margin-left: 39px;
   }
 
-  &__modal-bar {
-    // height: 66px;
-    // width: 50%;
-    border: 1px solid #e4e4e4;
-    border-radius: 18px;
-    box-sizing: border-box;
-    margin: 5px 0 5px 30px;
-  }
   &__modal-bar-text {
-    height: 17px;
-    width: 87px;
+    position: relative;
+    top: 0;
     color: #4f4f4f;
     font-family: 'DIN Pro';
     font-size: 13px;
     font-weight: 500;
-    // line-height: 17px;
     text-align: center;
-    margin: 5px;
+    padding: 5px 20px 5px 20px;
   }
 }
