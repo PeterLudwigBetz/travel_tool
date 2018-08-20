@@ -18,37 +18,6 @@ import './NavBar.scss';
  */
 
 class NavBar extends PureComponent {
-  userDetail() {
-    const { avatar } = this.props;
-    return (
-      <span className="navbar__mdl-icons">
-        <ImageLink
-          imageSrc={avatar}
-          altText="Andela Logo"
-          imageClass="navbar__mdl-upic"
-        />
-        <span className="navbar__text-size">
-          Silm Momoh
-        </span>
-      </span>
-    );
-  }
-
-  logout() {
-    return (
-      <div className="navbar__mdl-list">
-        <ul
-          htmlFor="demo-menu-lower-right"
-          className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect navbar__menu"
-        >
-          <li className="mdl-menu__item navbar__menu-item">
-          Logout
-          </li>
-        </ul>
-      </div>
-    );
-  }
-
   renderLogo() {
     return (
       <span className="navbar__logo-icons">
@@ -66,10 +35,7 @@ class NavBar extends PureComponent {
         className="navbar__nav-size"
         role="presentation"
       >
-        <span
-          className="material-icons mdl-badge navbar__badge"
-          data-badge="12"
-        >
+        <span className="material-icons mdl-badge navbar__badge" data-badge="12">
           <img
             src={notification}
             alt="Notification"
@@ -81,19 +47,26 @@ class NavBar extends PureComponent {
   }
 
   renderUserIcons() {
+    const { avatar } = this.props;
     return (
       <div>
-        {this.userDetail()}
+        <span className="navbar__mdl-icons">
+          <ImageLink imageSrc={avatar} altText="Andela Logo" imageClass="navbar__mdl-upic" />
+          <span className="navbar__text-size">
+            Silm Momoh
+          </span>
+        </span>
         <span>
-          <Button
-            imageSrc={icon}
-            altText="Dropdown Icon"
-            buttonId="demo-menu-lower-right"
-            imageClass="navbar__mdl-Icon"
-            buttonType="button"
-            buttonClass="mdl-button mdl-js-button mdl-button--icon mdl-Icons"
-          />
-          {this.logout()}
+          <Button 
+            imageSrc={icon} altText="Dropdown Icon" buttonId="demo-menu-lower-right" imageClass="navbar__mdl-Icon" buttonType="button" 
+            buttonClass="mdl-button mdl-js-button mdl-button--icon mdl-Icons" />
+          <div className="navbar__mdl-list">
+            <ul htmlFor="demo-menu-lower-right" className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect navbar__menu">
+              <li className="mdl-menu__item navbar__menu-item">
+                Logout
+              </li>
+            </ul>
+          </div>
         </span>
       </div>
     );
