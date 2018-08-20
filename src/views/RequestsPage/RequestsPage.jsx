@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import Table from '../../components/Table';
@@ -12,9 +13,12 @@ class RequestsPage extends Base {
   state = {
     hideNotificationPane: true,
     hideSideBar: false,
-    hideNewRequestModal: true
+    closeDrawerClass: '',
+    hideNewRequestModal: true,
+    openSearch: false
   };
-  // FIX: Remove console statement and replace with actual function
+
+  //FIX: Remove console statement and replace with actual function
   onPageChange(page) {
     console.log('Page Change function', page); /*eslint-disable-line */
   }
@@ -25,8 +29,9 @@ class RequestsPage extends Base {
       hideNotificationPane: false,
       hideSideBar: true
     });
-  };
+  }
 
+  
   onCloseNotificationPane = () => {
     this.setState({
       hideNotificationPane: true,
@@ -75,20 +80,37 @@ class RequestsPage extends Base {
     );
   }
 
+
+  renderRequestPage(hideClass2,leftPaddingClass, requests, pagination, hideClass, hideClass3 ) {
+    return(
+      <div className="mdl-layout__content full-height">
+        <div className="mdl-grid mdl-grid--no-spacing full-height">
+          <div className={`mdl-cell mdl-cell--2-col-desktop mdl-cell--hide-tablet mdl-cell--hide-phone request-page__left-side-bar ${hideClass2}`}>
+            {this.renderLeftSideBar(hideClass2)}       
+          </div>
+          <div className="mdl-cell mdl-cell--9-col-desktop request-page__table-view mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+            <div className={`rp-requests ${leftPaddingClass}`}>
+              {this.renderRequestPanelHeader()}
+              {this.renderRequests(requests)}
+              {this.renderPagination(pagination)}
+            </div>
+          </div>
+          <div className={`mdl-cell mdl-cell--3-col-desktop ${hideClass3} request-page__right-side-bar mdl-cell--3-col-tablet mdl-cell--4-col-phone`}>
+            {this.renderNotificationPane(hideClass)}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
-    const {
-      hideNotificationPane,
-      hideSideBar,
-      hideNewRequestModal
-    } = this.state;
-    let [hideClass, leftPaddingClass] = hideNotificationPane
-      ? ['hide', '']
-      : ['', 'pd-left'];
+    const { hideNotificationPane, hideSideBar, hideNewRequestModal } = this.state;
+    let [hideClass, leftPaddingClass] = hideNotificationPane? ['hide', '']: ['', 'pd-left'];
 
     const hideClass2 = hideSideBar ? 'hide' : '';
     const { requests, pagination } = requestsData;
 
-    return (
+    return(
       <div className="requests-page">
         {this.renderNavBar()}
         {this.renderNewRequestForm(hideNewRequestModal)}

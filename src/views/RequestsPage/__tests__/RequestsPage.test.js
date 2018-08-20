@@ -165,5 +165,15 @@ describe('<RequestsPage>', () => {
       done();
     });
 
+  it('should call handleHideSearchBar method', () =>{
+    const wrapper = shallow(<RequestsPage />);
+    wrapper.instance().handleHideSearchBar();
+    expect(wrapper.state('openSearch')).toBeTruthy;
+  });
+
+  it('should call handleClose method', () =>{
+    const wrapper = shallow(<RequestsPage />);
+    wrapper.instance().handleClose();
+    expect(wrapper.state('closeDrawerClass')).toBe('mdl-cell--hide-tablet');
   });
 });

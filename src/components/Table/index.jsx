@@ -157,8 +157,7 @@ class Table extends PureComponent {
   renderTableHead(avatar) {
     return (
       <tr>
-        {this.renderEmptyCell(avatar)}
-        <th className="mdl-data-table__cell--non-numeric table__head">
+        <th className="mdl-data-table__cell--non-numeric table__head freeze">
           Request ID
         </th>
         <th className="mdl-data-table__cell--non-numeric table__head">

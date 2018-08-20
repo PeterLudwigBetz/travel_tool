@@ -10,7 +10,9 @@ describe('Render NavBar component', () => {
     avatar: 'avatar',
     history: {
       push: jest.fn()
-    }
+    },
+    openSearch: true,
+    handleHideSearchBar: jest.fn()
   };
   // make our assertions and what we expect to happen
   it('should match snapshot', () => {
@@ -44,4 +46,10 @@ describe('Render NavBar component', () => {
     expect(token).toEqual(undefined);
     expect(loginStatus).toEqual(undefined);
   });
+  
+  it('should should be search bar for phone view toggle display', () => {
+    const wrapper = shallow(<NavBar {...props} />);
+    expect(wrapper.length).toBe(1);
+  });
+
 });

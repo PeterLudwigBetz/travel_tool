@@ -43,7 +43,12 @@ exports[`should render request header correctly 1`] = `
         <span
           className="label"
         >
-          Pending Requests
+          Open Requests
+        </span>
+        <span
+          className="show-phone-mode"
+        >
+          Open
         </span>
         <span
           className="badge"
@@ -55,7 +60,16 @@ exports[`should render request header correctly 1`] = `
         className="bg-btn"
         type="button"
       >
-        Past Requests
+        <span
+          className="label"
+        >
+          Past Requests
+        </span>
+        <span
+          className="show-phone-mode"
+        >
+          Past
+        </span>
       </button>
     </div>
     <div
