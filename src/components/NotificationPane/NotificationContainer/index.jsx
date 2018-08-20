@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './NotificationContainer.scss';
-import image from '../../images/logo.svg';
-import NotificationItem from './NotificationItem';
+import image from '../../../images/logo.svg';
+import NotificationItem from '../NotificationItem';
 
 export default class NotificationContainer extends PureComponent {
 

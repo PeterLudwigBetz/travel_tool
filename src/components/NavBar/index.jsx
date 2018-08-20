@@ -4,7 +4,7 @@ import travela from '../../images/travela.svg';
 import icon from '../../images/drop-down-icon.svg';
 import notification from '../../images/notification.svg';
 import SearchBar from '../SearchBar';
-import Button from '../Buttons';
+import Button from '../Button';
 import ImageLink from '../ImageLInk';
 import './NavBar.scss';
 

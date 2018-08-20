@@ -10,7 +10,7 @@ import fileSymbol from '../../images/file.svg';
 import './Login.scss';
 import TextLink from '../../components/TextLink';
 import { loginStatus } from '../../helper/userDetails';
-import Button from '../../components/Buttons';
+import Button from '../../components/Button';
 
 export class Login extends Component {
   componentDidMount() {

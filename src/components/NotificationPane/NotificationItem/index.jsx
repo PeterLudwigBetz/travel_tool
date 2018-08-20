@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import './NotificationItem.scss';
-import readMessageIcon from '../../images/read-message.svg';
-import unreadMessageIcon from '../../images/unread-message.svg';
+import readMessageIcon from '../../../images/read-message.svg';
+import unreadMessageIcon from '../../../images/unread-message.svg';
 
 export default class NotificationItem extends PureComponent {
   renderNotificationItemMetaInfo = () => {

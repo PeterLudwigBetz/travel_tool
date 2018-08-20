@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import './NotificationHeader.scss';
-import closeBtn from '../../images/close-btn.svg';
+import closeBtn from '../../../images/close-btn.svg';
 
 export default class NotificationHeader extends PureComponent {
   render() {

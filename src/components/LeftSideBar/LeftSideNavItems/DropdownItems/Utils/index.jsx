@@ -1,6 +1,6 @@
 import React from 'react';
-import DropdownItems from '../DropdownItems';
-import DropdownIcon from '../DropdownIcon/DropdownIcon';
+import DropdownItems from '..';
+import DropdownIcon from '../DropdownIcon/index.';
 
 export default class DropdownHelper {
 

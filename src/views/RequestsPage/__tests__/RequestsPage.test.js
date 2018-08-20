@@ -1,8 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import { MemoryRouter } from 'react-router-dom';
-
-import RequestsPage from '../RequestsPage';
+import RequestsPage from '../index';
 
 const props = {
   requests: [

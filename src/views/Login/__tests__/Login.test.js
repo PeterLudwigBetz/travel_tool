@@ -1,6 +1,6 @@
 import React from 'react';
 import Cookie from 'cookies-js';
-import { Login } from '../Login';
+import { Login } from '../index';
 import TextLink from '../../../components/TextLink';
 
 const props = {

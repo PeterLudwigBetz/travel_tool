@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme'; 
-import NotificationContainer from '../NotificationContainer';
-import testImage from '../../../images/logo.svg';
+import NotificationContainer from '..';
+import testImage from '../../../../images/logo.svg';
 
 describe('Notification Container Component', () => {
   const props = {

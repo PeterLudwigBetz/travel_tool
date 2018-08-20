@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import LeftSideNavItems from './LeftSideNavItems/LeftSideNavItems';
+import LeftSideNavItems from './LeftSideNavItems';
 import activeBookmarkIcon from '../../images/icons/bookmark_active.svg';
 import inactiveBookmarkIcon from '../../images/icons/bookmark_inactive.svg';
 import activeSettingsIcon from '../../images/icons/settings_active.svg';

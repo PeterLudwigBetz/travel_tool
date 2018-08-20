@@ -1,6 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import Pagination from '../Pagination';
+import Pagination from '..';
 
 const props = {
   currentPage: 2,

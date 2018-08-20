@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import LeftSideBar from '../LeftSideBar';
+import LeftSideBar from '../index';
 
 describe('<LeftSideBar />', () => {
   it('renders correctly', () => {
