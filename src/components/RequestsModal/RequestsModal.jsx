@@ -5,7 +5,6 @@ import CommentBox from './CommentBox/CommentBox';
 import ImageLink from '../image-link/ImageLink';
 import UserAvatar from './UserAvatar';
 import TravelLink from './TravelLink';
-import Button from '../buttons/Buttons';
 import './RequestsModal.scss';
 
 class RequestDetailsModal extends Component {
