@@ -1,12 +1,16 @@
 import React from 'react';
+import Cookie from 'cookies-js';
 import { shallow } from 'enzyme';
-import NavBar from '../index';
+import { NavBar } from '../index';
 
 // describe what we are testing
 describe('Render NavBar component', () => {
   const props = {
     onNotificationToggle: jest.fn(),
-    avatar: 'avatar'
+    avatar: 'avatar',
+    history: {
+      push: jest.fn()
+    }
   };
   // make our assertions and what we expect to happen
   it('should match snapshot', () => {
@@ -30,5 +34,14 @@ describe('Render NavBar component', () => {
       .first()
       .simulate('click');
     expect(NotificationToggleSpy).toHaveBeenCalled();
+  });
+
+  it('should log user out when the logout link is clicked', () => {
+    const wrapper = shallow(<NavBar {...props} />);
+    wrapper.find('#logout').simulate('click');
+    const token = Cookie.get('login-status');
+    const loginStatus = Cookie.get('jwt-token');
+    expect(token).toEqual(undefined);
+    expect(loginStatus).toEqual(undefined);
   });
 });

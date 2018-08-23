@@ -1,19 +1,19 @@
-import React, { Component } from  'react';
-
-import './RequestsPage.scss';
-import upic from '../../images/upic.svg';
-import Requests from '../../components/Requests';
-import LeftSideBar from '../../components/LeftSideBar';
-import Pagination from '../../components/Pagination';
-import requestsData from '../../components/Requests/requestsData';
-import NavBar from '../../components/NavBar';
-import NotificationPane from '../../components/NotificationPane';
+import React from  'react';
+import {PropTypes} from 'prop-types';
+import Table from '../../components/Table';
+import requestsData from '../../mockData/requestsMockData';
 import RequestPanelHeader from '../../components/RequestPanelHeader';
+import Modal from '../../components/Modal';
+import { NewRequestForm } from '../../components/Forms';
 
-class RequestsPage extends Component {
+import Base from '../Base';
+
+class RequestsPage extends Base {
+
   state = {
     hideNotificationPane: true,
-    hideSideBar: false
+    hideSideBar: false,
+    hideNewRequestModal: true
   }
   // FIX: Remove console statement and replace with actual function
   onPageChange (page) {
@@ -35,77 +35,57 @@ class RequestsPage extends Component {
     });
   }
 
-  renderNavBar = () => {
-    return (
-      <NavBar
-        className=""
-        avatar={upic}
-        onNotificationToggle={this.onNotificationToggle}
-      />
-    );
+
+  toggleNewRequestModal = (e) => {
+    const { hideNewRequestModal } = this.state;
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        hideNewRequestModal: !hideNewRequestModal
+      };
+    });
   }
 
-  renderLeftSideBar = (hideClass2) => {
-    return (
-      <div className={`sidebar ${hideClass2}`}>
-        <LeftSideBar />
-      </div>
-    );
-  }
-
-  renderRequestPanelHeader = () => {
+  renderRequestPanelHeader(){
     return(
       <div className="rp-requests__header">
-        <RequestPanelHeader />
+        <RequestPanelHeader toggleNewRequestModal={this.toggleNewRequestModal} />
       </div>
     );
   }
 
-  renderRequests = (requests) => {
+  renderRequests(requests) {
     return(
       <div className="rp-table">
-        <Requests requests={requests} />
+        <Table requests={requests} />
       </div>
     );
   }
 
-  renderPagination = (pagination) => {
-    return(
-      <div className="rp-pagination">
-        <Pagination
-          currentPage={pagination.currentPage}
-          pageCount={pagination.pageCount}
-          onPageChange={this.onPageChange}
-        />
-      </div>
-    );
-  }
-
-  renderNotificationPane = (hideClass) => {
-    return(
-      <div className={`notification ${hideClass}`}>
-        <NotificationPane
-          onCloseNotificationPane={this.onCloseNotificationPane}
-        />
-      </div>
+  renderNewRequestForm(hideNewRequestModal){
+    const {user} = this.props;
+    return (
+      <Modal
+        toggleModal={this.toggleNewRequestModal}
+        visibility={hideNewRequestModal? 'invisible': 'visible'}
+        title="New Travel Request"
+      >
+        <NewRequestForm user={user} handleCreateRequest={(formData)=>{}} />
+      </Modal>
     );
   }
 
   render() {
-    const { hideNotificationPane, hideSideBar } = this.state;
-    let hideClass, leftPaddingClass;
-    if(hideNotificationPane) {
-      hideClass = 'hide';
-      leftPaddingClass = '';
-    } else {
-      hideClass = '';
-      leftPaddingClass = 'pd-left';
-    }
+    const { hideNotificationPane, hideSideBar, hideNewRequestModal } = this.state;
+    let [hideClass, leftPaddingClass] = hideNotificationPane? ['hide', '']: ['', 'pd-left'];
+
     const hideClass2 = hideSideBar ? 'hide' : '';
     const { requests, pagination } = requestsData;
+
     return(
       <div className="requests-page">
         {this.renderNavBar()}
+        {this.renderNewRequestForm(hideNewRequestModal)}
         <section className="main-section">
           {this.renderLeftSideBar(hideClass2)}
           <div className={`rp-requests ${leftPaddingClass}`}>
@@ -120,5 +100,8 @@ class RequestsPage extends Component {
   }
 }
 
+RequestsPage.propTypes = {
+  user: PropTypes.object.isRequired,
+};
 
 export default RequestsPage;
