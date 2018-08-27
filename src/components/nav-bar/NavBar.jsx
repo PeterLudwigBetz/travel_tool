@@ -131,10 +131,12 @@ export class NavBar extends PureComponent {
     return (
       <header className="mdl-layout__header navbar__layout_header">
         {this.renderHeader()}
-        <button type="button" onClick={handleHideSearchBar}>
-          <i className="material-icons navbar__search-icon">
+        <button type="button" className="navbar__search-icon--btn" onClick={handleHideSearchBar}>
+          <div>
+            <i className="material-icons navbar__search-icon">
           search
-          </i>
+            </i>
+          </div>
         </button>
         <div className="navbar__search-size mdl-cell--hide-desktop mdl-cell--hide-tablet" style={{display: `${showSearch}`}}>
           <SearchBar />
@@ -150,7 +152,7 @@ NavBar.propTypes = {
   user: PropTypes.shape({}).isRequired,
   avatar: PropTypes.string.isRequired,
   handleHideSearchBar: PropTypes.func.isRequired,
-  openSearch: PropTypes.bool
+  openSearch: PropTypes.bool,
 };
 
 NavBar.defaultProps = {

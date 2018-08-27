@@ -43,10 +43,10 @@ exports[`should render request header correctly 1`] = `
         <span
           className="label"
         >
-          Open Requests
+          Pending Requests
         </span>
         <span
-          className="show-phone-mode"
+          className="mdl-cell--hide-desktop mdl-cell--hide-tablet"
         >
           Open
         </span>
@@ -57,19 +57,16 @@ exports[`should render request header correctly 1`] = `
         </span>
       </button>
       <button
-        className="bg-btn"
+        className="bg-btn label"
         type="button"
       >
-        <span
-          className="label"
-        >
-          Past Requests
-        </span>
-        <span
-          className="show-phone-mode"
-        >
-          Past
-        </span>
+        Past Requests
+      </button>
+      <button
+        className="bg-btn mdl-cell--hide-desktop mdl-cell--hide-tablet"
+        type="button"
+      >
+        Past
       </button>
     </div>
     <div

@@ -3,7 +3,10 @@
     background-color: #F8F8F8;
     height: 201.9px;
     width: 96.3%;
-    // width: 91.35%;
+    @media (max-width: 479px){
+        height: 150.9px;
+        width: 94%;
+    }
 
   .NewRequests {
         display: flex;

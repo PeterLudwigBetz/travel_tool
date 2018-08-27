@@ -5,10 +5,16 @@
     box-shadow: none;
     display: block;
     border-bottom: 1px solid #e9e9e9;
+    z-index: auto;
 }
 
 .mdl-layout__header-row {
-    padding: 0 40px 0 51px;
+    padding: 0 40px 10px 51px;
+
+    @media (max-width: 1024px){
+        height: 70%;
+        padding: 0 40px 0px 51px;
+    }
 }
 
 .mdl-badge.mdl-badge:after {
@@ -30,12 +36,15 @@
 
 .navbar {
     &__layout_header {
-        height: 8.5%;
+        height: auto;
         margin: auto;
         width: 100%;
         background-color: #ffffff;
         box-shadow: none;
         border-bottom: 1px solid #e9e9e9;
+        @media (max-width: 1024px){
+            height: 5.5%;
+        }
         @media (max-width: 839px) and (min-width: 480px) {
             width: 99%; // background-color: blue;
         }
@@ -53,6 +62,12 @@
             position: absolute;
             margin-left: 237px;
             top: 24px;
+        }
+        &--btn {
+            display: none;
+            @media (max-width: 479px) {
+                display: block;
+            }
         }
     }
     &__menu-item {
@@ -85,8 +100,11 @@
     }
     &__search-size {
         margin-right: -40px;
+        @media (max-width: 1024px){
+           margin-right: -71px;
+        }
         @media (max-width: 839px) and (min-width: 480px) {
-            margin-right: -60px;
+            margin-right: -83px;
         }
         @media (max-width: 479px) {
             display: none;
@@ -102,7 +120,6 @@
     }
     &__user-icon {
         height: 32px;
-        width: 161px;
         margin: 15px 20px 0 0;
     }
     &__text-size {
@@ -123,7 +140,8 @@
         width: 34px;
         border: 1px solid #ffffff;
         margin-right: 2px;
-    }
+        border-radius: 50%;
+}
     &__mdl-Icons {
         margin-bottom: 5px;
     }

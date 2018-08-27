@@ -31,7 +31,7 @@
     &__right-side-bar {
         height: 100%;
         @media (max-width: 839px) and (min-width: 480px) {
-            margin-left: -500px !important; // right: 0;
+            margin-left: -500px !important;
             z-index: 200;
         }
     }
