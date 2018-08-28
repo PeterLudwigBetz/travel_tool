@@ -51,14 +51,6 @@ class Table extends PureComponent {
     }
   }
 
-  renderTootTip(approval) {
-    return (
-      <div className="tool__tip">
-        {approval.name}
-      </div>
-    );
-  }
-
   renderNoRequests() {
     return (
       <div className="table__requests--empty">
@@ -94,7 +86,6 @@ class Table extends PureComponent {
       return (
         <td className="mdl-data-table__cell--non-numeric mdl-cell--hide-phone mdl-cell--hide-tablet table__image">
           {this.renderUserImage(request)}
-          {this.renderTootTip(request)}
         </td>
       );
     }
@@ -136,6 +127,9 @@ class Table extends PureComponent {
     return (
       <tr key={request.id} className="table__row">
         {this.renderUserAvatar(request, avatar)}
+        <td className="mdl-data-table__cell--non-numeric table__data">
+          {request.name}
+        </td>
         {this.renderApprovalsIdCell(request, avatar)}
         <td className="mdl-data-table__cell--non-numeric table__data">
           {request.destination}
@@ -160,6 +154,9 @@ class Table extends PureComponent {
     return (
       <tr>
         {this.renderEmptyCell(avatar)}
+        <th className="mdl-data-table__cell--non-numeric table__head freeze">
+          Name
+        </th>
         <th className="mdl-data-table__cell--non-numeric table__head freeze">
           Request ID
         </th>
