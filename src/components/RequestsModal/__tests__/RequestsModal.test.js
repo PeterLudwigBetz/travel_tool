@@ -43,16 +43,4 @@ describe('Render RequestsModal component', () => {
     expect(wrapper.state('rejectColor')).toBe('#FF5359');
   });
 
-  // it('should render close modal when button is clicked', () => {
-  //   // let approveState = {
-  //   //   approveColor: '#49AAAF',
-  //   //   approveTextColor: 'white'
-  //   // };
-  //   const wrapper = mount(<RequestDetailsModal  />);
-  //   let approve = wrapper.find('#buttonId').at(0);
-  //   approve.simulate('click');
-  //   // console.log(approveState);
-  //   expect(wrapper.state('approveColor').handleApprove).toEqual('#49AAAF');
-  // });
-
 });

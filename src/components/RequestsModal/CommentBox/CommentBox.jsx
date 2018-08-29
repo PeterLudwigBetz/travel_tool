@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Editor } from '@tinymce/tinymce-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import './_CommentBox.scss';
 
 class CommentBox extends Component {
@@ -9,49 +9,52 @@ class CommentBox extends Component {
     submitReady: false
   };
 
-  handleEditorChange = event => {
-    event.preventDefault();
+  handleOnChange = content => {
     this.setState({
-      dataInput: event.target.getContent({ format: 'text' }).trim(),
-      submitReady: true
+      dataInput: content,
+      submitReady: true,
+      border: false
     });
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const { handleCreateComment } = this.props;
+  handleFocus = () => {
+    const { border } = this.state;
+    this.setState({
+      border: !border
+    });
+  };
+
+  handleBlur = () => {
     const { dataInput } = this.state;
-    handleCreateComment(dataInput);
+    this.setState({
+      dataInput: '',
+      submitReady: dataInput ? true : false,
+      border: false
+    });
   };
-
-  handleFocus = event => {
-    event.target.editorContainer.style.border = '1px solid blue';
-  };
-
-  handleBlur = event => {
-    event.target.editorContainer.style.border = '1px solid #E4E4E4';
-  };
- 
 
   render() {
-    const { dataInput, submitReady } = this.state;
+    const { dataInput, submitReady, border } = this.state;
     let status = submitReady && dataInput ? '--active' : '';
+    let border_id = border || dataInput ? 'focus-class' : '';
     return (
-      <form onSubmit={this.handleSubmit} className="editor__editor-form" id="form-id">
-        <Editor
-          init={{
-            statusbar: false,
-            plugins: 'lists',
-            skin: 'lightgray',
-            menubar: false, branding: false,
-            toolbar: 'bold italic underline   numlist bullist   outdent indent' }}
-          onChange={this.handleEditorChange}
-          value={this.dataInput}
+      <form className="editor__editor-form" id="form-id">
+        <ReactQuill
+          id={border_id}
+          theme="snow"
+          placeholder="Write a comment"
+          modules={CommentBox.modules}
+          onChange={this.handleOnChange}
+          value={dataInput}
           onFocus={this.handleFocus}
-          onBlur={this.handleBlur} />
+          onBlur={this.handleBlur}
+        />
         <div className="editor__btn-size">
           <span className="editor__btn-wrap">
-            <button className={`editor__post-btn editor__post-btn${status} post-btn-text`} type="submit">
+            <button
+              className={`editor__post-btn editor__post-btn${status} post-btn-text`}
+              type="submit"
+            >
               Post
             </button>
           </span>
@@ -61,12 +64,14 @@ class CommentBox extends Component {
   }
 }
 
-CommentBox.propTypes = {
-  handleCreateComment: PropTypes.func
-};
-
-CommentBox.defaultProps = {
-  handleCreateComment: () => {}
+CommentBox.modules = {
+  toolbar: {
+    container: [
+      ['bold', 'italic', 'underline'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ indent: '-1' }, { indent: '+1' }]
+    ]
+  }
 };
 
 export default CommentBox;

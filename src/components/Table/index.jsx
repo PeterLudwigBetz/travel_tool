@@ -114,7 +114,15 @@ export class Table extends Component {
     if (avatar) {
       return (
         <td className="mdl-data-table__cell--non-numeric table__data table__id freeze">
-          {request.id}
+          <div
+            onKeyPress={() => {}}
+            onClick={() => this.handleClickRequest(request.id)}
+            role="button"
+            tabIndex="0"
+            className="button-outline"
+          >
+            {request.id}
+          </div>
         </td>
       );
     } else {
@@ -209,7 +217,7 @@ export class Table extends Component {
           </div>
         )}
       >
-        <RequestDetailsModal handleCreateComment={() => {}} />
+        <RequestDetailsModal />
       </Modal>
 
     );}
