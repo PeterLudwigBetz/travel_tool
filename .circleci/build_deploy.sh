@@ -74,7 +74,9 @@ EOF
 sendSlackDeployNotification() {
     require NOTIFICATION_CHANNEL $NOTIFICATION_CHANNEL
     require SLACK_CHANNEL_HOOK $SLACK_CHANNEL_HOOK
-    
+
+    echo $CIRCLE_SHA1
+
     info "Sending success message to slack"
     curl -X POST -H 'Content-type: application/json' --data "$(slackPayLoad)" "${SLACK_CHANNEL_HOOK}"
     is_success "Slack notification has been successfully sent"
