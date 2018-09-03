@@ -90,8 +90,8 @@ main() {
     # checkoutDeployScriptRepo
     # buildTagAndPushDockerImage
     # buildLintAndDeployK8sConfiguration
-    echo $1
-    echo $2
+    echo '1' $1
+    echo '2' $2
     # sendSlackDeployNotification $2
     # cleanGeneratedYamlFiles
 }
