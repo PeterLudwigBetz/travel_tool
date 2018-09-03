@@ -124,11 +124,9 @@ workflows:
       - build:
           requires:
             - checkout_code
-          <<: *filters
       - deployment:
           requires:
             - checkout_code
             - check_vulnerabilities
             - test_and_report
             - build
-          <<: *filters
