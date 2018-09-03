@@ -72,7 +72,7 @@ EOF
 }
 
 sendSlackDeployNotification() {
-    if [ $1 == "fail" ]; then
+    if [ "$1" == "fail" ]; then
       echo "failed"
     else
       require NOTIFICATION_CHANNEL $NOTIFICATION_CHANNEL
