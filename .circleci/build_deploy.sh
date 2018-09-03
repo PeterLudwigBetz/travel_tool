@@ -81,11 +81,11 @@ sendSlackDeployNotification() {
 }
 
 main() {
-    checkoutDeployScriptRepo
-    buildTagAndPushDockerImage
-    buildLintAndDeployK8sConfiguration
+    # checkoutDeployScriptRepo
+    # buildTagAndPushDockerImage
+    # buildLintAndDeployK8sConfiguration
     sendSlackDeployNotification
-    cleanGeneratedYamlFiles
+    # cleanGeneratedYamlFiles
 }
 
 $@
