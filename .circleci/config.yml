@@ -98,7 +98,7 @@ jobs:
       - *attach_workspace
       - run:
           name: Install K8s Deployment Scripts
-          command: sudo npm install -g rok8s-scripts
+          command: return -1
       - run:
           name: Make deploy script Executable
           command: |
@@ -110,6 +110,11 @@ jobs:
       - run:
           name: Build and Deploy Application
           command: .circleci/build_deploy.sh main
+      - run:
+          name: Upload Failed Tests
+          command: echo "FAILED"
+          when: on_fail
+
 workflows:
   version: 2
   test-build-deploy:
