@@ -112,7 +112,7 @@ jobs:
           command: .circleci/build_deploy.sh main
       - run:
           name: Upload Failed Tests
-          command: echo "FAILED"
+          command: .circleci/build_deploy.sh main fail
           when: on_fail
 
 workflows:
