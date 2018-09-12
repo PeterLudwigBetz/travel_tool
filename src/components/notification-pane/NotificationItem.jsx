@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import './_notificationItem.scss';
 import readMessageIcon from '../../images/read-message.svg';
 import unreadMessageIcon from '../../images/unread-message.svg';
-// import socket from '../../helper/socket/socket';
 
 export default class NotificationItem extends PureComponent {
   renderNotificationItemMetaInfo = () => {
