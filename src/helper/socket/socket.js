@@ -1,5 +1,4 @@
 import socketIOClient from 'socket.io-client';
-import toast from 'toastr';
 import store from '../../redux/store/store';
 import { addNotification } from '../../redux/actionCreator/notificationsActions';
 

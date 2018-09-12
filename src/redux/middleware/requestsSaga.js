@@ -42,7 +42,7 @@ export function* createNewRequestSagaAsync(action) {
     );
 
     const socketChannel = yield call(socket);
-    console.log('---------', socketChannel, action);
+    // console.log('---------', socketChannel, action, response.data.notification);
     toast.success('Request created');
     yield put(createNewRequestSuccess(response.data.request));
     yield put(closeModal());
