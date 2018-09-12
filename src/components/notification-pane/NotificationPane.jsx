@@ -7,6 +7,7 @@ import NotificationContainer from './NotificationContainer';
 import './_notificationPane.scss';
 
 import notifications from '../../mockData/notifications';
+import { handleManagerNotification } from '../../helper/socket/socket';
 
 const generalNotifications = [];
 
@@ -18,6 +19,10 @@ const pendingNotifications = notifications.filter(notification => {
 });
 
 export default class NotificationPane extends PureComponent {
+  componentDidMount() {
+    console.log('notification pane mounted');
+    handleManagerNotification();
+  }
   render() {
     const { onCloseNotificationPane } = this.props;
     return (

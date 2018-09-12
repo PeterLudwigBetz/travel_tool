@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import './_notificationItem.scss';
 import readMessageIcon from '../../images/read-message.svg';
 import unreadMessageIcon from '../../images/unread-message.svg';
+// import socket from '../../helper/socket/socket';
 
 export default class NotificationItem extends PureComponent {
   renderNotificationItemMetaInfo = () => {
+    // const { sender, recepient, requestId, status, type } = this.state;
     const { isPending, messageOpened } = this.props;
     return (
       <div className="notification--item__info__bottom">
@@ -27,6 +29,7 @@ export default class NotificationItem extends PureComponent {
   };
 
   render() {
+    // const { sender, recepient, requestId, status, type } = this.state;
     const { name, image, messageOpened } = this.props;
     const bgColorClass = messageOpened ? 'message-opened' : '';
 
