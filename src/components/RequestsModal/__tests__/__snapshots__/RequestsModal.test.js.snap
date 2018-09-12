@@ -151,7 +151,9 @@ exports[`Render RequestsModal component should match snapshot 1`] = `
       </span>
     </span>
   </div>
-  <AddComment />
+  <AddComment
+    image="http://my-image"
+  />
   <Connect(CommentBox)
     requestId="xDh20cuGx"
   />

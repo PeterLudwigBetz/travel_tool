@@ -211,7 +211,9 @@ export class RequestDetailsModal extends Component {
           requestData={requestData}
         />
         {this.shouldButtonsRender(status)}
-        <AddComment />
+        <AddComment
+          image={user.picture}
+        />
         <ConnectedCommentBox requestId={requestId} />
         {(requestData && status) === 'Approved' && this.renderRequestApproval()}
         <div id="comments">

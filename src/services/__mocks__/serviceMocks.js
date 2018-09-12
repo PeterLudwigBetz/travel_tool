@@ -80,3 +80,32 @@ export const roleResponses = {
     },
   ]
 };
+
+export const notifications = [
+  {
+    createdAt: '2018-09-18T18:53:18.788Z',
+    id: 'BUR2H8uoLB',
+    message: 'created a new travel request',
+    notificationLink: '/request/KIcWEiP2q',
+    notificationStatus: 'unread',
+    notificationType: 'pending',
+    recipientId: '-L32Kw-c5HU',
+    senderId: '-L32Kw-c5HU',
+    senderImage: 'link',
+    senderName: 'Nella Omnibus',
+    updatedAt: '2018-09-18T18:53:18.788Z'
+  },
+  {
+    createdAt: '2018-09-18T18:53:18.788Z',
+    id: 'BUR2H8uoLB',
+    message: 'created a new travel request',
+    notificationLink: '/request/KIcWEiP2q',
+    notificationStatus: 'unread',
+    notificationType: 'pending',
+    recipientId: '-L32Kw-c5HU',
+    senderId: '-L32Kw-c5HU',
+    senderImage: 'link',
+    senderName: 'Nella Omnibus',
+    updatedAt: '2018-09-18T18:53:18.788Z'
+  }
+];

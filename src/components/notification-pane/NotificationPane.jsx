@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 
 import NotificationHeader from './NotificationHeader';
 import NotificationContainer from './NotificationContainer';
-import Modal from '../modal/Modal';
-import RequestsModal from '../RequestsModal/RequestsModal';
 
 import './_notificationPane.scss';
 
@@ -51,7 +49,6 @@ export class NotificationPane extends PureComponent {
           />
         </div>
         <div className="notification-item__last" />
-        {this.renderDetailsModal()}
       </div>
     );
   }

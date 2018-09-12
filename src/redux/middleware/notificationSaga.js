@@ -7,7 +7,6 @@ export function* fetchNotifications(action) {
   try {
     const response = yield call(NotificationsAPI.getNotifications);
     yield put(fetchNotificationsSuccess(response.data.notifications));
-
   } catch (error) {
     const errorMessage = apiErrorHandler(error);
     yield put(fetchNotificationsFailure(errorMessage));

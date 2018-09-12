@@ -1,18 +1,19 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
 import './_notificationItem.scss';
 import readMessageIcon from '../../images/read-message.svg';
 import unreadMessageIcon from '../../images/unread-message.svg';
+import dateFormatter from '../../helper/dateFormatter';
 
 export default class NotificationItem extends PureComponent {
   renderNotificationItemMetaInfo = () => {
-    const { isPending, notificationStatus } = this.props;
+    const { isPending, notificationStatus, timeStamp } = this.props;
     return (
       <div className="notification--item__info__bottom">
         <span className="t-hours-ago">
-          5 hours ago
+          {dateFormatter(timeStamp)}
         </span>
+        { ' ' }
         <span className="view-details" role="button" tabIndex="0" onKeyUp={()=>{}}>
           {isPending && 'View Details'}
         </span>
@@ -27,7 +28,7 @@ export default class NotificationItem extends PureComponent {
   };
 
   render() {
-    const { name, image, notificationStatus } = this.props;
+    const { name, image, notificationStatus, message } = this.props;
     const bgColorClass = notificationStatus === 'read' ? 'message-opened' : '';
 
     return (
@@ -41,7 +42,8 @@ export default class NotificationItem extends PureComponent {
               <span className="notification--item__info__top__name">
                 {`@${name} `}
               </span>
-              submitted a travel request for your approval
+              {/* submitted a travel request for your approval */}
+              {message}
             </div>
           </div>
           {this.renderNotificationItemMetaInfo()}
@@ -56,6 +58,7 @@ NotificationItem.defaultProps = {
   notificationStatus: 'unread',
   name: '',
   image: '',
+  message: ''
 };
 
 NotificationItem.propTypes = {
@@ -63,4 +66,6 @@ NotificationItem.propTypes = {
   name: PropTypes.string,
   notificationStatus: PropTypes.string,
   image: PropTypes.string,
+  message: '',
+  timeStamp: PropTypes.string.isRequired
 };

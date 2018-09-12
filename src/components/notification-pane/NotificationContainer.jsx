@@ -19,10 +19,12 @@ export default class NotificationContainer extends PureComponent {
             isPending={isPending}
             name={notification.senderName}
             messageOpened={notification.notificationStatus}
+            timeStamp={notification.createdAt}
             image={notification.senderImage}
+            message={notification.message}
           />
         );
-      } 
+      }
     );
   };
 
@@ -39,7 +41,7 @@ export default class NotificationContainer extends PureComponent {
           <div className="notification-container__header__title">
             {title}
             <div className={`notification-container__header__title__number--${customClass}`}>
-              {number}
+              {number !== 0 && number}
             </div>
           </div>
           <div className="notification-container__header__action">
@@ -63,7 +65,7 @@ const NOTIFICATIONS_PROPTYPES = PropTypes.arrayOf(PropTypes.shape({
 NotificationContainer.propTypes = {
   title: PropTypes.string.isRequired,
   pendingNotifications: NOTIFICATIONS_PROPTYPES,
-  generalNotifications: NOTIFICATIONS_PROPTYPES
+  generalNotifications: NOTIFICATIONS_PROPTYPES,
 };
 
 NotificationContainer.defaultProps = {

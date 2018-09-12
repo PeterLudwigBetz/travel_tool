@@ -30,8 +30,11 @@ export function* updateRequestStatusSaga(action) {
     const response = yield call(
       ApprovalsApi.updateRequestStatus, action.statusUpdateData
     );
-    toast.success(response.data.message);
-    yield put(updateRequestStatusSuccess(response.data.updatedRequest));
+
+    const { message, updatedRequest } = response.data;
+    toast.success(message);
+    yield put(updateRequestStatusSuccess(updatedRequest));
+
     yield put(closeModal());
 
   } catch (error) {

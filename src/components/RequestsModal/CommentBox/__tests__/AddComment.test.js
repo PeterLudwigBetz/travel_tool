@@ -3,7 +3,11 @@ import { shallow } from 'enzyme';
 import AddComment from '../AddComment';
 
 describe('AddComment component', () => {
-  const wrapper = shallow(<AddComment />);
+  const props = {
+    image: 'path/to/image'
+  };
+
+  const wrapper = shallow(<AddComment {...props} />);
 
   it('should match snapshot', () => {
     expect(wrapper).toMatchSnapshot();

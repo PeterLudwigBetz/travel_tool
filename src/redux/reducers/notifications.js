@@ -1,7 +1,7 @@
 const initialState = {
   notifications: []
 };
-const notifications = (state = [], action) => {
+const notifications = (state = initialState, action) => {
   switch(action.type) {
   case 'FETCH_NOTIFICATIONS_SUCCESS':
     return action.notifications;
