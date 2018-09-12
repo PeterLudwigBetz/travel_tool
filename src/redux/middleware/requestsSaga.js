@@ -1,4 +1,4 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest, call, select } from 'redux-saga/effects';
 import toast from 'toastr';
 import {
   FETCH_USER_REQUESTS,
@@ -16,6 +16,7 @@ import {
   fetchUserRequestDetailsFailure
 } from '../actionCreator/requestActions';
 import { closeModal } from '../actionCreator/modalActions';
+import socket from '../../helper/socket/socket';
 
 export function* fetchUserRequestsSaga(action) {
   try {
@@ -35,9 +36,13 @@ export function* watchFetchRequests() {
 // worker saga responsible for make api request
 export function* createNewRequestSagaAsync(action) {
   try {
+    
     const response = yield call(
       RequestAPI.postNewRequest, action.requestData
     );
+
+    const socketChannel = yield call(socket);
+    console.log('---------', socketChannel, action);
     toast.success('Request created');
     yield put(createNewRequestSuccess(response.data.request));
     yield put(closeModal());

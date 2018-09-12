@@ -6,6 +6,7 @@ import TravelDetailsFieldset from './FormFieldsets/TravelDetails';
 import SubmitArea from './FormFieldsets/SubmitArea';
 import './NewRequestForm.scss';
 import Checkbox from '../../CheckBox/index';
+// import { createRequestSocket, handleManagerNotification } from '../../../helper/socket/socket';
 
 class NewRequestForm extends PureComponent {
   constructor(props) {
@@ -35,6 +36,12 @@ class NewRequestForm extends PureComponent {
     };
     this.state = { ...this.defaultState };
   }
+
+  // componentDidMount() {
+  //   console.log('new request form mounted');
+  //   createRequestSocket('demola', () => console.log('my name is demola'));
+  //   handleManagerNotification();
+  // }
 
   componentWillUnmount() {
     this.handleClearForm();
