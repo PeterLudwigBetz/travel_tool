@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 import './_notificationItem.scss';
 import readMessageIcon from '../../images/read-message.svg';
 import unreadMessageIcon from '../../images/unread-message.svg';
@@ -9,20 +9,22 @@ import unreadMessageIcon from '../../images/unread-message.svg';
 export default class NotificationItem extends PureComponent {
   renderNotificationItemMetaInfo = () => {
     // const { sender, recepient, requestId, status, type } = this.state;
-    const { isPending, messageOpened } = this.props;
+    const { isPending, notificationStatus, handleClick, id } = this.props;
+    
     return (
       <div className="notification--item__info__bottom">
         <span className="t-hours-ago">
           5 hours ago
         </span>
-        <span className="view-details">
+        <span className="view-details" id={id} onClick={handleClick} role="button" tabIndex="0" onKeyUp={()=>{}}>
           {isPending && 'View Details'}
         </span>
+        
         <img
           role="presentation"
-          src={messageOpened ? readMessageIcon : unreadMessageIcon}
+          src={notificationStatus === 'read' ? readMessageIcon : unreadMessageIcon}
           alt="message icon"
-          className={messageOpened ? 'msg-icon msg-icon__opened' : 'msg-icon msg-icon__closed'}
+          className={notificationStatus === 'read' ? 'msg-icon msg-icon__opened' : 'msg-icon msg-icon__closed'}
         />
       </div>
     );
@@ -30,9 +32,8 @@ export default class NotificationItem extends PureComponent {
 
   render() {
     // const { sender, recepient, requestId, status, type } = this.state;
-    const { name, image, messageOpened } = this.props;
-    const bgColorClass = messageOpened ? 'message-opened' : '';
-
+    const { name, image, notificationStatus } = this.props;
+    const bgColorClass = notificationStatus === 'read' ? 'message-opened' : '';
     return (
       <div className={`notification-item ${bgColorClass}`}>
         <div className="notification-item__image__container">
@@ -56,12 +57,14 @@ export default class NotificationItem extends PureComponent {
 
 NotificationItem.defaultProps = {
   isPending: false,
-  messageOpened: false
+  notificationStatus: 'unread'
 };
 
 NotificationItem.propTypes = {
   isPending: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  messageOpened: PropTypes.bool,
+  notificationStatus: PropTypes.string,
   image: PropTypes.string.isRequired,
 };

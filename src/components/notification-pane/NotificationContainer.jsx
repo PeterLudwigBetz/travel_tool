@@ -1,33 +1,39 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './_notificationContainer.scss';
-import image from '../../images/logo.svg';
 import NotificationItem from './NotificationItem';
 
 export default class NotificationContainer extends PureComponent {
 
   renderNotifications = (notifications) => {
+    const {handleClick} = this.props;
     return notifications.map(
-      notification => (
-        <NotificationItem
-          id={notification.name}
-          key={notification.name}
-          isPending={notification.isPending}
-          name={notification.name}
-          messageOpened={notification.messageOpened}
-          image={image}
-        />
-      )    
+      notification => {
+        let isPending = false;
+        if(notification.notificationType === 'pending'){
+          isPending = true;
+        }
+        return  (
+          <NotificationItem
+            handleClick={handleClick}
+            id={notification.requestId}
+            key={notification.id}
+            isPending={isPending}
+            name={notification.senderName}
+            messageOpened={notification.notificationStatus}
+            image={notification.senderImage}
+          />
+        );
+      } 
     );
   };
 
   render() {
-    const { title, pendingNotifications, generalNotifications } = this.props;
+    const { title, pendingNotifications, generalNotifications, handleClick } = this.props;
     const customClass = title === 'Pending Approvals' ? 'pending' : 'general';
     const number = title === 'Pending Approvals'
       ? pendingNotifications.length
       : generalNotifications.length;
-
     return (
       <div className="notification-container">
         <div className={`notification-container__header--${customClass}`}>
@@ -41,7 +47,7 @@ export default class NotificationContainer extends PureComponent {
               mark all as read
           </div>
         </div>
-        {title === 'Pending Approvals' && this.renderNotifications(pendingNotifications)}
+        {title === 'Pending Approvals' && this.renderNotifications(pendingNotifications,handleClick)}
         {title === 'General Notifications' && this.renderNotifications(generalNotifications)}
       </div>
     );
@@ -49,10 +55,9 @@ export default class NotificationContainer extends PureComponent {
 }
 
 const NOTIFICATIONS_PROPTYPES = PropTypes.arrayOf(PropTypes.shape({
-  isPending: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
-  messageOpened: PropTypes.bool.isRequired,
-  image: PropTypes.string.isRequired,
+  requestId: PropTypes.string.isRequired,
+  notificationStatus: PropTypes.string.isRequired,
+  senderImage: PropTypes.string.isRequired,
 }));
 
 NotificationContainer.propTypes = {

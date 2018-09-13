@@ -20,6 +20,8 @@ import {
   watchUpdateRequestStatus,
 } from './approvalsSaga';
 
+import {watchFetchUsersNotificationSync} from './notificationsSaga';
+
 function* rootSaga() {
   yield all([
     userAuth(),
@@ -33,7 +35,8 @@ function* rootSaga() {
     watchFetchRoleUsers(),
     watchFetchUserRequestsDetails(),
     watchCreateComment(),
-    watchUpdateRequestStatus()
+    watchUpdateRequestStatus(),
+    watchFetchUsersNotificationSync()
   ]);
 }
 

@@ -1,8 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import {PropTypes} from 'prop-types';
+import { Link } from 'react-router-dom';
 import ConnectedNavBar from '../../components/nav-bar/NavBar';
 import ConnectedLeftSideBar from '../../components/LeftSideBar/LeftSideBar';
-import NotificationPane from '../../components/notification-pane/NotificationPane';
+import NotificationPane from '../../components/notification-pane/NotificationPane'; // eslint-disable-line 
 import ConnectedSideDrawer from '../../components/SideDrawer/SideDrawer';
 import upic from '../../images/upic.svg';
 import RequireAuth from '../authHoc';
@@ -83,7 +84,6 @@ export class Layout extends Component {
   };
 
   renderNotificationPane = (hideClass, hideSideBar) => {
-
     const hideClass3 = hideSideBar ? '' : 'hide mdl-cell--hide-desktop';
     return (
       <div
@@ -118,7 +118,9 @@ export class Layout extends Component {
       ? ['hide', '']
       : ['', 'pd-left'];
 
+
     return (
+      
       <Fragment>
         <div className="mdl-layout mdl-js-layout request-page mdl-layout--no-desktop-drawer-button"
         >
