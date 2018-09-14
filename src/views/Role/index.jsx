@@ -45,7 +45,7 @@ export class Role extends Component {
     return (
       <Modal
         closeModal={closeModal}
-        width='600px'
+        width="600px"
         visibility={
           shouldOpen && modalType === 'new model' ? 'visible' : 'invisible'
         }

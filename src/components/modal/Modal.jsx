@@ -22,7 +22,8 @@ class Modal extends PureComponent {
     innerClass: PropTypes.string,
     dynamicText: PropTypes.string,
     nextClass: PropTypes.string,
-    dynamicDate:PropTypes.string
+    dynamicDate:PropTypes.string,
+    width: PropTypes.string,
   };
 
   renderModalHeader = () => {
@@ -94,6 +95,7 @@ Modal.defaultProps = {
   nextClass: '',
   dynamicDate: '',
   closeModal: null,
+  width: ''
 };
 
 export default Modal;

@@ -14,6 +14,7 @@ exports[`<Requests> renders as expected 1`] = `
     symbol=""
     title="New Travel Request"
     visibility="invisible"
+    width="1000px"
   >
     <NewRequestForm
       closeModal={[Function]}

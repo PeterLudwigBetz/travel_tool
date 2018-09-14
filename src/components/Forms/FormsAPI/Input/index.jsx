@@ -38,7 +38,7 @@ class Input extends PureComponent {
     case 'date':
       this.props = { // save props for date type for use in render InputElement
         ...this.props,
-        onChange: eventHandlers.handleSelectDate,
+        onChange: this.props.handleDate, /* eslint-disable-line */
         onBlur: eventHandlers.handleInputBlur
       };
       return DateInput; // pick date Input

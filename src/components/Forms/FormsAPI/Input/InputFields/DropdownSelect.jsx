@@ -10,6 +10,7 @@ export default class DropdownSelect extends Component {
     onChange: PropTypes.func.isRequired,
     choices: PropTypes.arrayOf(PropTypes.string).isRequired,
     value: PropTypes.string.isRequired,
+    size:  PropTypes.string.isRequired,
   }
 
   static defaultProps = {
