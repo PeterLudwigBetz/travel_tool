@@ -1,12 +1,4 @@
-/*
-  Various types of form input elements can be created with the Input component
-  - It can create:
-    - Normal html input
-    - Custom dropdown select
-    - Date picker input
-    - Button option toggler input e.g. Male/Female, Yes/No etc.
-*/
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
 import { HtmlInput, DropdownSelect, DateInput, ButtonToggler } from './InputFields';
 import createEventHandlersFor from '../formEventHandlers';
@@ -78,7 +70,7 @@ class Input extends PureComponent {
 
     return (
       <div
-        className={`form-input ${customClass}${errors[name] ? 'error' : ''}`}
+        className={`form-input ${customClass} ${errors[name] ? 'error' : ''}`}
       >
         <label htmlFor={name}>
           {label}
@@ -87,7 +79,7 @@ class Input extends PureComponent {
           </span>
           {this.labelNote(labelNote)}
         </label>
-        <InputElement {...this.props} />
+        <InputElement error={errors[name]} {...this.props} />
         <span className="error">
           {errors[name]}
         </span>

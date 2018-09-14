@@ -2,9 +2,55 @@ form.new-request {
   fieldset {
     .input-group {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
     }
+    .spaces {
+      margin-right: 30px
+    }
+    .space {
+      margin-right: 20px
+    }
+    .line {
+      width: 100%;
+      padding-bottom: 11px;
+      
+    }
+    .hide-details {	
+        height: 18px;
+        width: 103px;	
+        color: #4F4F4F;	
+        font-family: "DIN Pro";	
+        font-size: 14px;	
+        font-weight: 500;	
+        line-height: 18px;	
+        float: right;
+        cursor: pointer;
+      }
+      .expand {	
+        float: right;
+        margin: 7px 0px 0px 6px;
+      }
+
+    .rectangle{
+      height: 95px;
+      width: 100%;	
+      border: 1px solid #E4E4E4;
+      border-radius: 2px;	
+      background-color: #F8F8F8;
+      margin: 7px 0px 20px 0px;
+  }
+  .style-details {
+    display: flex;
+    padding: 10px;
+    margin-left: 20px;
+  }
+
+  .travel-to {
+    margin-right: 20px;
+  }
+
+  .others-width {
+    width : 190px;
   }
 }
 
+}

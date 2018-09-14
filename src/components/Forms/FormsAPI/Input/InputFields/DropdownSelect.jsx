@@ -84,7 +84,7 @@ export default class DropdownSelect extends Component {
   }
 
   render() {
-    const {choices, value, className} = this.props;
+    const {choices, value, className, size} = this.props;
     const options = this.getSelectOptions(choices);
 
     return (
@@ -92,7 +92,7 @@ export default class DropdownSelect extends Component {
         <div
           {...this.getPropsObject()}
         >
-          <div className="value">
+          <div className="value" style={{width: size}}> 
             {value}
             <div className={`select-dropdown ${this.getDropdownStatus()}`}>
               <img src={selectDropdownIcon} alt="icn" />

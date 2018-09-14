@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {PropTypes} from 'prop-types';
-import moment from 'moment';
 import Input from './Input';
 import FormContext from './FormContext/FormContext';
 
@@ -28,7 +26,7 @@ class InputRenderer {
   }
 
   renderInput = (name, type, customProps) => {
-    const {values, onChange} = this.props;
+    const {values, onChange, value} = this.props;
 
     // common props
     let inputProps = {
@@ -36,6 +34,7 @@ class InputRenderer {
       value: values[name],
       name: name,
       type: type,
+      size: value,
       label: this.formMetadata.inputLabels[name].label,
       labelNote: this.formMetadata.inputLabels[name].note,
       onChange: onChange

@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import WithLoadingRoleTable from '../../components/RoleTable';
-import Base from '../Base';
 import RolePanelHeader from '../../components/RolePanelHeader';
 import Modal from '../../components/modal/Modal';
 import { NewUserRoleForm } from '../../components/Forms';
@@ -13,21 +12,12 @@ import {
 } from '../../redux/actionCreator/roleActions';
 import './Role.scss';
 
-export class Role extends Base {
-  state = {
-    hideNotificationPane: true,
-    hideSideBar: false,
-    openSearch: false,
-    selectedLink: 'settings page',
-    hideOverlay: false
-  };
-
+export class Role extends Component {
   componentDidMount() {
     const { getRoleData } = this.props;
     getRoleData();
   }
 
- 
   renderUserRolePanelHeader() {
     const { openModal } = this.props;
     return (
@@ -36,7 +26,6 @@ export class Role extends Base {
       </div>
     );
   }
-
 
   renderRoles() {
     const { isLoading, getRole, roleErrors } = this.props;
@@ -56,6 +45,7 @@ export class Role extends Base {
     return (
       <Modal
         closeModal={closeModal}
+        width='600px'
         visibility={
           shouldOpen && modalType === 'new model' ? 'visible' : 'invisible'
         }
@@ -71,38 +61,12 @@ export class Role extends Base {
     );
   }
 
-  renderUserRolePage( ) {
-    const { hideSideBar, selectedLink, hideNotificationPane } = this.state;
-    let [hideClass, leftPaddingClass] = hideNotificationPane ? ['hide', ''] : ['', 'pd-left'];
+  renderUserRolePage() {
     return (
-      <div className="mdl-layout__content full-height">
-        <div className="mdl-grid mdl-grid--no-spacing full-height">
-          {this.renderLeftSideBar( hideSideBar, selectedLink)}
-          <div className="mdl-cell mdl-cell--9-col-desktop request-page__table-view mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-            <div className={`rp-requests ${leftPaddingClass}`}>
-              {this.renderUserRolePanelHeader()}
-              {this.renderRoles()}
-            </div>
-          </div>
-          {this.renderNotificationPane(hideClass, hideSideBar)}
-        </div>
-      </div>
-    );
-  }
-
-  renderRolesTable  ()  {
-    const { selectedLink, openSearch, hideOverlay } = this.state;
-    const overlayClass = hideOverlay ? 'block' : 'none';
-    return (
-      <div>
-        {this.renderOverlay(overlayClass)}
-        <div className="mdl-layout mdl-js-layout request-page mdl-layout--no-desktop-drawer-button">
-          {this.renderSideDrawer(selectedLink, overlayClass)}
-          {this.renderNavBar(openSearch)}
-          {this.renderRoleForm()}
-          {this.renderUserRolePage( )}
-        </div>
-      </div>
+      <Fragment>
+        {this.renderUserRolePanelHeader()}
+        {this.renderRoles()}
+      </Fragment>
     );
   }
 
@@ -113,13 +77,10 @@ export class Role extends Base {
       history.push('/');
     }
     return (
-      <div>
-        <div className="mdl-layout mdl-js-layout request-page mdl-layout--no-desktop-drawer-button">
-          <div>
-            {this.renderRolesTable()}
-          </div>
-        </div>
-      </div>
+      <Fragment>
+        {this.renderRoleForm()}
+        {this.renderUserRolePage( )}
+      </Fragment>
     );
   }
 }

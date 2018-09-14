@@ -5,6 +5,7 @@ import closeButton from '../../images/icons/close.svg';
 import TravelLink from '../RequestsModal/_RequestTravel';
 import './_modal.scss';
 
+
 class Modal extends PureComponent {
   static propTypes = {
     visibility: PropTypes.oneOf(['visible', 'invisible']).isRequired,
@@ -51,13 +52,14 @@ class Modal extends PureComponent {
 
   render() {
     const {children, visibility, closeModal, divClass, innerClass, dynamicText,
-      nextClass, dynamicDate, title  } = this.props;
+      nextClass, dynamicDate, title, width  } = this.props;
     return (
       visibility === 'visible' ? (
         <Fragment>
           <Overlay click={closeModal} className={visibility}>
             <div
               className={`modal ${visibility}`}
+              style={{maxWidth: width}}
               onClick={e => {e.stopPropagation();}} onKeyPress={() => {}}
               tabIndex="0"
               role="button">

@@ -5,7 +5,6 @@ import PersonalDetailsFieldset from './FormFieldsets/PersonalDetails';
 import TravelDetailsFieldset from './FormFieldsets/TravelDetails';
 import SubmitArea from './FormFieldsets/SubmitArea';
 import './NewRequestForm.scss';
-import Checkbox from '../../CheckBox/index';
 
 class NewRequestForm extends PureComponent {
   constructor(props) {
@@ -19,9 +18,9 @@ class NewRequestForm extends PureComponent {
     this.defaultState = {
       values: {
         name: user ? user : '', // FIX: need to be refactor later
-        gender: gender ? gender: '',
-        department: department ? department: '',
-        role: role ? role :'',
+        gender: gender ? gender : '',
+        department: department ? department : '',
+        role: role ? role : '',
         manager: manager ? manager : '',
         origin: '',
         destination: '',
@@ -30,9 +29,9 @@ class NewRequestForm extends PureComponent {
         arrivalDate: null
       },
       errors: {},
-      hasBlankFields: true
+      hasBlankFields: true,
+      checkBox: 'notClicked'
     };
-
     this.state = { ...this.defaultState };
   }
 
@@ -47,13 +46,18 @@ class NewRequestForm extends PureComponent {
     const { handleCreateRequest } = this.props;
     const { values } = this.state;
     const checkBoxState = localStorage.getItem('state');
-    if (checkBoxState === 'clicked'){
-      const [name, gender, department, role, manager] = [values.name, values.gender, values.department, values.role, values.manager];
-      this.savePersonalDetails(name,gender,department,role,manager);
+    if (checkBoxState === 'clicked') {
+      const [name, gender, department, role, manager] = [
+        values.name,
+        values.gender,
+        values.department,
+        values.role,
+        values.manager
+      ];
+      this.savePersonalDetails(name, gender, department, role, manager);
     }
     if (this.validate()) {
       // call create the request
-
       let data = { ...values };
       if (data.destination === 'Other') {
         data.destination = data.otherDestination;
@@ -90,7 +94,7 @@ class NewRequestForm extends PureComponent {
     return !hasBlankFields;
   };
 
-  savePersonalDetails(name, gender, department, role, manager){
+  savePersonalDetails(name, gender, department, role, manager) {
     // save to localstorage
     localStorage.setItem('name', name);
     localStorage.setItem('gender', gender);
@@ -102,20 +106,27 @@ class NewRequestForm extends PureComponent {
   render() {
     const { values, errors, hasBlankFields } = this.state;
     const { managers, creatingRequest } = this.props;
-
     return (
       <FormContext targetForm={this} errors={errors} validatorName="validate">
-
         {creatingRequest && (
-          <h5 style={{display: 'flex', justifyContent: 'center', fontFamily: 'DIN Pro'}}>
-          Creating request...
+          <h5
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              fontFamily: 'DIN Pro'
+            }}
+          >
+            Creating request...
           </h5>
         )}
         <form onSubmit={this.handleSubmit} className="new-request">
-          <PersonalDetailsFieldset values={values} managers={managers} />
-          <Checkbox />
-          <TravelDetailsFieldset values={values} />
-          <hr />
+          <PersonalDetailsFieldset
+            values={values}
+            managers={managers}
+            value="232px"
+          />
+         
+          <TravelDetailsFieldset values={values} value="190px" />
           <SubmitArea
             onCancel={this.handleClearForm}
             hasBlankFields={hasBlankFields}
@@ -130,7 +141,7 @@ class NewRequestForm extends PureComponent {
 NewRequestForm.propTypes = {
   handleCreateRequest: PropTypes.func.isRequired,
   managers: PropTypes.array,
-  creatingRequest: PropTypes.bool,
+  creatingRequest: PropTypes.bool
 };
 
 NewRequestForm.defaultProps = {
