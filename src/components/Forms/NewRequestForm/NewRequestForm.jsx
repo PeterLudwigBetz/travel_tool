@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
+import Script from 'react-load-script';
 import { FormContext } from '../FormsAPI';
 import PersonalDetailsFieldset from './FormFieldsets/PersonalDetails';
 import TravelDetailsFieldset from './FormFieldsets/TravelDetails';
@@ -22,15 +23,16 @@ class NewRequestForm extends PureComponent {
         department: department ? department : '',
         role: role ? role : '',
         manager: manager ? manager : '',
-        origin: '',
-        destination: '',
-        otherDestination: '',
-        departureDate: null,
-        arrivalDate: null
       },
+      trips: [],
       errors: {},
       hasBlankFields: true,
-      checkBox: 'notClicked'
+      checkBox: 'notClicked',
+      selection: 'return',
+      collapse: false,
+      title: 'Hide Details',
+      position: 'none',
+      line: '1px solid #E4E4E4'
     };
     this.state = { ...this.defaultState };
   }
@@ -39,12 +41,122 @@ class NewRequestForm extends PureComponent {
     this.handleClearForm();
   }
 
-  // an onChange handler will be created by the Input component when it's rendered
+  onChangeDate = (date, event) => {
+    const { values } = this.state;
+    console.log(event.nativeEvent);
+    this.setState({
+      values: {
+        ...values,
+        ['departureDate-0']: date
+      }
+    });
+  }
+
+  onChangeDateBox = (event) => {
+    console.log(event.target);
+  }
+
+  onChangeInput (event) {
+    const name = event.target.name;
+    const getId = event.target.dataset.parentid;
+    const { trips, values } = this.state;
+    const options = {
+      types: ['(cities)'],
+    };
+    const autocomplete = new google.maps.places.Autocomplete(event.target, options);
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace().address_components;
+      const places = place[0].long_name + ' ' + place[2].long_name;
+      if (trips[getId]){
+        if (name.startsWith('destination')) {
+          trips[getId].destination = places;
+        } else if (name.startsWith('origin')) {
+          trips[getId].origin = places;
+        }
+      }else {
+        const tripDetails = {
+          origin: '',
+          destination: '',
+          departureDate: '',
+          returnDate:'',
+        };
+        trips.push({
+          ...tripDetails,
+          [name.split('-')[0]]: places
+        });
+      }
+      this.setState({
+        values: {
+          ...values,
+          [name] :  places
+        }
+      });
+    });
+  }
+ 
+  onClickInput = (event) =>  {
+    // console.log(this.props.selectedDate);
+    // console.log(event.target);
+    const name = event.target.name;
+    const getId = event.target.dataset.parentid;
+    // const { trips, values } = this.state;
+
+    // if (trips[getId]){
+    //   if (name.startsWith('destination')) {
+    //     trips[getId].destination = places;
+    //   } else if (name.startsWith('origin')) {
+    //     trips[getId].origin = places;
+    //   }
+    // }else {
+    //   const tripDetails = {
+    //     origin: '',
+    //     destination: '',
+    //     departureDate: '',
+    //     returnDate:'',
+    //   };
+    //   trips.push({
+    //     ...tripDetails,
+    //     [name.split('-')[0]]: places
+    //   });
+    // }
+    // this.setState({
+    //   values: {
+    //     ...values,
+    //     [name] :  places
+    //   }
+    // });
+  }
+ 
+
+  handleRadioButton = (event) => {
+    const { selection, collapse } = this.state;
+    this.setState({
+      selection: event.target.value,
+      hasBlankFields: true, 
+    });
+    if (event.target.value === 'multi' && !collapse) {
+      this.collapsible();
+    }else if (!collapse) {
+      return;
+    }else{
+      this.collapsible();
+    }
+  }
+
+
   handleSubmit = event => {
     event.preventDefault();
-
     const { handleCreateRequest } = this.props;
-    const { values } = this.state;
+    const { values, selection, trips } = this.state;
+    const newData = {
+      name: values.name,
+      tripType: selection,
+      manager: values.manager,
+      gender: values.gender,
+      trips: trips,
+      department: values.department,
+      role: values.role
+    };
     const checkBoxState = localStorage.getItem('state');
     if (checkBoxState === 'clicked') {
       const [name, gender, department, role, manager] = [
@@ -58,11 +170,11 @@ class NewRequestForm extends PureComponent {
     }
     if (this.validate()) {
       // call create the request
-      let data = { ...values };
-      if (data.destination === 'Other') {
-        data.destination = data.otherDestination;
-      }
-      delete data.otherDestination;
+      let data = { ...newData };
+
+      // if (data.tripType === 'oneWay') {
+      //   delete data.trips[0].returnDate;
+      // }
       handleCreateRequest(data);
     }
   };
@@ -72,7 +184,11 @@ class NewRequestForm extends PureComponent {
   };
 
   validate = field => {
-    let { values, errors } = this.state;
+    let { values, errors, selection } = this.state;
+    // if (selection === 'oneWay') {
+    //   delete values.arrivalDate;
+    // }
+
     [errors, values] = [{ ...errors }, { ...values }];
     let hasBlankFields = false;
 
@@ -94,6 +210,27 @@ class NewRequestForm extends PureComponent {
     return !hasBlankFields;
   };
 
+  collapsible =  () => {
+    const { collapse } = this.state;
+    if(!collapse) {
+      this.setState({ 
+        collapse: true,
+        title: 'Show Details',
+        position: 'rotate(266deg)',
+        line: 'none'
+      });
+    }else{
+      this.setState({ 
+        collapse: false,
+        title: 'Hide Details',
+        position: 'none',
+        line: '1px solid #E4E4E4'
+      });
+    }
+  }
+
+
+
   savePersonalDetails(name, gender, department, role, manager) {
     // save to localstorage
     localStorage.setItem('name', name);
@@ -103,30 +240,37 @@ class NewRequestForm extends PureComponent {
     localStorage.setItem('manager', manager);
   }
 
-  render() {
-    const { values, errors, hasBlankFields } = this.state;
-    const { managers, creatingRequest } = this.props;
+  renderForm = (managers, creatingRequest) => {
+    const { values, errors, hasBlankFields, selection,  collapse, title, position, line } = this.state;
     return (
       <FormContext targetForm={this} errors={errors} validatorName="validate">
         {creatingRequest && (
-          <h5
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              fontFamily: 'DIN Pro'
-            }}
-          >
-            Creating request...
+          <h5 className="style-h5">
+         Creating request...
           </h5>
         )}
         <form onSubmit={this.handleSubmit} className="new-request">
           <PersonalDetailsFieldset
             values={values}
+            collapsible={this.collapsible}
+            collapse={collapse}
+            title={title}
+            position={position}
+            line={line}
             managers={managers}
             value="232px"
           />
-         
-          <TravelDetailsFieldset values={values} value="190px" />
+          <TravelDetailsFieldset 
+            values={values} 
+            value="232px" 
+            selection={selection}
+            handleDate={this.onChangeDate}
+            handleDateBox={this.onChangeDateBox}
+            handleChange={this.handleRadioButton}
+            onChangeInput={this.onChangeInput}
+            onClickInput={this.onClickInput}
+          />
+          <Script url={process.env.REACT_APP_CITY} />   
           <SubmitArea
             onCancel={this.handleClearForm}
             hasBlankFields={hasBlankFields}
@@ -134,6 +278,16 @@ class NewRequestForm extends PureComponent {
           />
         </form>
       </FormContext>
+    );
+  }
+  
+
+  render() {
+    const { managers, creatingRequest } = this.props;
+    return (
+      <div>
+        {this.renderForm(managers, creatingRequest)}
+      </div>
     );
   }
 }

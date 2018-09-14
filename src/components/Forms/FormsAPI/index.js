@@ -26,20 +26,20 @@ class InputRenderer {
   }
 
   renderInput = (name, type, customProps) => {
-    const {values, onChange, value} = this.props;
+    const { values, onChange, value} = this.props;
 
-    // common props
     let inputProps = {
       ...customProps,
       value: values[name],
       name: name,
       type: type,
       size: value,
-      label: this.formMetadata.inputLabels[name].label,
-      labelNote: this.formMetadata.inputLabels[name].note,
-      onChange: onChange
+      label: this.formMetadata.inputLabels[name.split('-')[0]].label,
+      labelNote: this.formMetadata.inputLabels[name.split('-')[0]].note,
+      onChange: onChange,
     };
-    // get input-type-unique props
+
+    customProps ? inputProps['data-parentid'] = customProps.parentid : null;
     inputProps = this.switchProps(name, type, values, inputProps);
 
     return createInput(inputProps);

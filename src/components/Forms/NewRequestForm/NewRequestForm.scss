@@ -4,16 +4,20 @@ form.new-request {
       display: flex;
     }
     .spaces {
-      margin-right: 30px
+      margin-right: 30px;
     }
-    .space {
-      margin-right: 20px
-    }
+
     .line {
       width: 100%;
       padding-bottom: 11px;
       
     }
+    .style-h5 {
+      display: 'flex';
+      justifyContent: 'center';
+      fontFamily: 'DIN Pro';
+    }
+    
     .hide-details {	
         height: 18px;
         width: 103px;	
@@ -46,10 +50,18 @@ form.new-request {
 
   .travel-to {
     margin-right: 20px;
+    position: relative;
+    width: 198px;
   }
 
+  .location-icon {
+    position: absolute;
+    right: 15px;
+    top: 39px;
+}
+
   .others-width {
-    width : 190px;
+    margin-right : 20px;
   }
 }
 

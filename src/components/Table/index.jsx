@@ -142,6 +142,7 @@ export class Table extends Component {
         visibility={(shouldOpen && modalType === 'request details') ? 'visible' : 'invisible'}
         title={clickedRequestId}
         symbol="#"
+        width="600px"
         description="Request Details"
         modalBar={(
           <div className="table__modal-bar-text">

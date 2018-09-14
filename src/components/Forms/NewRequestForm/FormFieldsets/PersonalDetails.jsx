@@ -6,60 +6,10 @@ import expand from '../../../../images/expand_more_24px.svg';
 import Checkbox from '../../../CheckBox/index';
 
 class PersonalDetailsFieldset extends Component {
-  state = {
-    collapse: false,
-    title: 'Hide Details',
-    position: 'none',
-    line: '1px solid #E4E4E4'
-  }
-
-  collapsible =  () => {
-    const { collapse } = this.state;
-    if(!collapse) {
-      this.setState({ 
-        collapse: true,
-        title: 'Show Details',
-        position: 'rotate(266deg)',
-        line: 'none'
-      });
-    }else{
-      this.setState({ 
-        collapse: false,
-        title: 'Hide Details',
-        position: 'none',
-        line: '1px solid #E4E4E4'
-      });
-    }
-  }
-
- 
-  render() {
-    const { managers } = this.props;
-    const { collapse, title, position, line } = this.state;
-    const managerNames = managers.map(manager => manager.fullName);
-    formMetadata.dropdownSelectOptions.manager = managerNames;
-
-    this.inputRenderer = new InputRenderer(this.props, formMetadata);
+  renderfields = (collapse) => {
     const { renderInput } = this.inputRenderer;
-
     return (
-      <fieldset className="personal-details">
-        <legend style={{ width: '100%' , borderBottom: line }}>
-          Personal Details
-          <span className="required-field">
-          * Required Field
-          </span>
-          <span
-            className="hide-details" 
-            onClick={this.collapsible} 
-            onKeyPress={this.handleKeyDown} 
-            role="button" 
-            tabIndex={0}
-          >
-            <img src={expand} alt="clicked" className="expand" style={{transform: position }} />
-            { title }
-          </span>
-        </legend>
+      <div>
         { !collapse ?
           ( 
             <div>
@@ -84,17 +34,59 @@ class PersonalDetailsFieldset extends Component {
             </div>
           )  : null
         }
+      </div>
+    );
+  }
+
+ 
+  render() {
+    const { managers, collapsible, collapse, title, position, line } = this.props;
+    const managerNames = managers.map(manager => manager.fullName);
+    formMetadata.dropdownSelectOptions.manager = managerNames;
+    this.inputRenderer = new InputRenderer(this.props, formMetadata);
+    return (
+      <fieldset className="personal-details">
+        <legend style={{ width: '100%' , borderBottom: line }}>
+          Personal Details
+          <span className="required-field">
+          * Required Field
+          </span>
+          <span
+            className="hide-details" 
+            onClick={collapsible} 
+            onKeyPress={this.handleKeyDown} 
+            role="button" 
+            tabIndex={0}
+          >
+            <img src={expand} alt="clicked" className="expand" style={{transform: position }} />
+            { !title ? 'Hide Details' : title }
+          </span>
+        </legend>
+        {this.renderfields(collapse)}
       </fieldset>
     );
   }
 }
 
+const managers = PropTypes.array;
+const collapsible = PropTypes.func;
+const collapse = PropTypes.bool;
+const title = PropTypes.string;
+const position = PropTypes.string;
+const line = PropTypes.string;
+
 PersonalDetailsFieldset.propTypes = {
-  managers: PropTypes.array
+  managers: managers.isRequired,
+  collapsible: collapsible.isRequired,
+  collapse: collapse.isRequired,
+  title:  title.isRequired,
+  position: position.isRequired,
+  line: position.isRequired,
+
+
+
 };
 
-PersonalDetailsFieldset.defaultProps = {
-  managers: []
-};
+
 
 export default PersonalDetailsFieldset;

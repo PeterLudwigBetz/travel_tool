@@ -5,15 +5,17 @@ import './RaidoButton.scss';
 class RadioButton extends PureComponent {
 
   render() {
-    const  { name, value, id } = this.props;
+    const  { name, value, id, defaultChecked} = this.props;
     return (
       <ul style={{ padding: '0' }}>
-        <li className="box-li">
+        <li>
           <input
             type="radio"
             id={id}
             value={value}
             name="selector"
+            defaultChecked={defaultChecked}
+            onChange={()=>{}}
           />
           <label htmlFor={id}>
             {name}
@@ -25,10 +27,15 @@ class RadioButton extends PureComponent {
   }
 }
 
-RadioButton.prototypes = {
+RadioButton.propTypes = {
   name: PropTypes.string.isRequired,
   value:  PropTypes.string.isRequired,
   id:  PropTypes.string.isRequired,
+  defaultChecked: PropTypes.string,
+};
+
+RadioButton.defaultProps = {
+  defaultChecked: ''
 };
 
 

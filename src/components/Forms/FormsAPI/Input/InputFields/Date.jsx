@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import calendarIcon from '../../../../../images/icons/calendar_icon.svg';
 
 const DateInput = props => {
-  const { error, className, selectedDate } = props;
+  const { error, className, selectedDate} = props;
   let _selectedDate = selectedDate
     ? moment(selectedDate, 'MM-DD-YYYY')
     : selectedDate;

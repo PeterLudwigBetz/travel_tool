@@ -13,6 +13,8 @@ function updateFormValues(value, targetField, validate) {
 export function getInputChangeHandler(validate, targetField) {
   return e => {
     let value = e.target.value;
+    console.log(value);
+    console.log('targetField', targetField)
     updateFormValues.call(this, value, targetField, validate);
   };
 }
