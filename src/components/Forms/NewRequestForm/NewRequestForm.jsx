@@ -26,11 +26,12 @@ class NewRequestForm extends PureComponent {
         destination: '',
         otherDestination: '',
         departureDate: null,
-        arrivalDate: null
+        arrivalDate: null,
       },
       errors: {},
       hasBlankFields: true,
-      checkBox: 'notClicked'
+      checkBox: 'notClicked',
+      selection: ''
     };
     this.state = { ...this.defaultState };
   }
@@ -39,12 +40,33 @@ class NewRequestForm extends PureComponent {
     this.handleClearForm();
   }
 
-  // an onChange handler will be created by the Input component when it's rendered
+  handleRadioButton = (event) => {
+    this.setState({
+      selection: event.target.value,
+      hasBlankFields: true
+    });
+  }
+
   handleSubmit = event => {
     event.preventDefault();
-
     const { handleCreateRequest } = this.props;
-    const { values } = this.state;
+    const { values, selection } = this.state;
+    const newData = {
+      name: values.name,
+      tripType: selection,
+      manager: values.manager,
+      gender: values.gender,
+      trips: [
+        {
+          origin: values.origin,
+          destination: values.destination,
+          departureDate: values.departureDate,
+          returnDate: values.arrivalDate,
+        }
+      ],
+      department: values.department,
+      role: values.role
+    };
     const checkBoxState = localStorage.getItem('state');
     if (checkBoxState === 'clicked') {
       const [name, gender, department, role, manager] = [
@@ -58,11 +80,11 @@ class NewRequestForm extends PureComponent {
     }
     if (this.validate()) {
       // call create the request
-      let data = { ...values };
-      if (data.destination === 'Other') {
-        data.destination = data.otherDestination;
+      let data = { ...newData };
+
+      if (data.tripType === 'oneWay') {
+        delete data.trips[0].returnDate;
       }
-      delete data.otherDestination;
       handleCreateRequest(data);
     }
   };
@@ -72,7 +94,11 @@ class NewRequestForm extends PureComponent {
   };
 
   validate = field => {
-    let { values, errors } = this.state;
+    let { values, errors, selection } = this.state;
+    if (selection === 'oneWay') {
+      delete values.arrivalDate;
+    }
+
     [errors, values] = [{ ...errors }, { ...values }];
     let hasBlankFields = false;
 
@@ -102,9 +128,10 @@ class NewRequestForm extends PureComponent {
     localStorage.setItem('role', role);
     localStorage.setItem('manager', manager);
   }
+  
 
   render() {
-    const { values, errors, hasBlankFields } = this.state;
+    const { values, errors, hasBlankFields, selection } = this.state;
     const { managers, creatingRequest } = this.props;
     return (
       <FormContext targetForm={this} errors={errors} validatorName="validate">
@@ -125,8 +152,12 @@ class NewRequestForm extends PureComponent {
             managers={managers}
             value="232px"
           />
-         
-          <TravelDetailsFieldset values={values} value="190px" />
+          <TravelDetailsFieldset 
+            values={values} 
+            value="190px" 
+            selection={selection}
+            handleChange={this.handleRadioButton}
+          />
           <SubmitArea
             onCancel={this.handleClearForm}
             hasBlankFields={hasBlankFields}

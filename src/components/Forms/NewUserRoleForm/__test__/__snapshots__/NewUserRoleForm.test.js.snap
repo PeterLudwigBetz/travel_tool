@@ -89,6 +89,11 @@ exports[`<NewUserRoleForm /> renders correctly 1`] = `
           >
             <div
               className="value"
+              style={
+                Object {
+                  "width": undefined,
+                }
+              }
             >
               <div
                 className="select-dropdown inactive"

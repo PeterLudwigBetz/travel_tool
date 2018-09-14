@@ -6,27 +6,11 @@ import * as formMetadata from '../../FormsMetadata/NewRequestFormMetadata';
 import RadioButton from '../../../RadioButton';
 
 class TravelDetailsFieldset extends Component {
-  state = {
-    selection: ''
-  };
-
-  handleChange = (event) => {
-    const { selection } = this.state;
-    this.setState({
-      selection: event.target.value
-    });
-    console.log(selection);
-  }
-
 
   render() {
-    const { selection } = this.state;
     this.inputRenderer = new InputRenderer(this.props, formMetadata);
     const { renderInput } = this.inputRenderer;
-    const { values } = this.props;
-    const otherDestStatus = values.destination === 'Other' ? '' : 'hidden';
-    const otherDestCustomClass = `full-width other-dest--${otherDestStatus}`;
-    const customPropsOtherDest = { className: otherDestCustomClass };
+    const { values, handleChange, selection } = this.props;
     const customPropsForDepartureDate = { minDate: moment() };
     const customPropsForArrivalDate = {
       disabled: !values.departureDate,
@@ -42,7 +26,7 @@ class TravelDetailsFieldset extends Component {
           style={{ marginBottom: '6px', borderBottom:  '1px solid #E4E4E4' }}>
         Travel Details
         </legend>
-        <div className="trip-align" onChange={this.handleChange}>
+        <div className="trip-align" onChange={handleChange}>
           <RadioButton 
             name="One Way Trip"
             value="oneWay"
