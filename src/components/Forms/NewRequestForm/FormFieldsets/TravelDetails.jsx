@@ -10,7 +10,8 @@ class TravelDetailsFieldset extends Component {
   render() {
     this.inputRenderer = new InputRenderer(this.props, formMetadata);
     const { renderInput } = this.inputRenderer;
-    const { values, handleChange, selection } = this.props;
+    const { values, handleChange, onChange, selection } = this.props;
+    // console.log('*********', this.props);
     const customPropsForDepartureDate = { minDate: moment() };
     const customPropsForArrivalDate = {
       disabled: !values.departureDate,
@@ -18,6 +19,34 @@ class TravelDetailsFieldset extends Component {
       placeholderText: !values.departureDate
         ? 'select depart date first'
         : 'select return date'
+    };
+    const renderInputGroup = (selection) => {
+      const inputGroup = (
+        <div className="input-group">
+          <div className="rectangle">
+            <div className="style-details">
+              <div className="travel-to">
+                {renderInput('destination', 'dropdown-select')}
+              </div>
+              <div className="travel-to">
+                {renderInput('origin', 'dropdown-select')}
+              </div>
+              <div className="travel-to">
+                {renderInput(
+                  'departureDate',
+                  'date',
+                  customPropsForDepartureDate
+                )}
+              </div>
+              { selection !== 'oneWay' ? renderInput('arrivalDate', 'date', customPropsForArrivalDate) : null}
+            </div>
+          </div>
+        </div>
+      );
+      if (selection === 'multi'){
+        return [inputGroup, inputGroup];
+      }
+      return [inputGroup];
     };
     return (
       <fieldset className="travel-details">
@@ -43,26 +72,8 @@ class TravelDetailsFieldset extends Component {
             id="multi"
           />
         </div>
-        <div className="input-group">
-          <div className="rectangle">
-            <div className="style-details">
-              <div className="travel-to">
-                {renderInput('destination', 'dropdown-select')}
-              </div>
-              <div className="travel-to">
-                {renderInput('origin', 'dropdown-select')}
-              </div>
-              <div className="travel-to">
-                {renderInput(
-                  'departureDate',
-                  'date',
-                  customPropsForDepartureDate
-                )}
-              </div>
-              { selection !== 'oneWay' ? renderInput('arrivalDate', 'date', customPropsForArrivalDate) : null}
-            </div>
-          </div>
-        </div>
+        {renderInputGroup(selection).map(element => element
+        )}
       </fieldset>
     );
   }

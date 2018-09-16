@@ -24,8 +24,9 @@ class Input extends PureComponent {
       return this.switchInputWithProps(type, eventHandlers);
     }
   }
-
   switchInputWithProps = (type, eventHandlers) => {
+    const { onChange } = this.props;
+    const { errors, targetForm, validatorName } = this.context;
     switch (type) {
     case 'button-toggler':
       // switches mutually exclusive options like a fancy set of radio buttons
@@ -46,7 +47,7 @@ class Input extends PureComponent {
     case 'dropdown-select':
       this.props = {
         ...this.props,
-        onChange: eventHandlers.handleSelectDropdown
+        onChange: onChange || eventHandlers.handleSelectDropdown
       };
       return DropdownSelect;
     }

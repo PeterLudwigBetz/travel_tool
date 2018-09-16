@@ -157,6 +157,7 @@ class NewRequestForm extends PureComponent {
             value="190px" 
             selection={selection}
             handleChange={this.handleRadioButton}
+            onChange={(targetForm) => console.log(targetForm)}
           />
           <SubmitArea
             onCancel={this.handleClearForm}
