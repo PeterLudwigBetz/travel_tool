@@ -3,12 +3,11 @@ import moment from 'moment';
 import { PropTypes } from 'prop-types';
 import InputRenderer from '../../FormsAPI';
 import * as formMetadata from '../../FormsMetadata/NewRequestFormMetadata';
-import RadioButton from '../../../RadioButton';
 import location from '../../../../images/location.svg';
 import addMultipleCityBtn from '../../../../images/add.svg';
 import deleteBtnRed from '../../../../images/delete.svg';
 
-class TravelDetailsFieldset extends Component {
+class EditInputFieldSet extends Component {
 
   state = {
     // parentIds: []
@@ -43,28 +42,7 @@ class TravelDetailsFieldset extends Component {
     };
   }
 
-  renderRadioButton = (handleChange) => {
-    return (
-      <div className="trip-align" onChange={handleChange}>
-        <RadioButton 
-          name="One Way Trip"
-          value="oneWay"
-          id="oneWay"
-        />
-        <RadioButton 
-          name="Return Trip"
-          value="return"
-          id="return"
-          defaultChecked="defaultChecked"
-        />
-        <RadioButton 
-          name="Multi City Trip"
-          value="multi"
-          id="multi"
-        />
-      </div>
-    );
-  }
+  
   
   renderAddAnotherBtn = () => {
     const { addNewTrip } = this.props;
@@ -85,7 +63,7 @@ class TravelDetailsFieldset extends Component {
     return (
       <Fragment>
         <div className="travel-input-area">
-          <div className="input-group" id={`trip${i}`}>
+          <div className="input-group">
             <div className={selection === 'multi' ? 'rec-div': ''} />
             <div className="rectangle">
               <div className="style-details">
@@ -137,7 +115,7 @@ class TravelDetailsFieldset extends Component {
 
   render() {
     this.inputRenderer = new InputRenderer(this.props, formMetadata);
-    const { handleChange, selection, onChangeInput} = this.props;
+    const { selection, onChangeInput} = this.props;
   
     const { parentIds } = this.props;
     return (
@@ -147,7 +125,6 @@ class TravelDetailsFieldset extends Component {
           style={{ marginBottom: '6px', borderBottom:  '1px solid #E4E4E4' }}>
         Travel Details
         </legend>
-        {this.renderRadioButton(handleChange)}
         {this.renderForms(parentIds, selection, onChangeInput)}
         {selection === 'multi' && this.renderAddAnotherBtn()}
       </fieldset>
@@ -164,15 +141,5 @@ const handleDate = PropTypes.func;
 const removeTrip = PropTypes.func;
 const parentIds = PropTypes.string;
 
-TravelDetailsFieldset.propTypes = {
-  values: values.isRequired,
-  handleChange: handleChange.isRequired,
-  selection: selection.isRequired,
-  onChangeInput: onChangeInput.isRequired,
-  addNewTrip: addNewTrip.isRequired,
-  handleDate: handleDate.isRequired,
-  removeTrip: removeTrip.isRequired,
-  parentIds: parentIds.isRequired
-};
 
-export default TravelDetailsFieldset;
+export default EditInputFieldSet;

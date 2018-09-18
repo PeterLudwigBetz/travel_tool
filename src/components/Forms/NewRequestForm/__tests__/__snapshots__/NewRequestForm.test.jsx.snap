@@ -624,206 +624,224 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
         </ul>
       </div>
       <div
-        className="input-group"
+        id={0}
+        key="0"
       >
         <div
-          className="rectangle"
+          className="travel-input-area"
         >
           <div
-            className="style-details"
+            className="input-group"
+            id="trip0"
           >
             <div
-              className="travel-to"
-              onChange={[Function]}
-            >
-              <div
-                className="form-input  "
-              >
-                <label
-                  htmlFor="destination"
-                >
-                  Travel to
-                  <span
-                    style={
-                      Object {
-                        "color": "red",
-                      }
-                    }
-                  >
-                    *
-                  </span>
-                </label>
-                <input
-                  className=" "
-                  label="Travel to"
-                  name="destination"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  size="232px"
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="error"
-                />
-              </div>
-              <img
-                alt="icn"
-                className="location-icon"
-                src="location.svg"
-              />
-            </div>
+              className=""
+            />
             <div
-              className="travel-to"
-              onChange={[Function]}
+              className="rectangle"
             >
               <div
-                className="form-input  "
+                className="style-details"
               >
-                <label
-                  htmlFor="origin"
-                >
-                  From
-                  <span
-                    style={
-                      Object {
-                        "color": "red",
-                      }
-                    }
-                  >
-                    *
-                  </span>
-                </label>
-                <input
-                  className=" "
-                  label="From"
-                  name="origin"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  size="232px"
-                  type="text"
-                  value=""
-                />
-                <span
-                  className="error"
-                />
-              </div>
-              <img
-                alt="icn"
-                className="location-icon"
-                src="location.svg"
-              />
-            </div>
-            <div
-              className="others-width"
-            >
-              <div
-                className="form-input  "
-              >
-                <label
-                  htmlFor="departureDate"
-                >
-                  Depart
-                  <span
-                    style={
-                      Object {
-                        "color": "red",
-                      }
-                    }
-                  >
-                    *
-                  </span>
-                </label>
                 <div
-                  className="date-wrapper "
+                  className="travel-to"
+                  onChange={[Function]}
                 >
-                  <div>
-                    <div
-                      className="react-datepicker-wrapper"
+                  <div
+                    className="form-input  "
+                  >
+                    <label
+                      htmlFor="destination-0"
                     >
-                      <div
-                        className="react-datepicker__input-container"
+                      Travel to
+                      <span
+                        style={
+                          Object {
+                            "color": "red",
+                          }
+                        }
                       >
-                        <input
-                          className=""
-                          disabled={false}
-                          name="departureDate"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onClick={[Function]}
-                          onFocus={[Function]}
-                          onKeyDown={[Function]}
-                          readOnly={false}
-                          type="text"
-                          value=""
-                        />
-                      </div>
-                    </div>
+                        *
+                      </span>
+                    </label>
+                    <input
+                      className=" "
+                      data-parentid={0}
+                      label="Travel to"
+                      name="destination-0"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      parentid={0}
+                      size="232px"
+                      type="text"
+                    />
+                    <span
+                      className="error"
+                    />
                   </div>
                   <img
-                    alt="cal"
-                    className="calendar-icon"
-                    src="calendar_icon.svg"
+                    alt="icn"
+                    className="location-icon"
+                    src="location.svg"
                   />
                 </div>
-                <span
-                  className="error"
-                />
-              </div>
-            </div>
-            <div
-              className="form-input  "
-            >
-              <label
-                htmlFor="arrivalDate"
-              >
-                Return
-                <span
-                  style={
-                    Object {
-                      "color": "red",
-                    }
-                  }
+                <div
+                  className="travel-to"
+                  onChange={[Function]}
                 >
-                  *
-                </span>
-              </label>
-              <div
-                className="date-wrapper "
-              >
-                <div>
                   <div
-                    className="react-datepicker-wrapper"
+                    className="form-input  "
                   >
-                    <div
-                      className="react-datepicker__input-container"
+                    <label
+                      htmlFor="origin-0"
                     >
-                      <input
-                        className=""
-                        disabled={true}
-                        name="arrivalDate"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onKeyDown={[Function]}
-                        placeholder="select depart date first"
-                        readOnly={false}
-                        type="text"
-                        value=""
+                      From
+                      <span
+                        style={
+                          Object {
+                            "color": "red",
+                          }
+                        }
+                      >
+                        *
+                      </span>
+                    </label>
+                    <input
+                      className=" "
+                      data-parentid={0}
+                      label="From"
+                      name="origin-0"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      parentid={0}
+                      size="232px"
+                      type="text"
+                    />
+                    <span
+                      className="error"
+                    />
+                  </div>
+                  <img
+                    alt="icn"
+                    className="location-icon"
+                    src="location.svg"
+                  />
+                </div>
+                <div
+                  className="others-width"
+                  role="presentation"
+                >
+                  <div
+                    className="form-input  "
+                  >
+                    <label
+                      htmlFor="departureDate-0"
+                    >
+                      Depart
+                      <span
+                        style={
+                          Object {
+                            "color": "red",
+                          }
+                        }
+                      >
+                        *
+                      </span>
+                    </label>
+                    <div
+                      className="date-wrapper "
+                      id="departureDate-0_date"
+                    >
+                      <div>
+                        <div
+                          className="react-datepicker-wrapper"
+                        >
+                          <div
+                            className="react-datepicker__input-container"
+                          >
+                            <input
+                              className=""
+                              disabled={false}
+                              name="departureDate-0"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onClick={[Function]}
+                              onFocus={[Function]}
+                              onKeyDown={[Function]}
+                              readOnly={false}
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <img
+                        alt="cal"
+                        className="calendar-icon"
+                        src="calendar_icon.svg"
                       />
                     </div>
+                    <span
+                      className="error"
+                    />
                   </div>
                 </div>
-                <img
-                  alt="cal"
-                  className="calendar-icon"
-                  src="calendar_icon.svg"
-                />
+                <div
+                  className="form-input  "
+                >
+                  <label
+                    htmlFor="arrivalDate-0"
+                  >
+                    Return
+                    <span
+                      style={
+                        Object {
+                          "color": "red",
+                        }
+                      }
+                    >
+                      *
+                    </span>
+                  </label>
+                  <div
+                    className="date-wrapper "
+                    id="arrivalDate-0_date"
+                  >
+                    <div>
+                      <div
+                        className="react-datepicker-wrapper"
+                      >
+                        <div
+                          className="react-datepicker__input-container"
+                        >
+                          <input
+                            className=""
+                            disabled={true}
+                            name="arrivalDate-0"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            onFocus={[Function]}
+                            onKeyDown={[Function]}
+                            placeholder="select depart date first"
+                            readOnly={false}
+                            type="text"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <img
+                      alt="cal"
+                      className="calendar-icon"
+                      src="calendar_icon.svg"
+                    />
+                  </div>
+                  <span
+                    className="error"
+                  />
+                </div>
               </div>
-              <span
-                className="error"
-              />
             </div>
           </div>
         </div>

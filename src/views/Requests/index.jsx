@@ -6,10 +6,11 @@ import RequestPanelHeader from '../../components/RequestPanelHeader/RequestPanel
 import Utils from '../../helper/Utils';
 import Modal from '../../components/modal/Modal';
 import Base from '../Base';
-import { NewRequestForm } from '../../components/Forms';
+import { NewRequestForm, EditRequestForm } from '../../components/Forms';
 import {
   fetchUserRequests,
-  createNewRequest
+  createNewRequest,
+  editRequest
 } from '../../redux/actionCreator/requestActions';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 import { fetchRoleUsers } from '../../redux/actionCreator/roleActions';
@@ -18,7 +19,8 @@ export class Requests extends Base {
   state = {
     hideNewRequestModal: true,
     activeStatus: Utils.getActiveStatus(this.props.location.search),
-    url: this.props.location.search
+    url: this.props.location.search,
+    requestForEdit: null
   };
 
   componentDidMount() {
@@ -28,7 +30,13 @@ export class Requests extends Base {
     // Fetch managers
     fetchRoleUsers(53019);
   }
-
+  handleEditRequest = (request) => {
+    const { openModal } = this.props;
+    this.setState({
+      requestForEdit: request
+    });
+    openModal(true, 'edit request');
+  }
   fetchRequests = query => {
     const { history, fetchUserRequests } = this.props;
     history.push(`/requests${query}`);
@@ -87,6 +95,7 @@ export class Requests extends Base {
       <div className="rp-table">
         <WithLoadingTable
           type="requests"
+          editRequest={this.handleEditRequest}
           requests={requests}
           isLoading={isLoading}
           fetchRequestsError={error}
@@ -99,7 +108,25 @@ export class Requests extends Base {
       </div>
     );
   }
-
+  renderEditRequestModal() {
+    const { requestForEdit } = this.state;
+    const { closeModal, shouldOpen, modalType, editRequest } = this.props;
+    return (
+      <Modal
+        closeModal={closeModal}
+        visibility={(shouldOpen && modalType === 'edit request') ? 'visible' : 'invisible'}
+        title={requestForEdit && requestForEdit.id}
+        symbol="#"
+        description="Edit Request"
+        width="1000px"
+      >
+        <EditRequestForm
+          request={requestForEdit}
+          handleEditRequest={editRequest}
+        />
+      </Modal>
+    );
+  }
   renderNewRequestForm() {
     const {
       user,
@@ -124,9 +151,9 @@ export class Requests extends Base {
         <NewRequestForm
           user={user}
           handleCreateRequest={createNewRequest}
-          loading={loading}
+          // loading={loading}
           errors={errors}
-          closeModal={closeModal}
+          // closeModal={closeModal}
           managers={manager}
         />
       </Modal>
@@ -150,6 +177,7 @@ export class Requests extends Base {
       <Fragment>
         {this.renderNewRequestForm()}
         {this.renderRequestPage()}
+        {this.renderEditRequestModal()}
       </Fragment>
     );
   }
@@ -198,6 +226,7 @@ export const mapStateToProps = ({ requests, modal, role }) => ({
 const actionCreators = {
   fetchUserRequests,
   createNewRequest,
+  editRequest,
   fetchRoleUsers,
   openModal,
   closeModal

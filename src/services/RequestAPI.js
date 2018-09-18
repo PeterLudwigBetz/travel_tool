@@ -14,6 +14,10 @@ class RequestAPI {
   static postNewRequest(requestData) {
     return axios.post(`${baseUrl}/requests`, requestData);
   }
+  static editRequest(requestId, requestData) {
+    // console.log('I am called');
+    return axios.put(`${baseUrl}/requests/${requestId}`, requestData);
+  }
 }
 
 export default RequestAPI;

@@ -5,6 +5,8 @@ import RequestsModal from '../RequestsModal/RequestsModal';
 import Modal from '../modal/Modal';
 import './Table.scss';
 import withLoading from '../Hoc/withLoading';
+import TableMenu from '../TableMenu/TableMenu';
+import EditRequestForm from '../Forms/NewRequestForm/EditRequestForm';
 
 export class Table extends Component {
   state = {
@@ -36,8 +38,9 @@ export class Table extends Component {
   }
 
   renderRequestStatus(request) {
+    const { editRequest } = this.props;
     return (
-      <div>
+      <div className="table__menu">
         <div
           id={`status-${request.id}`}
           className={
@@ -50,9 +53,7 @@ export class Table extends Component {
         >
           {request.status}
         </div>
-        <span className="table__request-menu">
-          <i className="fa fa-ellipsis-v" />
-        </span>
+        <TableMenu request={request} editRequest={editRequest} />
       </div>
     );
   }
@@ -142,20 +143,21 @@ export class Table extends Component {
         visibility={(shouldOpen && modalType === 'request details') ? 'visible' : 'invisible'}
         title={clickedRequestId}
         symbol="#"
-        width="600px"
         description="Request Details"
+        width="600px"
         modalBar={(
           <div className="table__modal-bar-text">
             Manager stage
           </div>
         )}
       >
-        <RequestsModal 
+        <RequestsModal
           requestId={clickedRequestId}
         />
       </Modal>
 
-    );}
+    );
+  }
 
   render() {
     const { requests, type, fetchRequestsError, message } = this.props;
@@ -184,6 +186,7 @@ export class Table extends Component {
   }
 }
 
+const editRequest = PropTypes.func;
 Table.propTypes = {
   requests: PropTypes.array,
   type: PropTypes.string,
@@ -192,7 +195,8 @@ Table.propTypes = {
   openModal: PropTypes.func,
   shouldOpen: PropTypes.bool,
   modalType: PropTypes.string,
-  message: PropTypes.string
+  message: PropTypes.string,
+  editRequest: PropTypes.func.isRequired
 };
 
 Table.defaultProps = {

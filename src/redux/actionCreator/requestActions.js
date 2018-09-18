@@ -5,6 +5,9 @@ import {
   FETCH_USER_REQUESTS,
   FETCH_USER_REQUESTS_SUCCESS,
   FETCH_USER_REQUESTS_FAILURE,
+  EDIT_REQUEST,
+  EDIT_REQUEST_SUCCESS,
+  EDIT_REQUEST_FAILURE,
   FETCH_USER_REQUEST_DETAILS,
   FETCH_USER_REQUEST_DETAILS_SUCCESS,
   FETCH_USER_REQUEST_DETAILS_FAILURE,
@@ -54,5 +57,19 @@ export const fetchUserRequestDetailsSuccess = (requestData) => ({
 
 export const fetchUserRequestDetailsFailure = (error) => ({
   type: FETCH_USER_REQUEST_DETAILS_FAILURE,
+  error,
+});
+
+export const editRequest = (requestId, requestData) => ({
+  type: EDIT_REQUEST,
+  requestId,
+  requestData
+});
+export const editRequestSuccess = (updatedRequest) => ({
+  type: EDIT_REQUEST_SUCCESS,
+  updatedRequest,
+});
+export const editRequestFailure = (error) => ({
+  type: EDIT_REQUEST_FAILURE,
   error,
 });
