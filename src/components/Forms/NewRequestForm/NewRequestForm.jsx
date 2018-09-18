@@ -32,7 +32,8 @@ class NewRequestForm extends PureComponent {
       collapse: false,
       title: 'Hide Details',
       position: 'none',
-      line: '1px solid #E4E4E4'
+      line: '1px solid #E4E4E4',
+      parentIds: 1
     };
     this.state = { ...this.defaultState };
   }
@@ -104,9 +105,11 @@ class NewRequestForm extends PureComponent {
     });
     if (event.target.value === 'multi' && !collapse) {
       this.collapsible();
+      this.setState({ parentIds : 2 });
     }else if (!collapse) {
       return;
     }else{
+      this.setState({ parentIds : 1 });
       this.collapsible();
     }
   }
@@ -137,12 +140,23 @@ class NewRequestForm extends PureComponent {
       ];
       this.savePersonalDetails(name, gender, department, role, manager);
     }
-    console.log(...trips);
     if (this.validate()) {
       let data = { ...newData };
       handleCreateRequest(data);
     }
   };
+
+  addNewTrip = () => {
+    let { parentIds } = this.state;
+    return this.setState({ parentIds: parentIds + 1 });
+  }
+
+  removeTrip = (i) => {
+    let { parentIds, id, trips } = this.state;
+    document.getElementById(`trip${i}`).style.display = 'none';
+    trips.splice(i, 1);
+    this.setState({ trips: [...trips] });
+  }
 
   handleClearForm = () => {
     this.setState({ ...this.defaultState });
@@ -159,7 +173,6 @@ class NewRequestForm extends PureComponent {
   validate = field => {
     let { values, errors, trips } = this.state;
     [errors, values, trips] = [{ ...errors }, { ...values }, [...trips]];
-    console.log( [errors, values, trips])
     let hasBlankFields = false;
 
     !values[field]
@@ -203,7 +216,7 @@ class NewRequestForm extends PureComponent {
   }
 
   renderForm = (managers, creatingRequest) => {
-    const { values, errors, hasBlankFields, selection,  collapse, title, position, line } = this.state;
+    const { values, errors, hasBlankFields, selection,  collapse, title, position, line, parentIds } = this.state;
     return (
       <FormContext targetForm={this} errors={errors} validatorName="validate">
         {creatingRequest && (
@@ -229,6 +242,9 @@ class NewRequestForm extends PureComponent {
             handleDate={this.onChangeDate}
             handleChange={this.handleRadioButton}
             onChangeInput={this.onChangeInput}
+            parentIds={parentIds}
+            addNewTrip={this.addNewTrip}
+            removeTrip={this.removeTrip}
           />
           <Script url={process.env.REACT_APP_CITY} />   
           <SubmitArea

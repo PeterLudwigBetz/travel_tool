@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import moment from 'moment';
 import { PropTypes } from 'prop-types';
 import InputRenderer from '../../FormsAPI';
 import * as formMetadata from '../../FormsMetadata/NewRequestFormMetadata';
 import RadioButton from '../../../RadioButton';
 import location from '../../../../images/location.svg';
+import addMultipleCityBtn from '../../../../images/add.svg';
+import deleteBtnRed from '../../../../images/delete.svg';
 
 class TravelDetailsFieldset extends Component {
 
   state = {
-    parentIds: []
+    // parentIds: []
   }
 
 
   componentWillMount=() => {
-    this.setState({
-      parentIds: 2
-    });
+    // this.setState({
+    //   parentIds: 1
+    // });
   }
 
   componentDidMount = () => {
@@ -25,7 +27,7 @@ class TravelDetailsFieldset extends Component {
 
 
   get_details = () => {
-    const { parentIds } = this.state;
+    const { parentIds } = this.props;
     for (let i = 0; i < parentIds; i += 1) {
       const id = document.getElementById(i);
     }
@@ -63,39 +65,60 @@ class TravelDetailsFieldset extends Component {
       </div>
     );
   }
-
-
+  
+  renderAddAnotherBtn = () => {
+    const { addNewTrip } = this.props;
+    return (
+      <div className="add-multi-trip-area">
+        <button type="button" className="another-trip" onClick={addNewTrip}>
+          <img src={addMultipleCityBtn} alt="clicked" className="addsvg" />
+        Add another trip
+        </button>
+      </div>
+    );
+  }
   renderTravelDetails = (i, selection, onChangeInput) => {
-    const { values, handleDate } = this.props;
+    const { values, handleDate, removeTrip, parentIds } = this.props;
     const { renderInput } = this.inputRenderer;
     const customPropsForDepartureDate = { minDate: moment() };
 
     return (
-      <div className="input-group">
-        <div className="rectangle">
-          <div className="style-details">
-            <div className="travel-to" onChange={onChangeInput}>
-              {renderInput(`destination-${i}`, 'text', {parentid: i})}
-              <img src={location} alt="icn" className="location-icon"  />
-            </div>
+      <Fragment>
+        <div className="travel-input-area">
+          <div className="input-group" id={`trip${i}`}>
+            <div className={selection === 'multi' ? 'rec-div': ''} />
+            <div className="rectangle">
+              <div className="style-details">
+                <div className="travel-to" onChange={onChangeInput}>
+                  {renderInput(`destination-${i}`, 'text', {parentid: i})}
+                  <img src={location} alt="icn" className="location-icon"  />
+                </div>
 
-            <div className="travel-to" onChange={onChangeInput}>
-              {renderInput(`origin-${i}`, 'text', {parentid: i})}
-              <img src={location} alt="icn" className="location-icon" />
-            </div>
+                <div className="travel-to" onChange={onChangeInput}>
+                  {renderInput(`origin-${i}`, 'text', {parentid: i})}
+                  <img src={location} alt="icn" className="location-icon" />
+                </div>
 
-            <div className="others-width" role="presentation">
-              {renderInput(
-                `departureDate-${i}`,
-                'date',
-                {...customPropsForDepartureDate, parentid: i, handleDate}
-              )}
+                <div className="others-width" role="presentation">
+                  {renderInput(
+                    `departureDate-${i}`,
+                    'date',
+                    {...customPropsForDepartureDate, parentid: i, handleDate}
+                  )}
+                </div>
+                { selection !== 'oneWay' ? renderInput(`arrivalDate-${i}`, 'date', {...this.customPropsForArrival(values, `departureDate-${i}`), parentid: i, handleDate}) : null}
+              </div>
             </div>
-            { selection !== 'oneWay' ? renderInput(`arrivalDate-${i}`, 'date', {...this.customPropsForArrival(values, `departureDate-${i}`), parentid: i, handleDate}) : null}
+            {selection === 'multi' && i >= 2 && 
+                (
+                  <button type="button" className="delete-icon" onClick={() => removeTrip(i)}>
+                    <img src={deleteBtnRed} alt="clicked" className="addsvg" />
+                  </button>
+                ) }
           </div>
-
         </div>
-      </div>
+      </Fragment>
+      
     );
   }
 
@@ -116,7 +139,7 @@ class TravelDetailsFieldset extends Component {
     this.inputRenderer = new InputRenderer(this.props, formMetadata);
     const { handleChange, selection, onChangeInput} = this.props;
   
-    const { parentIds } = this.state;
+    const { parentIds } = this.props;
     return (
       <fieldset className="travel-details">
         <legend
@@ -126,6 +149,7 @@ class TravelDetailsFieldset extends Component {
         </legend>
         {this.renderRadioButton(handleChange)}
         {this.renderForms(parentIds, selection, onChangeInput)}
+        {selection === 'multi' && this.renderAddAnotherBtn()}
       </fieldset>
     );
   }
@@ -135,12 +159,20 @@ const values = PropTypes.object;
 const handleChange = PropTypes.func;
 const selection = PropTypes.string;
 const onChangeInput = PropTypes.func;
+const addNewTrip = PropTypes.func;
+const handleDate = PropTypes.func;
+const removeTrip = PropTypes.func;
+const parentIds = PropTypes.string;
 
 TravelDetailsFieldset.propTypes = {
   values: values.isRequired,
   handleChange: handleChange.isRequired,
   selection: selection.isRequired,
   onChangeInput: onChangeInput.isRequired,
+  addNewTrip: addNewTrip.isRequired,
+  handleDate: handleDate.isRequired,
+  removeTrip: removeTrip.isRequired,
+  parentIds: parentIds.isRequired
 };
 
 export default TravelDetailsFieldset;

@@ -28,7 +28,6 @@ export class Requests extends Base {
     // Fetch managers
     fetchRoleUsers(53019);
   }
-
   fetchRequests = query => {
     const { history, fetchUserRequests } = this.props;
     history.push(`/requests${query}`);
@@ -99,7 +98,6 @@ export class Requests extends Base {
       </div>
     );
   }
-
   renderNewRequestForm() {
     const {
       user,
