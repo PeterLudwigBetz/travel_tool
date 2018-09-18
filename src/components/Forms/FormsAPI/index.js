@@ -30,7 +30,7 @@ class InputRenderer {
 
     let inputProps = {
       ...customProps,
-      value: values[name],
+      value: customProps && customProps.editValue ? customProps.editValue: values[name],
       name: name,
       type: type,
       size: value,

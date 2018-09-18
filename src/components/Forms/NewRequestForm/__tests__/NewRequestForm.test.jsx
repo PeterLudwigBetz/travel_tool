@@ -31,11 +31,8 @@ describe('<NewRequestForm />', () => {
       department: '',
       role: '',
       manager: '',
-      origin: '',
-      destination: '',
-      departureDate: null,
-      arrivalDate: null
     },
+    trips: [],
     errors: {},
     hasBlankFields: true,
     checkBox: 'notClicked',

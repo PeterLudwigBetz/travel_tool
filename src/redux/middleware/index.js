@@ -33,7 +33,7 @@ function* rootSaga() {
     watchFetchRoleUsers(),
     watchFetchUserRequestsDetails(),
     watchCreateComment(),
-    watchUpdateRequestStatus()
+    watchUpdateRequestStatus(),
   ]);
 }
 

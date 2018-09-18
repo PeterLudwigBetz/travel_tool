@@ -180,7 +180,7 @@ exports[`Render RequestsModal component should match snapshot 1`] = `
         <span
           className="modal__hours-status"
         >
-          in 18 days
+          in 15 days
         </span>
         <span
           className="modal__dialog"
@@ -228,7 +228,7 @@ exports[`Render RequestsModal component should match snapshot 1`] = `
         <span
           className="modal__hours-status"
         >
-          12 days ago
+          15 days ago
         </span>
         <span
           className="modal__dialog"
