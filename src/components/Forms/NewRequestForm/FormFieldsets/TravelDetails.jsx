@@ -66,7 +66,7 @@ class TravelDetailsFieldset extends Component {
 
 
   renderTravelDetails = (i, selection, onChangeInput) => {
-    const { values,  handleDate } = this.props;
+    const { values, handleDate } = this.props;
     const { renderInput } = this.inputRenderer;
     const customPropsForDepartureDate = { minDate: moment() };
 
@@ -84,11 +84,11 @@ class TravelDetailsFieldset extends Component {
               <img src={location} alt="icn" className="location-icon" />
             </div>
 
-            <div className="others-width">
+            <div className="others-width" role="presentation">
               {renderInput(
                 `departureDate-${i}`,
                 'date',
-                {...customPropsForDepartureDate, parentid: i,  handleDate}
+                {...customPropsForDepartureDate, parentid: i, handleDate}
               )}
             </div>
             { selection !== 'oneWay' ? renderInput(`arrivalDate-${i}`, 'date', {...this.customPropsForArrival(values, `departureDate-${i}`), parentid: i, handleDate}) : null}
@@ -97,7 +97,7 @@ class TravelDetailsFieldset extends Component {
         </div>
       </div>
     );
-  } 
+  }
 
 
   renderForms(parentIds, selection, onChangeInput) {
