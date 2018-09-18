@@ -42,21 +42,31 @@ class NewRequestForm extends PureComponent {
   }
 
   onChangeDate = (date, event) => {
-    const { values } = this.state;
-    console.log(event.nativeEvent);
+    const { values, trips } = this.state;
+    const dateFormat = date.format('YYYY-MM-DD');
+    const dateWrapperId = event.nativeEvent.path[7].id;
+    const dateName = dateWrapperId.split('_')[0];
+    const getId = dateName.split('-')[1];
+    if (trips[getId]){
+      if (dateName.startsWith('departure')) {
+        trips[getId].departureDate = dateFormat;
+      } else if (dateName.startsWith('arrival')) {
+        trips[getId].returnDate = dateFormat;
+      }
+    }else {
+      trips.push({
+        [dateName.split('-')[0]]: dateFormat
+      });
+    }
     this.setState({
       values: {
         ...values,
-        ['departureDate-0']: date
+        [dateName]: date
       }
     });
   }
 
-  onChangeDateBox = (event) => {
-    console.log(event.target);
-  }
-
-  onChangeInput (event) {
+  onChangeInput = (event) => {
     const name = event.target.name;
     const getId = event.target.dataset.parentid;
     const { trips, values } = this.state;
@@ -74,14 +84,7 @@ class NewRequestForm extends PureComponent {
           trips[getId].origin = places;
         }
       }else {
-        const tripDetails = {
-          origin: '',
-          destination: '',
-          departureDate: '',
-          returnDate:'',
-        };
         trips.push({
-          ...tripDetails,
           [name.split('-')[0]]: places
         });
       }
@@ -157,6 +160,7 @@ class NewRequestForm extends PureComponent {
       department: values.department,
       role: values.role
     };
+    console.log(newData);
     const checkBoxState = localStorage.getItem('state');
     if (checkBoxState === 'clicked') {
       const [name, gender, department, role, manager] = [
@@ -183,8 +187,18 @@ class NewRequestForm extends PureComponent {
     this.setState({ ...this.defaultState });
   };
 
+  hasBlankTrips = () => {
+    let { trips } = this.state;
+    const blank = trips.map(trip => {
+      console.log(trip);
+      return Object.keys(trip).some(key => !trip[key]);
+    });
+    return blank;
+  }
+
   validate = field => {
-    let { values, errors, selection } = this.state;
+    let { values, errors, selection, trips } = this.state;
+    console.log('validate values', values);
     // if (selection === 'oneWay') {
     //   delete values.arrivalDate;
     // }
