@@ -282,102 +282,26 @@ exports[`Render RequestsModal component should match snapshot 1`] = `
   <div
     id="comments"
   >
-    <div
-      className="modal__modal1"
-      key="2"
-    >
-      <hr />
-      <div
-        className="modal__mdl-icons"
-      >
-        <ImageLink
-          altText="avatar"
-          imageClass="modal__oval-copy"
-          imageSrc="http://my-image"
-        />
-        <span
-          className="modal__user-name"
-        >
-          Random User Two
-        </span>
-        <span
-          className="modal__hours-status"
-        >
-          in 23 days
-        </span>
-        <span
-          className="modal__dialog"
-        >
-          <button
-            className="modal__delete-btn"
-            type="button"
-          >
-            Delete
-          </button>
-        </span>
-        <div
-          className="modal__modal2"
-        >
-          <div
-            className="modal__status-update"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "This is another comment",
-              }
-            }
-          />
-           
-        </div>
-      </div>
-    </div>
-    <div
-      className="modal__modal1"
-      key="1"
-    >
-      <hr />
-      <div
-        className="modal__mdl-icons"
-      >
-        <ImageLink
-          altText="avatar"
-          imageClass="modal__oval-copy"
-          imageSrc="http://my-image"
-        />
-        <span
-          className="modal__user-name"
-        >
-          Random User
-        </span>
-        <span
-          className="modal__hours-status"
-        >
-          7 days ago
-        </span>
-        <span
-          className="modal__dialog"
-        >
-          <button
-            className="modal__delete-btn"
-            type="button"
-          >
-            Delete
-          </button>
-        </span>
-        <div
-          className="modal__modal2"
-        >
-          <div
-            className="modal__status-update"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "This is a comment",
-              }
-            }
-          />
-           
-        </div>
-      </div>
-    </div>
+    <UserComments
+      comments={
+        Array [
+          Object {
+            "comment": "This is a comment",
+            "createdAt": "2018-09-04T10:38:12.141Z",
+            "id": 1,
+            "picture": "http://my-image",
+            "userName": "Random User",
+          },
+          Object {
+            "comment": "This is another comment",
+            "createdAt": "2018-10-04T10:38:12.141Z",
+            "id": 2,
+            "picture": "http://my-image",
+            "userName": "Random User Two",
+          },
+        ]
+      }
+    />
   </div>
 </Fragment>
 `;

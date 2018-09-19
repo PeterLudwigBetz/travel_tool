@@ -1,30 +1,33 @@
 import {
+  FETCH_USERS_NOTIFICATION,
+  FETCH_USERS_NOTIFICATION_SUCCESS,
+  FETCH_USERS_NOTIFICATION_FAILURE,
+  ADD_USERS_NOTIFICATION,
+  ADD_USERS_NOTIFICATION_SUCCESS,
+  ADD_USERS_NOTIFICATION_FAILURE,
 } from '../constants/actionTypes';
 
-export const fetchNotifications = () => ({
-  type: 'FETCH_NOTIFICATIONS',
+export const fetchUsersNotification = () => ({
+  type: FETCH_USERS_NOTIFICATION,
 });
-
-export const fetchNotificationsSuccess = (notifications) => ({
-  type: 'FETCH_NOTIFICATIONS_SUCCESS',
+export const fetchUsersNotificationSuccess = notifications => ({
+  type: FETCH_USERS_NOTIFICATION_SUCCESS,
   notifications
 });
-
-export const fetchNotificationsFailure = error => ({
-  type: 'FETCH_NOTIFICATIONS_FAILURE',
+export const fetchUsersNotificationFailure = error => ({
+  type: FETCH_USERS_NOTIFICATION_FAILURE,
   error
 });
 
-export const addNotification = (notification) => {
-  return {
-    type: 'ADD_NOTIFICATION',
-    notification
-  };
-};
-
-export const addNotificationSuccess = (notification) => {
-  return {
-    type: 'ADD_NOTIFICATION_SUCCESS',
-    notification
-  };
-};
+export const addUsersNotification = notification => ({
+  type: ADD_USERS_NOTIFICATION,
+  notification
+});
+export const addUsersNotificationSuccess = notification => ({
+  type: ADD_USERS_NOTIFICATION_SUCCESS,
+  notification
+});
+export const addUsersNotificationFailure = error => ({
+  type: ADD_USERS_NOTIFICATION_FAILURE,
+  error
+});

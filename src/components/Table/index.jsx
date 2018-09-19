@@ -130,7 +130,7 @@ export class Table extends Component {
           Status
         </th>
       </tr>
-    );
+    ); 
   }
 
   renderDetailsModal() {

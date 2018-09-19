@@ -7,6 +7,9 @@ exports[`<Requests> renders as expected 1`] = `
     modalBar={<div />}
     modalContentId=""
     modalId=""
+    nextClass=""
+    params=""
+    symbol=""
     title="New Travel Request"
     visibility="invisible"
   >
@@ -51,6 +54,7 @@ exports[`<Requests> renders as expected 1`] = `
       isLoading={false}
       modalType={null}
       openModal={[Function]}
+      page="Requests"
       requests={
         Array [
           Object {
