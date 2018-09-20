@@ -143,6 +143,10 @@ export class Table extends Component {
         modalContentId="request-details-modal-content"
         visibility={(shouldOpen && modalType === 'request details') ? 'visible' : 'invisible'}
         title={`#${clickedRequestId} Request Details`}
+        title={clickedRequestId}
+        symbol="#"
+        description="Request Details"
+        width="600px"
         modalBar={(
           <div className="table__modal-bar-text">
             Manager stage
@@ -154,7 +158,8 @@ export class Table extends Component {
         />
       </Modal>
 
-    );}
+    );
+  }
 
   render() {
     const { requests, type, fetchRequestsError, message } = this.props;
@@ -183,6 +188,7 @@ export class Table extends Component {
   }
 }
 
+const editRequest = PropTypes.func;
 Table.propTypes = {
   requests: PropTypes.array,
   type: PropTypes.string,

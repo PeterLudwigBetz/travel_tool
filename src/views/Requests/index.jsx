@@ -33,7 +33,6 @@ export class Requests extends Base {
     // Fetch managers
     fetchRoleUsers(53019);
   }
-
   fetchRequests = query => {
     const { history, fetchUserRequests } = this.props;
     history.push(`/requests${query}`);
@@ -105,7 +104,6 @@ export class Requests extends Base {
       </div>
     );
   }
-
   renderNewRequestForm() {
     const {
       user,
@@ -121,6 +119,7 @@ export class Requests extends Base {
     return (
       <Modal
         closeModal={closeModal}
+        width="1000px"
         visibility={
           shouldOpen && modalType === 'new model' ? 'visible' : 'invisible'
         }

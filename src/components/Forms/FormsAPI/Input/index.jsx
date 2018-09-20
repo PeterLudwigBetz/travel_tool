@@ -1,12 +1,4 @@
-/*
-  Various types of form input elements can be created with the Input component
-  - It can create:
-    - Normal html input
-    - Custom dropdown select
-    - Date picker input
-    - Button option toggler input e.g. Male/Female, Yes/No etc.
-*/
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
 import { HtmlInput, DropdownSelect, DateInput, ButtonToggler } from './InputFields';
 import createEventHandlersFor from '../formEventHandlers';

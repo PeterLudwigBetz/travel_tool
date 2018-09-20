@@ -5,6 +5,7 @@ import Overlay from './overlay/Overlay';
 import closeButton from '../../images/icons/close.svg';
 import './_modal.scss';
 
+
 class Modal extends PureComponent {
   static propTypes = {
     visibility: PropTypes.oneOf(['visible', 'invisible']).isRequired,
@@ -16,7 +17,8 @@ class Modal extends PureComponent {
     children: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.arrayOf(PropTypes.object)
-    ]).isRequired
+    ]).isRequired,
+    width: PropTypes.string,
   };
 
   renderModalHeader = () => {
@@ -62,12 +64,15 @@ class Modal extends PureComponent {
       let urlArr = params.split('/');
       url = urlArr.slice(0, urlArr.length-1).join('/');
     }
+    const {children, visibility, closeModal, divClass, innerClass, dynamicText,
+      nextClass, dynamicDate, title, width  } = this.props;
     return (
       visibility === 'visible' ? (
         <Fragment>
           <Overlay className={visibility}>
             <div
               className={`modal ${visibility}`}
+              style={{maxWidth: width}}
               onClick={e => {e.stopPropagation();}} onKeyPress={() => {}}
               id={modalId}
               tabIndex="0"
@@ -98,6 +103,7 @@ Modal.defaultProps = {
   description: '',
   modalBar: <div />,
   closeModal: null,
+  width: ''
 };
 
 export default Modal;

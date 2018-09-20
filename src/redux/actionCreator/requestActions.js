@@ -56,3 +56,4 @@ export const fetchUserRequestDetailsFailure = (error) => ({
   type: FETCH_USER_REQUEST_DETAILS_FAILURE,
   error,
 });
+

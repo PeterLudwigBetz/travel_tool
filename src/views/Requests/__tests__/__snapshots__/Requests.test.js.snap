@@ -12,13 +12,12 @@ exports[`<Requests> renders as expected 1`] = `
     symbol=""
     title="New Travel Request"
     visibility="invisible"
+    width="1000px"
   >
     <NewRequestForm
-      closeModal={[Function]}
       creatingRequest={false}
       errors={Array []}
       handleCreateRequest={[Function]}
-      loading={false}
       managers={Array []}
       user={
         Object {
@@ -50,6 +49,7 @@ exports[`<Requests> renders as expected 1`] = `
   >
     <WithLoading
       closeModal={[Function]}
+      editRequest={[Function]}
       fetchRequestsError={null}
       isLoading={false}
       modalType={null}
@@ -114,5 +114,25 @@ exports[`<Requests> renders as expected 1`] = `
       pageCount={4}
     />
   </div>
+  <Modal
+    closeModal={[Function]}
+    description="Edit Request"
+    divClass=""
+    dynamicDate=""
+    dynamicText=""
+    innerClass=""
+    modalBar={<div />}
+    nextClass=""
+    symbol="#"
+    title={null}
+    visibility="invisible"
+    width=""
+  >
+    <EditRequestForm
+      creatingRequest={false}
+      managers={Array []}
+      request={null}
+    />
+  </Modal>
 </Fragment>
 `;

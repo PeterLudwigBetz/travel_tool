@@ -282,6 +282,7 @@ exports[`Render RequestsModal component should match snapshot 1`] = `
   <div
     id="comments"
   >
+<<<<<<< HEAD
     <UserComments
       comments={
         Array [
@@ -302,6 +303,104 @@ exports[`Render RequestsModal component should match snapshot 1`] = `
         ]
       }
     />
+=======
+    <div
+      className="modal__modal1"
+      key="2"
+    >
+      <hr />
+      <div
+        className="modal__mdl-icons"
+      >
+        <ImageLink
+          altText="avatar"
+          imageClass="modal__oval-copy"
+          imageSrc="http://my-image"
+        />
+        <span
+          className="modal__user-name"
+        >
+          Random User Two
+        </span>
+        <span
+          className="modal__hours-status"
+        >
+          in 15 days
+        </span>
+        <span
+          className="modal__dialog"
+        >
+          <button
+            className="modal__delete-btn"
+            type="button"
+          >
+            Delete
+          </button>
+        </span>
+        <div
+          className="modal__modal2"
+        >
+          <div
+            className="modal__status-update"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "This is another comment",
+              }
+            }
+          />
+           
+        </div>
+      </div>
+    </div>
+    <div
+      className="modal__modal1"
+      key="1"
+    >
+      <hr />
+      <div
+        className="modal__mdl-icons"
+      >
+        <ImageLink
+          altText="avatar"
+          imageClass="modal__oval-copy"
+          imageSrc="http://my-image"
+        />
+        <span
+          className="modal__user-name"
+        >
+          Random User
+        </span>
+        <span
+          className="modal__hours-status"
+        >
+          15 days ago
+        </span>
+        <span
+          className="modal__dialog"
+        >
+          <button
+            className="modal__delete-btn"
+            type="button"
+          >
+            Delete
+          </button>
+        </span>
+        <div
+          className="modal__modal2"
+        >
+          <div
+            className="modal__status-update"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "This is a comment",
+              }
+            }
+          />
+           
+        </div>
+      </div>
+    </div>
+>>>>>>> a246ad03ff28fedf533183bf7576c36afd024407
   </div>
 </Fragment>
 `;
