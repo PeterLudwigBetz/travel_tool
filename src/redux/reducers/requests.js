@@ -8,11 +8,15 @@ import {
   FETCH_USER_REQUEST_DETAILS,
   FETCH_USER_REQUEST_DETAILS_SUCCESS,
   FETCH_USER_REQUEST_DETAILS_FAILURE,
+  EDIT_REQUEST,
+  EDIT_REQUEST_SUCCESS,
+  EDIT_REQUEST_FAILURE,
 } from '../constants/actionTypes';
 
 const initialState = {
   requestData: {}
 };
+let editedRequestIndex;
 const requests = (state = initialState, action) => {
   switch(action.type) {
   case FETCH_USER_REQUESTS:
@@ -72,6 +76,30 @@ const requests = (state = initialState, action) => {
       ...state,
       fetchingRequest: false,
       errors: action.error
+    };
+  case EDIT_REQUEST:
+    return {
+      ...state,
+      editingRequest: true,
+    };
+  case EDIT_REQUEST_SUCCESS:
+    editedRequestIndex = state.requests.findIndex((request) => {
+      request.id === action.updatedRequest.id; });
+    return {
+      ...state,
+      editingRequest: false,
+      requests: [
+        ...state.requests.slice(0, editedRequestIndex),
+        action.updatedRequest,
+        ...state.requests.slice(editedRequestIndex+1)
+      ],
+      editRequestError: null
+    };
+  case EDIT_REQUEST_FAILURE:
+    return {
+      ...state,
+      editingRequest: false,
+      editRequestError: action.error
     };
   default: return state;
   }
