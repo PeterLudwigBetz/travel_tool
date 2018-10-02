@@ -1,7 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
 import NewRequestForm from '../NewRequestForm';
-import PersonalDetailsFieldset from '../FormFieldsets/PersonalDetails';
 
 describe('<NewRequestForm />', () => {
   let wrapper, onSubmit;

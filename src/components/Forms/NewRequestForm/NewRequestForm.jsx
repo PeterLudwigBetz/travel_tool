@@ -21,6 +21,8 @@ class NewRequestForm extends PureComponent {
     const firstTripStateValues = this.getDefaultTripStateValues(0);
 
     this.defaultState = {
+
+      
       values: {
         name: !(/^null|undefined$/).test(user) ? user : '', // FIX: need to be refactor later
         gender: !(/^null|undefined$/).test(gender) ? gender: '',
@@ -238,6 +240,7 @@ class NewRequestForm extends PureComponent {
     let { values, errors, trips } = this.state;
     [errors, values, trips] = [{ ...errors }, { ...values }, [...trips]];
     let hasBlankFields = false;
+
     hasBlankFields = Object.keys(values).some(key => !values[key]);
     if (!field){
       this.setState({hasBlankFields});

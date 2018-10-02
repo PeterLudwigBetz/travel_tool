@@ -3,6 +3,7 @@ import inactiveBookmarkIcon from '../../../images/icons/bookmark_inactive.svg';
 import activeSettingsIcon from '../../../images/icons/settings_active.svg';
 import inactiveSettingsIcon from '../../../images/icons/settings_inactive.svg';
 import inactiveLogoutIcon from '../../../images/icons/logout_inactive.svg';
+import Accommodation from '../../../images/accommodation.svg';
 
 const NavItemsMetadata = [
   // Requests
@@ -25,6 +26,17 @@ const NavItemsMetadata = [
     icons: {
       active: activeBookmarkIcon,
       inactive: inactiveBookmarkIcon
+    }
+  },
+  // Accommodation
+  {
+    text: 'Accommodation',
+    link_to: '/accommodation',
+    activateOnLogin: true,
+    isDropdown: false,
+    icons: {
+      active: Accommodation,
+      inactive: Accommodation
     }
   },
   // Settings

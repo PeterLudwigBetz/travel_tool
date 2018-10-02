@@ -36,6 +36,16 @@ exports[`<LeftSideBar /> renders correctly 1`] = `
               "text": "Requests",
             },
             Object {
+              "activateOnLogin": true,
+              "icons": Object {
+                "active": "accommodation.svg",
+                "inactive": "accommodation.svg",
+              },
+              "isDropdown": false,
+              "link_to": "/accommodation",
+              "text": "Accommodation",
+            },
+            Object {
               "activateOnLogin": false,
               "dropdownItems": Array [
                 Object {

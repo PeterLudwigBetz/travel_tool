@@ -22,9 +22,8 @@ import {
   watchUpdateAllNotificationStatus,
 } from './notificationsSaga';
 
+import { watchCreateAccommodationSagaAsync } from './accommodationSaga';
 import { watchUpdateUserProfileAsync } from './UserProfileSaga';
-
-
 
 function* rootSaga() {
   yield all([
@@ -44,7 +43,8 @@ function* rootSaga() {
     watchFetchNotifications(),
     watchAddNotification(),
     watchUpdateUserProfileAsync(),
-    watchUpdateAllNotificationStatus()
+    watchUpdateAllNotificationStatus(),
+    watchCreateAccommodationSagaAsync()
   ]);
 }
 
