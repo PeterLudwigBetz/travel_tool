@@ -24,9 +24,10 @@ class InputRenderer {
     }
   }
 
-  renderInput = (name, type, customProps) => {
+  renderInput = (name, type, customProps, editValue) => {
     const { values, onChange, value, handleInputChange} = this.props;
     let inputProps = {
+      defaultValue: editValue,
       value: values[name],
       name: name,
       type: type,
