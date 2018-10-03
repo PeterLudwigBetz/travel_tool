@@ -38,7 +38,7 @@ exports[`<LeftSideBar /> renders correctly 1`] = `
             Object {
               "activateOnLogin": false,
               "icons": Object {
-                "active": "accommodation.svg",
+                "active": "accommodation-blue.svg",
                 "inactive": "accomodation-grey.svg",
               },
               "isDropdown": false,

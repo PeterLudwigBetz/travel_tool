@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
 import Script from 'react-load-script';
-import Cookies from 'cookies-js';
 import axios from 'axios';
+import AccommodationAPI from '../../../services/AccommodationAPI'
 import { FormContext } from '../FormsAPI';
 import { errorMessage } from '../../../helper/toast';
 import SubmitArea from '../NewRequestForm/FormFieldsets/SubmitArea';
@@ -36,7 +36,9 @@ class NewAccommodation extends PureComponent {
   }
 
   componentWillUnmount() {
+    const { fetchAccommodation } = this.props;
     this.handleFormCancel();
+    fetchAccommodation();
   }
 
   defaultRoom = (index) => ({
@@ -102,7 +104,8 @@ class NewAccommodation extends PureComponent {
     const { target } = event;
     const { name, value, dataset } = target;
     const { parentid } = dataset;
-    if (rooms[parentid]) {
+    const check = rooms[parentid];
+    if (check) {
       if (name.startsWith('roomName')) {
         rooms[parentid].roomName = value;
       } else if (name.startsWith('bedCount')) {
@@ -141,8 +144,8 @@ class NewAccommodation extends PureComponent {
   };
 
   validate = field => {
-    let { values, errors, rooms } = this.state;
-    [errors, values, rooms] = [{ ...errors }, { ...values }, [...rooms]];
+    let { values, errors } = this.state;
+    [errors, values] = [{ ...errors }, { ...values }];
     let hasBlankFields = false;
 
     hasBlankFields = Object.keys(values).some(key => !values[key]);
@@ -192,10 +195,6 @@ class NewAccommodation extends PureComponent {
     }, this.validate);
   };
 
-  setHeader = () => {
-    const token = Cookies.get('jwt-token');
-    axios.defaults.headers.common['Authorization'] = token;
-  }
 
   handleInputSubmit = async event => {
     event.preventDefault();
@@ -208,7 +207,7 @@ class NewAccommodation extends PureComponent {
       delete axios.defaults.headers.common['Authorization'];
       const imageData = await axios.post(process.env.REACT_APP_CLOUNDINARY_API, fd);
       const imageUrl = imageData.data.secure_url;
-      this.setHeader();
+      AccommodationAPI.setToken();
       const guestHouse = {
         houseName: values.houseName,
         location: values.location,
@@ -254,7 +253,8 @@ class NewAccommodation extends PureComponent {
 }
 
 NewAccommodation.propTypes = {
-  createAccommodation: PropTypes.func.isRequired
+  createAccommodation: PropTypes.func.isRequired,
+  fetchAccommodation: PropTypes.func.isRequired,
 };
 
 export default NewAccommodation;

@@ -2,12 +2,16 @@ import {
   CREATE_ACCOMMODATION_DATA,
   CREATE_ACCOMMODATION_DATA_SUCCESS,
   CREATE_ACCOMMODATION_DATA_FAILURE,
+  FETCH_ACCOMMODATION_CENTRES,
+  FETCH_ACCOMMODATION_CENTRES_SUCCESS,
+  FETCH_ACCOMMODATION_CENTRES_FAILURE,
 } from '../constants/actionTypes';
 
 const initialState = {
   postAccommodationData: [],
   errors: []
 };
+
 const accommodation = (state = initialState, action) => {
   switch (action.type) {
   case CREATE_ACCOMMODATION_DATA:
@@ -24,8 +28,25 @@ const accommodation = (state = initialState, action) => {
       ...state,
       errors: action.error
     };
-  default:
-    return state;
+  case FETCH_ACCOMMODATION_CENTRES:
+    return {
+      ...state,
+      isLoading: true
+    };
+  case FETCH_ACCOMMODATION_CENTRES_SUCCESS:
+    return {
+      ...state,
+      isLoading: false,
+      guestHouses: action.guestHouses
+    };
+  case FETCH_ACCOMMODATION_CENTRES_FAILURE:
+    return {
+      ...state,
+      isLoading: false,
+      guestHouses: null,
+      accommodationError: action.error
+    };
+  default: return state;
   }
 };
 

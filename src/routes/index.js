@@ -9,7 +9,6 @@ import ConnectedUserProfile from '../views/UserProfile';
 import LayoutShell from '../hoc/Layout';
 import ConnectedAccommodation from '../views/Accommodation';
 
-
 const Routes = () => (
   <Switch>
     <Route

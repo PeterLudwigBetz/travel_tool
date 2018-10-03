@@ -13,9 +13,9 @@ describe('<NewRequestForm />', () => {
     getPlace = () => {
       const components = {
         address_components:  [
-          {long_name: 'Las Vegas', short_name: 'Las Vegas', types: Array(2)},
-          {long_name: 'Las Vegas', short_name: 'Las Vegas', types: Array(2)},
-          {long_name: 'Las Vegas', short_name: 'Las Vegas', types: Array(2)},
+          {long_name: 'Las Vegas', short_name: 'Las Vegas', types: ['locality', 'political']},
+          {long_name: 'Las Vegas', short_name: 'Las Vegas', types: ['political']},
+          {long_name: 'Las Vegas', short_name: 'Las Vegas', types: ['country', 'political']},
         ]
       };
       return components;
@@ -530,19 +530,5 @@ describe('<NewRequestForm />', () => {
     expect(shallowWrapper.instance().savePersonalDetails.calledOnce).toEqual(true);
   });
 
-   
-  it('should save return hasBlankTrips', () => {
-    const shallowWrapper = shallow(<NewRequestForm {...props} />);
-    sinon.spy(shallowWrapper.instance(), 'hasBlankTrips');
-    shallowWrapper.instance().hasBlankTrips(event);
-    expect(shallowWrapper.instance().hasBlankTrips.calledOnce).toEqual(true);
-  });
-
-  it('check hasBlankTrips works', ()=>{
-    const wrapper = shallow(<NewRequestForm {...props} />)
-    const wrapperInstance = wrapper.instance();
-    wrapperInstance.state.trips = ['Nigeria', 'Ghana']
-    expect(wrapperInstance.hasBlankTrips()).toEqual([false, false]);
-  });
 
 });

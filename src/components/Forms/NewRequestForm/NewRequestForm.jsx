@@ -130,7 +130,8 @@ class NewRequestForm extends PureComponent {
     const autocomplete = new google.maps.places.Autocomplete(event.target, options);
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace().address_components;
-      const places = place[0].long_name + ' ' + place[2].long_name;
+      const countryIndex = place.findIndex(addr => addr.types.includes('country'));
+      const places = place[0].long_name + ', ' + place[countryIndex].long_name;
       if (trips[getId]){
         if (name.startsWith('destination')) {
           trips[getId].destination = places;
@@ -275,13 +276,6 @@ class NewRequestForm extends PureComponent {
   handleClearForm = () => {
     this.setState({ ...this.defaultState });
   };
-  hasBlankTrips = () => {
-    let { trips } = this.state;
-    const blank = trips.map(trip => {
-      return Object.keys(trip).some(key => !trip[key]);
-    });
-    return blank;
-  }
   validate = field => {
     let { values, errors, trips } = this.state;
     [errors, values, trips] = [{ ...errors }, { ...values }, [...trips]];
