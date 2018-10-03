@@ -60,7 +60,6 @@ const requests = (state = initialState, action) => {
     };
   case FETCH_USER_REQUEST_DETAILS:
     return {
-      ...state,
       fetchingRequest: true
     };
   case FETCH_USER_REQUEST_DETAILS_SUCCESS:
@@ -68,7 +67,7 @@ const requests = (state = initialState, action) => {
       ...state,
       fetchingRequest: false,
       requestData: action.requestData,
-      comments: action.requestData.comments
+      comments: action.requestData.comments.sort( (commentDate1, commentDate2) =>  (commentDate1.createdAt > commentDate2.createdAt))
     };
   case FETCH_USER_REQUEST_DETAILS_FAILURE:
     return {

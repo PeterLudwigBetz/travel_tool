@@ -3,7 +3,8 @@ import inactiveBookmarkIcon from '../../../images/icons/bookmark_inactive.svg';
 import activeSettingsIcon from '../../../images/icons/settings_active.svg';
 import inactiveSettingsIcon from '../../../images/icons/settings_inactive.svg';
 import inactiveLogoutIcon from '../../../images/icons/logout_inactive.svg';
-import Accommodation from '../../../images/accommodation.svg';
+import activeAccomodationIcon from '../../../images/accommodation.svg';
+import inactiveAccomodationIcon from '../../../images/icons/accomodation-grey.svg';
 
 const NavItemsMetadata = [
   // Requests
@@ -30,13 +31,14 @@ const NavItemsMetadata = [
   },
   // Accommodation
   {
-    text: 'Accommodation',
+    text: 'Accomodation',
     link_to: '/accommodation',
-    activateOnLogin: true,
+    activateOnLogin: false,
     isDropdown: false,
+    onlyVisibleTo: ['Travel Administrator', 'Super Administrator'],
     icons: {
-      active: Accommodation,
-      inactive: Accommodation
+      active: activeAccomodationIcon,
+      inactive: inactiveAccomodationIcon
     }
   },
   // Settings

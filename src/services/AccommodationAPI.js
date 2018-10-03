@@ -6,7 +6,7 @@ const baseUrl = resolveBaseUrl();
 
 class AccommodationAPI {
   static postAccommodation(accommodationData) {
-    return  axios.post(`${baseUrl}/accommodations`, accommodationData);
+    return axios.post(`${baseUrl}/guesthouses`, accommodationData);
   }
 }
 export default AccommodationAPI;

@@ -63,7 +63,7 @@ class AccommodationDetails extends Component {
 
   renderGuestHouseInput = (renderInput, handleLocation) => {
     return (
-      <div className="input-group">
+      <div className="input-group reduce-margin">
         <div className="guest-house-input">
           {renderInput('houseName', 'text')}
         </div>

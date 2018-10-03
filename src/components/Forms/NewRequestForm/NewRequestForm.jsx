@@ -16,7 +16,7 @@ class NewRequestForm extends PureComponent {
     const role = localStorage.getItem('role');
     const manager = localStorage.getItem('manager');
 
-    const checkBoxState = localStorage.getItem('state');
+
 
     const firstTripStateValues = this.getDefaultTripStateValues(0);
 
@@ -34,7 +34,6 @@ class NewRequestForm extends PureComponent {
       trips: [{}],
       errors: {},
       hasBlankFields: true,
-      checkBox: 'notClicked',
       selection: 'return',
       collapse: false,
       title: 'Hide Details',
@@ -44,7 +43,7 @@ class NewRequestForm extends PureComponent {
     };
     this.state = { ...this.defaultState };
   }
-
+  
   componentWillUnmount() {
     this.handleClearForm();
   }
@@ -181,7 +180,7 @@ class NewRequestForm extends PureComponent {
       department: values.department,
       role: values.role
     };
-    const checkBoxState = localStorage.getItem('state');
+    const checkBoxState = localStorage.getItem('checkBox');
     if (checkBoxState === 'clicked') {
       values.passportName = values.name;
       values.occupation = values.role;
@@ -294,6 +293,7 @@ class NewRequestForm extends PureComponent {
         <form onSubmit={this.handleSubmit} className="new-request">
           <PersonalDetailsFieldset
             values={values}
+            savePersonalDetails={this.savePersonalDetails}
             collapsible={this.collapsible}
             collapse={collapse}
             title={title}

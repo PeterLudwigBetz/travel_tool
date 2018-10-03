@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import Modal from '../../components/modal/Modal';
 import { NewAccommodationForm } from '../../components/Forms';
@@ -49,8 +48,7 @@ export class Accommodation extends Component {
   }
 }
 
-export const mapStateToProps = ({ modal, user }) => ({
-  ...user,
+export const mapStateToProps = ({ modal }) => ({
   ...modal.modal,
 });
 

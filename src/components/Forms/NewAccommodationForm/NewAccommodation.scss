@@ -9,8 +9,8 @@
 
 .add-photo {
   position: relative;
-  top: 50%;
-  left: 45%;
+  top: 75%;
+  left: 52%;
   transform: translateY(-50%);
 }
 
@@ -137,6 +137,7 @@
 
 .add-cancel {
   display: flex;
+  margin-bottom: -12px;
 }
 
 .cancel-button {
@@ -150,4 +151,7 @@
 
 .remove {
   -webkit-appearance: none;
+}
+.reduce-margin {
+  margin-bottom: -17px;
 }

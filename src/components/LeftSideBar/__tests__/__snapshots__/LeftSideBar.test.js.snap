@@ -36,14 +36,18 @@ exports[`<LeftSideBar /> renders correctly 1`] = `
               "text": "Requests",
             },
             Object {
-              "activateOnLogin": true,
+              "activateOnLogin": false,
               "icons": Object {
                 "active": "accommodation.svg",
-                "inactive": "accommodation.svg",
+                "inactive": "accomodation-grey.svg",
               },
               "isDropdown": false,
               "link_to": "/accommodation",
-              "text": "Accommodation",
+              "onlyVisibleTo": Array [
+                "Travel Administrator",
+                "Super Administrator",
+              ],
+              "text": "Accomodation",
             },
             Object {
               "activateOnLogin": false,

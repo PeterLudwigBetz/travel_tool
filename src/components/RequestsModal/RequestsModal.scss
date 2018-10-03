@@ -305,7 +305,7 @@
   }
 }
 .comment-box {
-  margin: 20px 12px -70px 33px;
+  margin: 20px 12px -70px 31px;
 }
 
 .edit-button {
@@ -330,9 +330,11 @@
 }
 .edit-button:hover {
   text-decoration: underline;
+  color: blue;
 }
 #cancel-button {
   position: relative;
   top: -88px;
   right: -95px;
 }
+

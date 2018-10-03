@@ -31,6 +31,10 @@ class NewAccommodation extends PureComponent {
     this.state = { ...this.defaultState };
   }
 
+  componentDidMount(){
+    this.addRoomOnClick()
+  }
+
   componentWillUnmount() {
     this.handleFormCancel();
   }
@@ -241,7 +245,7 @@ class NewAccommodation extends PureComponent {
           <SubmitArea
             onCancel={this.handleFormCancel}
             hasBlankFields={hasBlankFields}
-            send="Send Request"
+            send="Save"
           />
         </form>
       </FormContext>

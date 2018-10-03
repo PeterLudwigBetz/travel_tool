@@ -72,7 +72,6 @@ describe('<NewRequestForm />', () => {
     trips: [{}],
     errors: {},
     hasBlankFields: true,
-    checkBox: 'notClicked',
     selection: 'return',
     collapse: false,
     title: 'Hide Details',
@@ -265,7 +264,7 @@ describe('<NewRequestForm />', () => {
     expect(shallowWrapper.instance().handleRadioButton.calledOnce).toEqual(true);
   });
 
-  it('should change the radio buttton on click to single and collapse true', () => {
+  it('should change the radio button on click to single and collapse true', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     shallowWrapper.instance().state.collapse=true;
     const event = {
@@ -458,7 +457,7 @@ describe('<NewRequestForm />', () => {
 
   it('should submit travel details ', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
-    localStorage.setItem('state', 'clicked');
+    localStorage.setItem('checkBox', 'clicked');
     shallowWrapper.setState({
       values: {
         name: 'tomato', // FIX: need to be refactor later
