@@ -56,26 +56,6 @@ describe('<NewAccommodation />', () => {
     expect(componentWillUnmount).toHaveBeenCalledTimes(1);
   });
 
-  // it('call handleImageChange when image is selected is picked', () => {
-  //   const shallowWrapper = shallow(<NewAccommodation {...props} />);
-  //   const files = {
-  //     name: '%40Venkatesh_Sompari_Walls%40~01.jpeg', 
-  //     lastModified: 1516434814000, 
-  //     lastModifiedDate: 'Sat Jan 20 2018 08:53:34 GMT+0100 (West Africa Standard Time)', webkitRelativePath: '', 
-  //     size: 302114,
-  //     type: 'image/jpeg',
-  //     __proto__: File
-  //   };
-  //   const event = {
-  //     preventDefault: jest.fn(),
-  //     target: files[0]
-  //   };
-  //   sinon.spy(shallowWrapper.instance(), 'handleImageChange');
-  //   shallowWrapper.instance().handleImageChange(event);
-  //   expect(shallowWrapper.instance().handleImageChange.calledOnce).toEqual(true);
-  // });
-
-
   it('call event when Location is picked', () => {
     const shallowWrapper = shallow(<NewAccommodation {...props} />);
     const event = {
@@ -173,12 +153,12 @@ describe('<NewAccommodation />', () => {
   it('call event when drop down is selected', () => {
     const shallowWrapper = shallow(<NewAccommodation {...props} />);
     const data =  {
-      name: 'roomType-0',
+      name: 'roomName-0',
       parentid: 0
     };
     const choice = 'dance';
     shallowWrapper.setState({
-      rooms: []
+      rooms: [{}]
     });
     sinon.spy(shallowWrapper.instance(), 'handleDropDown');
     shallowWrapper.instance().handleDropDown(data, choice);
@@ -216,10 +196,52 @@ describe('<NewAccommodation />', () => {
           roomType: 'leke',
           bedCount: 1,
         },
-      ]
+      ],
+      documentId: 2
     });
     sinon.spy(shallowWrapper.instance(), 'removeRoom');
-    shallowWrapper.instance().removeRoom(1);
+    shallowWrapper.instance().removeRoom(2);
     expect(shallowWrapper.instance().removeRoom.calledOnce).toEqual(true);
   });
+
+  it('should submit guest house details ', () => {
+    const shallowWrapper = shallow(<NewAccommodation {...props} />);
+    shallowWrapper.setState({
+      values: {
+        houseName: 'lol',
+        location: 'lol',
+        bathRooms: '1',
+        image: 'lol',
+        preview: 'lol',
+      },
+      rooms: [],
+      documentId: 1,
+      hasBlankFields: true
+    });
+    const event = {
+      preventDefault: jest.fn(),
+    };
+    sinon.spy(shallowWrapper.instance(), 'handleInputSubmit');
+    shallowWrapper.instance().handleInputSubmit(event);
+    expect(shallowWrapper.instance().handleInputSubmit.calledOnce).toEqual(true);
+  });
+
+  it('should update state when a room is added and when it\'s removed', () => {
+    expect.assertions(7);
+    wrapper.instance().addRoomOnClick();
+    wrapper.instance().addRoomOnClick();
+    expect(wrapper.instance().state.values['roomName-1']).toBe('');
+    expect(wrapper.instance().state.values['roomName-2']).toBe('');
+    expect(wrapper.instance().state.documentId).toBe(4);
+    wrapper.instance().removeRoom(1);
+    expect(wrapper.instance().state.documentId).toBe(3);
+    expect(wrapper.instance().state.values['roomName-1']).toBe('');
+    expect(wrapper.instance().state.values['roomName-4']).toBe(undefined);
+    expect(wrapper.instance().state.rooms).toHaveLength(3);
+  });
+
+
+
+
+
 });

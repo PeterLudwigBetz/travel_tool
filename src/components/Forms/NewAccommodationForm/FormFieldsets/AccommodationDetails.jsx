@@ -6,31 +6,34 @@ import '../NewAccommodation.scss';
 import addMoreRoomIcon from '../../../../images/add.svg';
 import deleteRoomIcon from '../../../../images/delete.svg';
 
-
 class AccommodationDetails extends Component {
-
   renderAddRoomBtn = () => {
     const { addRoomOnClick } = this.props;
     return (
       <div className="add-more-room-rectangle">
-        <div className="set-width" onClick={addRoomOnClick} role="presentation" onKeyPress={this.press}>
+        <div
+          className="set-width"
+          onClick={addRoomOnClick}
+          role="presentation"
+          onKeyPress={this.press}
+        >
           <img src={addMoreRoomIcon} alt="clicked" className="add-sug-room" />
           <p className="add-another-room">Add a Room</p>
         </div>
-      </div>    
+      </div>
     );
-  }
+  };
 
   renderForms(documentId, handleInputChange, handleDropDown) {
-    const forms = [];
-    for (let i = 0; i < documentId; i += 1) {
-      forms.push(
+    let roomForm = [];
+    for (let i = 0; i < documentId; i++) {
+      roomForm.push(
         <div id={i} key={i}>
           {this.renderAddRoom(i, handleInputChange, handleDropDown)}
         </div>
       );
     }
-    return forms;
+    return roomForm;
   }
 
   renderAddRoom = (i, handleInputChange, handleDropDown) => {
@@ -41,25 +44,32 @@ class AccommodationDetails extends Component {
         <div className="room-rectangle">
           <div className="style-input-box" onChange={handleInputChange}>
             <div className="room">
-              {renderInput(`roomName-${i}`, 'text', {parentid: i})}
+              {renderInput(`roomName-${i}`, 'text', { parentid: i })}
             </div>
             <div className="room">
-              {renderInput(`roomType-${i}`, 'dropdown-select', {parentid: i, handleDropDown })}
+              {renderInput(`roomType-${i}`, 'dropdown-select', {
+                parentid: i,
+                handleDropDown
+              })}
             </div>
             <div className="room remove" onChange={handleInputChange}>
-              {renderInput(`bedCount-${i}`, 'number', { parentid: i})}
+              {renderInput(`bedCount-${i}`, 'number', { parentid: i })}
             </div>
           </div>
         </div>
-        { i >= 1 ?
-          (
-            <img src={deleteRoomIcon} alt="clicked" onClick={() => removeRoom(i)} className="cancel-button" role="presentation" onKeyPress={this.press} /> 
-          ) :
-          null
-        }
+        {i >= 1 ? (
+          <img
+            src={deleteRoomIcon}
+            alt="clicked"
+            onClick={() => removeRoom(i)}
+            className="cancel-button"
+            role="presentation"
+            onKeyPress={this.press}
+          />
+        ) : null}
       </div>
     );
-  }
+  };
 
   renderGuestHouseInput = (renderInput, handleLocation) => {
     return (
@@ -75,18 +85,16 @@ class AccommodationDetails extends Component {
         </div>
       </div>
     );
-  }
+  };
 
-  renderImageDisplay = (displayImage,handleImageChange ) => {
+  renderImageDisplay = (displayImage, handleImageChange) => {
     return (
       <div className="aline-box">
         {displayImage()}
         <div className="image-space">
           <p className="upload">Upload guest house image</p>
-          <div className="upload-btn-wrapper"> 
-            <button
-              type="button"
-              className="action-btn btn-new-request">
+          <div className="upload-btn-wrapper">
+            <button type="button" className="action-btn btn-new-request">
               upload
             </button>
             <input type="file" name="myfile" onChange={handleImageChange} />
@@ -94,19 +102,26 @@ class AccommodationDetails extends Component {
         </div>
       </div>
     );
-  }
+  };
 
   render() {
     this.inputRenderer = new InputRenderer(this.props, formMetadata);
     const { renderInput } = this.inputRenderer;
-    const {handleImageChange, displayImage, documentId, handleInputChange, handleLocation, handleDropDown} = this.props;
+    const {
+      handleImageChange,
+      displayImage,
+      documentId,
+      handleInputChange,
+      handleLocation,
+      handleDropDown
+    } = this.props;
     return (
       <fieldset>
-        {this.renderImageDisplay(displayImage,handleImageChange )}
+        {this.renderImageDisplay(displayImage, handleImageChange)}
         {this.renderGuestHouseInput(renderInput, handleLocation)}
         <h4 className="add-rooms">Add Rooms</h4>
         {this.renderForms(documentId, handleInputChange, handleDropDown)}
-        {this.renderAddRoomBtn()}         
+        {this.renderAddRoomBtn()}
       </fieldset>
     );
   }
@@ -120,7 +135,7 @@ AccommodationDetails.propTypes = {
   handleLocation: PropTypes.func.isRequired,
   removeRoom: PropTypes.func.isRequired,
   documentId: PropTypes.string.isRequired,
-  handleDropDown: PropTypes.string.isRequired,
+  handleDropDown: PropTypes.string.isRequired
 };
 
 export default AccommodationDetails;

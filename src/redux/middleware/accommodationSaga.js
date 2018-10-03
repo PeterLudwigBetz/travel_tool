@@ -10,11 +10,9 @@ import {
   fetchAccommodationFailure,
 } from '../actionCreator/accommodationActions';
 import { closeModal } from '../actionCreator/modalActions';
-
 import {
   FETCH_ACCOMMODATION_CENTRES,
 } from '../constants/actionTypes';
-
 
 
 export function* watchCreateAccommodationSagaAsync() {

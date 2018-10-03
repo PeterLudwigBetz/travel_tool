@@ -5,13 +5,14 @@ import './AccommodationPanelHeader.scss';
 
 class AccommodationPanelHeader extends PureComponent {
   render() {
-    const { openModal } = this.props;
+    let { openModal } = this.props;
+    const modalStatus = openModal;
     return (
-      <div className="role-panel-header">
+      <div className="accommodation">
         <PageHeader
           title="ACCOMMODATION"
           actionBtn="Add Guest House"
-          openModal={openModal}
+          openModal={modalStatus}
         />
       </div>
     );

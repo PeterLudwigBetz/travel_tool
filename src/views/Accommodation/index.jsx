@@ -15,7 +15,7 @@ export class Accommodation extends Component {
   }
   
   renderAccommodationPanelHeader() {
-    const { openModal } = this.props;
+    let { openModal } = this.props;
     return (
       <div className="rp-role__header">
         <AccommodationPanelHeader openModal={openModal} />
@@ -99,7 +99,7 @@ const actionCreators = {
   createAccommodation,
 };
 
-export const mapStateToProps = (accommodation, modal) => ({
+export const mapStateToProps = ({ accommodation, modal }) => ({
   ...accommodation,
   ...modal.modal,
 });
