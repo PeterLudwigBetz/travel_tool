@@ -15,15 +15,22 @@ import {
   watchPutRoleDataSagaAsync
 } from './roleDataSaga';
 import { watchFetchRoleUsers } from './roleSaga';
-import { watchCreateComment, watchEditComment, watchDeleteComment } from './commentsSaga';
-import { watchFetchApprovals, watchUpdateRequestStatus } from './approvalsSaga';
+import {
+  watchCreateComment,
+  watchEditComment,
+  watchDeleteComment
+} from './commentsSaga';
+import {
+  watchFetchApprovals,
+  watchUpdateRequestStatus
+} from './approvalsSaga';
 import {
   watchFetchNotifications,
   watchAddNotification,
   watchUpdateAllNotificationStatus,
 } from './notificationsSaga';
 
-import { watchCreateAccommodationSagaAsync } from './accommodationSaga';
+import { watchCreateAccommodationSagaAsync, watchFetchAccommodation } from './accommodationSaga';
 import { watchUpdateUserProfileAsync } from './UserProfileSaga';
 
 function* rootSaga() {
@@ -46,6 +53,7 @@ function* rootSaga() {
     watchUpdateUserProfileAsync(),
     watchEditRequest(),
     watchAddNotification(),
+    watchFetchAccommodation(),
     watchUpdateUserProfileAsync(),
     watchUpdateAllNotificationStatus(),
     watchCreateAccommodationSagaAsync()

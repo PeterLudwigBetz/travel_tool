@@ -33,6 +33,7 @@ describe('<NewAccommodation />', () => {
 
   const props = {
     createAccommodation: jest.fn(() => {}),
+    fetchAccommodation: jest.fn(() => {}),
   };
 
   global.FileReader = () => ({

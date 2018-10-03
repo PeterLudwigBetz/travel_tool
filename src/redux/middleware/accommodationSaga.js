@@ -6,8 +6,16 @@ import {
   createAccommodation,
   createAccommodationSuccess,
   createAccommodationFailure,
-} from '../actionCreator/accommodationAction';
+  fetchAccommodationSuccess,
+  fetchAccommodationFailure,
+} from '../actionCreator/accommodationActions';
 import { closeModal } from '../actionCreator/modalActions';
+
+import {
+  FETCH_ACCOMMODATION_CENTRES,
+} from '../constants/actionTypes';
+
+
 
 export function* watchCreateAccommodationSagaAsync() {
   yield takeLatest(createAccommodation().type, accommodationSagaAsync);
@@ -26,3 +34,23 @@ export function* accommodationSagaAsync(action) {
   }
 }
 
+export function* fetchAccommodationSaga() {
+  try {
+    const response = yield call(
+      AccommodationAPI.getAccommodationCentres
+    );
+    const { data } = response;
+    yield put(fetchAccommodationSuccess(data));
+  }
+  catch(error) {
+    const errorMessage = apiErrorHandler(error);
+    yield put(fetchAccommodationFailure(errorMessage));
+  }
+}
+
+
+export function* watchFetchAccommodation() {
+  yield takeLatest(
+    FETCH_ACCOMMODATION_CENTRES,
+    fetchAccommodationSaga);
+}

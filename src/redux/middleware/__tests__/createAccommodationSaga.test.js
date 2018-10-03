@@ -1,6 +1,5 @@
-import { call, actionChannel } from 'redux-saga/effects';
+import { call } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
-import { throwError } from 'redux-saga-test-plan/providers';
 import AccommodationAPI from '../../../services/AccommodationAPI';
 import {
   watchCreateAccommodationSagaAsync,

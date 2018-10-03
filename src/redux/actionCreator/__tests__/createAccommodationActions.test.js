@@ -2,7 +2,7 @@ import {
   createAccommodation,
   createAccommodationSuccess,
   createAccommodationFailure,
-} from '../accommodationAction';
+} from '../accommodationActions';
 
 const guestHouses = {
   'houseName': 'Small Lagos ',

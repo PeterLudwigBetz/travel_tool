@@ -36,7 +36,9 @@ class NewAccommodation extends PureComponent {
   }
 
   componentWillUnmount() {
+    const { fetchAccommodation } = this.props;
     this.handleFormCancel();
+    fetchAccommodation();
   }
 
   defaultRoom = (index) => ({
