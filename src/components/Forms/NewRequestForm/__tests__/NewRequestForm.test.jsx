@@ -1,6 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import NewRequestForm from '../NewRequestForm';
+import beds from '../../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
 
 describe('<NewRequestForm />', () => {
   let wrapper, onSubmit;
@@ -59,9 +60,13 @@ describe('<NewRequestForm />', () => {
           returnDate: '2018-09-30',
           createdAt: '2018-09-27T18:49:03.626Z',
           updatedAt: '2018-09-27T18:49:43.803Z',
-          requestId: 'NfR-9KoCP'
+          requestId: 'NfR-9KoCP',
+          bedId: 6000
         }
       ]
+    },
+    availableRooms: {
+      beds
     },
     google: {},
     handleCreateRequest: jest.fn(() => {}),
@@ -69,6 +74,7 @@ describe('<NewRequestForm />', () => {
     creatingRequest: jest.fn(() => {}),
     handleEditRequest: jest.fn(() => {}),
     fetchUserRequests: jest.fn(() => {}),
+    handlePickBed: jest.fn(() => {}),
     choices: ['director', 'chef'],
     managers: [
       {
@@ -93,7 +99,7 @@ describe('<NewRequestForm />', () => {
 
   const defaultState = {
     values: {
-      name: !(/^null|undefined$/).test(user) ? user : '', // FIX: need to be 
+      name: !(/^null|undefined$/).test(user) ? user : '', // FIX: need to be
       gender: !(/^null|undefined$/).test(gender) ? gender: '',
       department: !(/^null|undefined$/).test(department) ? department: '',
       role: !(/^null|undefined$/).test(role) ? role :'',
@@ -187,7 +193,7 @@ describe('<NewRequestForm />', () => {
       selection: 'multi',
       parentIds: 2,
       trips: [
-        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30'},
+        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30', bedId: 6000},
       ]
     });
     sinon.spy(shallowWrapper.instance(), 'onChangeDate');
@@ -209,7 +215,7 @@ describe('<NewRequestForm />', () => {
       selection: 'multi',
       parentIds: 2,
       trips: [
-        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30'},
+        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30', bedId: 6000},
       ]
     });
     sinon.spy(shallowWrapper.instance(), 'onChangeDate');
@@ -225,7 +231,7 @@ describe('<NewRequestForm />', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     const event = {
       target: {
-        dataset: {  
+        dataset: {
           parentid: '0'
         },
         name: 'destination-0',
@@ -240,7 +246,7 @@ describe('<NewRequestForm />', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     const event = {
       target: {
-        dataset: {  
+        dataset: {
           parentid: '0'
         },
         name: 'destination-0',
@@ -250,7 +256,7 @@ describe('<NewRequestForm />', () => {
       selection: 'multi',
       parentIds: 2,
       trips: [
-        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30'},
+        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30', bedId: 6000},
       ]
     });
     sinon.spy(shallowWrapper.instance(), 'onChangeInput');
@@ -262,7 +268,7 @@ describe('<NewRequestForm />', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     const event = {
       target: {
-        dataset: {  
+        dataset: {
           parentid: '0'
         },
         name: 'origin-0',
@@ -555,9 +561,9 @@ describe('<NewRequestForm />', () => {
   });
 
   xit('check hasBlankTrips works', ()=>{
-    const wrapper = shallow(<NewRequestForm {...props} />)
+    const wrapper = shallow(<NewRequestForm {...props} />);
     const wrapperInstance = wrapper.instance();
-    wrapperInstance.state.trips = ['Nigeria', 'Ghana']
+    wrapperInstance.state.trips = ['Nigeria', 'Ghana'];
     expect(wrapperInstance.hasBlankTrips()).toEqual([false, false]);
   });
 });

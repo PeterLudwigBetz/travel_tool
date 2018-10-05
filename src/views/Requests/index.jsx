@@ -13,6 +13,7 @@ import {
   editRequest,
   fetchEditRequest,
 } from '../../redux/actionCreator/requestActions';
+import { fetchAvailableRooms } from '../../redux/actionCreator/availableRoomsActions';
 import updateUserProfile from '../../redux/actionCreator/userProfileActions';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 import { fetchRoleUsers } from '../../redux/actionCreator/roleActions';
@@ -32,11 +33,12 @@ export class Requests extends Base {
   };
 
   componentDidMount() {
-    const { openModal, fetchUserRequests,getOccupation, fetchRoleUsers, page, match: { params: { requestId } } } = this.props;
+    const { openModal, fetchUserRequests, fetchAvailableRooms, getOccupation, fetchRoleUsers, page, match: { params: { requestId } } } = this.props;
     const { url } = this.state;
     fetchUserRequests(url);
     fetchRoleUsers(53019);
     getOccupation();
+    fetchAvailableRooms();
 
     if(requestId){
       openModal(true, 'request details', page);
@@ -134,12 +136,12 @@ export class Requests extends Base {
   }
   renderNewRequestForm() {
     const { updateUserProfile, user, createNewRequest, loading, errors, closeModal,
-      shouldOpen, modalType, managers, requestOnEdit, editRequest, fetchUserRequests,occupations } = this.props;
+      shouldOpen, modalType, managers, requestOnEdit, editRequest, fetchAvailableRooms, fetchUserRequests,occupations, availableRooms } = this.props;
     const { url } = this.state;
     return (
       <Modal
         closeModal={closeModal}
-        width="1000px"
+        width="81.25%"
         visibility={(shouldOpen && (modalType === 'edit request' || modalType === 'new model')) ? 'visible' : 'invisible'}
         title={modalType === 'edit request' ? 'Edit Travel Request' : 'New Travel Request'}
       >
@@ -152,9 +154,11 @@ export class Requests extends Base {
           errors={errors}
           closeModal={closeModal}
           managers={managers}
+          availableRooms={availableRooms}
           modalType={modalType}
           requestOnEdit={requestOnEdit}
           fetchUserRequests={() => fetchUserRequests(url)}
+          fetchAvailableRooms={fetchAvailableRooms}
           occupations={occupations}
         />
       </Modal>
@@ -202,7 +206,8 @@ Requests.propTypes = {
   errors: PropTypes.array,
   shouldOpen: PropTypes.bool.isRequired,
   modalType: PropTypes.string,
-  openModal: PropTypes.func.isRequired
+  openModal: PropTypes.func.isRequired,
+  fetchAvailableRooms: PropTypes.func.isRequired
 };
 
 Requests.defaultProps = {
@@ -219,15 +224,17 @@ Requests.defaultProps = {
   user: {}
 };
 
-export const mapStateToProps = ({ requests, modal, role, user, occupations }) => ({
+export const mapStateToProps = ({ requests, modal, role, user, occupations, availableRooms }) => ({
   ...requests,
   ...modal.modal,
   ...role,
   ...occupations,
-  getUserData: user.getUserData
+  getUserData: user.getUserData,
+  availableRooms
 });
 
-const actionCreators = {fetchUserRequests,createNewRequest,fetchEditRequest,editRequest,fetchRoleUsers,openModal,closeModal,updateUserProfile,getOccupation,
+const actionCreators = { fetchUserRequests,createNewRequest,fetchEditRequest,editRequest,
+  fetchRoleUsers,openModal,closeModal,updateUserProfile,getOccupation, fetchAvailableRooms
 };
 
 export default connect(

@@ -44,7 +44,7 @@ class NewRequestForm extends PureComponent {
   }
 
   componentWillUnmount() {
-    const { fetchUserRequests } = this.props;
+    const { fetchUserRequests} = this.props;
     fetchUserRequests();
     this.handleClearForm();
   }
@@ -78,6 +78,8 @@ class NewRequestForm extends PureComponent {
       tripsStateValues[`destination-${index}`] = trip.destination;
       tripsStateValues[`arrivalDate-${index}`] = moment(trip.returnDate);
       tripsStateValues[`departureDate-${index}`] = moment(trip.departureDate);
+      tripsStateValues[`bed-${index}`] = trip.bedId;
+
     });
     return tripsStateValues;
   }
@@ -210,7 +212,8 @@ class NewRequestForm extends PureComponent {
     [`origin-${index}`]: '',
     [`destination-${index}`]: '',
     [`arrivalDate-${index}`]: null,
-    [`departureDate-${index}`]: null
+    [`departureDate-${index}`]: null,
+    [`bed-${index}`]: ''
   })
   refreshValues = (prevState, tripType) => {
     // squash state.values to the shape defaultState keeping the values from state
@@ -275,7 +278,7 @@ class NewRequestForm extends PureComponent {
     }, this.validate);
   }
   removeTrip = (i) => {
-    const tripProps = ['origin', 'destination', 'arrivalDate', 'departureDate'];
+    const tripProps = ['origin', 'destination', 'arrivalDate', 'departureDate', 'bed'];
     this.setState((prevState) => {
       let { parentIds, trips, values, errors } = prevState;
       trips.splice(i, 1);
@@ -316,15 +319,6 @@ class NewRequestForm extends PureComponent {
     }
   }
 
-  savePersonalDetails(name, gender, department, role, manager) {
-    // save to localstorage
-    localStorage.setItem('name', name);
-    localStorage.setItem('gender', gender);
-    localStorage.setItem('department', department);
-    localStorage.setItem('role', role);
-    localStorage.setItem('manager', manager);
-  }
-
   renderPersonalDetailsFieldset = () => {
     const {collapse, title, position, line,values} = this.state;
     const { managers , occupations } = this.props;
@@ -345,19 +339,49 @@ class NewRequestForm extends PureComponent {
     );
   }
 
+  handlePickBed = (bedId, tripIndex) => {
+    const fieldName = `bed-${tripIndex}`;
+    this.setState(prevState => {
+      const { trips } = prevState;
+      trips[tripIndex].bedId = bedId;
+      return {
+        ...prevState,
+        values: {
+          ...prevState.values,
+          [fieldName]: bedId
+        },
+        trips
+      };
+    }, () => this.validate(fieldName));
+  }
+
+
+  savePersonalDetails(name, gender, department, role, manager) {
+    // save to localstorage
+    localStorage.setItem('name', name);
+    localStorage.setItem('gender', gender);
+    localStorage.setItem('department', department);
+    localStorage.setItem('role', role);
+    localStorage.setItem('manager', manager);
+  }
+
   renderTravelDetailsFieldset = () => {
     const { selection, parentIds, values } = this.state;
+    const { fetchAvailableRooms, availableRooms } = this.props;
     return (
       <TravelDetailsFieldset
+        fetchAvailableRooms={fetchAvailableRooms}
         values={values}
         value="232px"
         selection={selection}
         handleDate={this.onChangeDate}
+        handlePickBed={this.handlePickBed}
         handleRadioButtonChange={this.handleRadioButton}
         onChangeInput={this.onChangeInput}
         parentIds={parentIds}
         addNewTrip={this.addNewTrip}
         removeTrip={this.removeTrip}
+        availableRooms={availableRooms}
       />
     );
   }
@@ -410,6 +434,8 @@ NewRequestForm.propTypes = {
   modalType: PropTypes.string,
   requestOnEdit: PropTypes.object.isRequired,
   fetchUserRequests: PropTypes.func.isRequired,
+  fetchAvailableRooms: PropTypes.func.isRequired,
+  availableRooms: PropTypes.func.isRequired,
   occupations: PropTypes.array.isRequired,
 };
 
