@@ -4,15 +4,41 @@ import PropTypes from 'prop-types';
 import Modal from '../../components/modal/Modal';
 import { NewAccommodationForm } from '../../components/Forms';
 import AccommodationPanelHeader from '../../components/AccommodationPanelHeader';
+import GuestHouseHeader from '../../components/AccommodationPanelHeader/EditAccommodation';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
-import { createAccommodation, fetchAccommodation } from '../../redux/actionCreator/accommodationActions';
+import { createAccommodation, fetchAccommodation, editAccommodation } from '../../redux/actionCreator/accommodationActions';
 import WithLoadingCentreGrid from '../../components/CentreGrid';
 
 export class Accommodation extends Component {
+  state = {
+    guestHouseToEdit: {},
+  }
   componentDidMount() {
     const { fetchAccommodation } = this.props;
     fetchAccommodation();
   }
+
+  handleOnEdit = (guestHouse) => {
+    let { openModal, modalType } = this.props;
+    console.log(guestHouse)
+    // editAccommodation(guestHouseId);
+    this.setState({
+      guestHouseToEdit: guestHouse
+    })
+    openModal(true, 'edit accomodation');
+    // localStorage.setItem('modalType', 'edit accomodation');//////////
+    // this.saveGuestHouseData(editAccommodations.accommodationData);
+    console.log(modalType);
+  }
+
+  // saveGuestHouseData = (guestHousesData) => {
+  //   localStorage.setItem('houseName', guestHousesData.houseName);
+  //   localStorage.setItem('id', guestHousesData.id);
+  //   localStorage.setItem('location', guestHousesData.location);
+  //   localStorage.setItem('bathRooms', guestHousesData.bathRooms);
+  //   localStorage.setItem('imageUrl', guestHousesData.imageUrl);
+  //   localStorage.setItem('rooms', JSON.stringify(guestHousesData.rooms));
+  // }
   
   renderAccommodationPanelHeader() {
     let { openModal } = this.props;
@@ -24,20 +50,23 @@ export class Accommodation extends Component {
   }
 
   renderAccommodationForm() {
-    const { closeModal, shouldOpen, modalType, createAccommodation, fetchAccommodation } = this.props;
+    const { closeModal, shouldOpen, modalType, guestHouses, createAccommodation, fetchAccommodation, editAccommodation } = this.props;
+    const { guestHouseToEdit } = this.state;
+    console.log(guestHouseToEdit);
     return (
       <Modal
         closeModal={closeModal}
         width="800px"
-        visibility={
-          shouldOpen && modalType === 'new model' ? 'visible' : 'invisible'
-        }
-        title="Add Guest House"
+        visibility={(shouldOpen && (modalType === 'edit accomodation' || modalType === 'new model')) ? 'visible' : 'invisible'}
+        title={modalType === 'edit accomodation' ? `Edit Guest House ${guestHouseToEdit.houseName}` : 'Add Guest House'}
       >
         <NewAccommodationForm
           closeModal={closeModal}
+          modalType={modalType}
           createAccommodation={createAccommodation}
           fetchAccommodation={fetchAccommodation}
+          guestHouseToEdit={guestHouseToEdit}
+          editAccommodation={editAccommodation}
         />
       </Modal>
     );
@@ -51,6 +80,7 @@ export class Accommodation extends Component {
         {this.renderAccommodationForm()}
         <div className="table__container">
           <WithLoadingCentreGrid
+            handleOnEdit={this.handleOnEdit}
             guestHouses={guestHouses}
             isLoading={isLoading}
             error={accommodationError}
@@ -79,6 +109,7 @@ Accommodation.propTypes = {
   isLoading: PropTypes.bool,
   accommodationError: PropTypes.string,
   fetchAccommodation: PropTypes.func.isRequired,
+  // guestHouseToEdit: PropTypes.func.isRequired,
 };
 
 Accommodation.defaultProps = {
@@ -97,6 +128,7 @@ const actionCreators = {
   closeModal,
   fetchAccommodation,
   createAccommodation,
+  editAccommodation
 };
 
 export const mapStateToProps = ({ accommodation, modal }) => ({

@@ -1,4 +1,4 @@
-import React, { PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import bedIcon from '../../images/icons/accomodation-grey.svg';
 import bathroomIcon from '../../images/icons/hot_tub_24px.svg';
@@ -24,7 +24,8 @@ class CentreCard extends PureComponent {
           src={image}
           alt={imageAlt}
           className="centre__image"
-          onError={(e) => e.target.src = defaultImage} />
+          onError={e => (e.target.src = defaultImage)}
+        />
       </div>
     );
   }
@@ -33,7 +34,7 @@ class CentreCard extends PureComponent {
     return (
       <div
         className="centre__flag"
-        style={{backgroundImage: `url(${flagImage})`}}
+        style={{ backgroundImage: `url(${flagImage})` }}
         alt={`${guestHouseLocation} flag`}
       />
     );
@@ -42,13 +43,17 @@ class CentreCard extends PureComponent {
   renderCentreInfo(houseName, location) {
     return (
       <div>
-        <p className="centre__name">
-          {houseName}
-        </p>
+        <p className="centre__name">{houseName}</p>
         <span className="centre__location">{location}</span>
       </div>
     );
   }
+
+  handleEdit = guestHouse => {
+    console.log(guestHouse, this.props)
+    let { handleOnEdit } = this.props;
+    handleOnEdit(guestHouse);
+  };
 
   render() {
     const {
@@ -58,24 +63,29 @@ class CentreCard extends PureComponent {
       guestHouseName,
       guestHouseLocation,
       beds,
-      bathrooms
+      bathrooms,
+      guestHouseId,
+      guestHouse,
+      handleOnEdit
     } = this.props;
     return (
       <div className="mdl-cell mdl-cell--4 mdl-card centre-card">
-        { this.renderCentreImage(cardImage, imageAlt)}
-        <div className="mdl-card__supporting-text centre-info">
-          <div className="centre-info__container">
-            {this.renderCentreFlag(guestHouseLocation, countryFlagImage)}
-            {this.renderCentreInfo(guestHouseName, guestHouseLocation)}
+        <button type="button" onClick={() => this.handleEdit(guestHouse)}>
+          {this.renderCentreImage(cardImage, imageAlt)}
+          <div className="mdl-card__supporting-text centre-info">
+            <div className="centre-info__container">
+              {this.renderCentreFlag(guestHouseLocation, countryFlagImage)}
+              {this.renderCentreInfo(guestHouseName, guestHouseLocation)}
+            </div>
           </div>
-        </div>
-        <div className="mdl-card__actions centre__description">
-          <div className="centre__horizontal-line" />
-          <div className="centre__facility">
-            {this.renderCentreFacilities(bedIcon, 'Bed', beds)}
-            {this.renderCentreFacilities(bathroomIcon, 'Bathroom', bathrooms)}
+          <div className="mdl-card__actions centre__description">
+            <div className="centre__horizontal-line" />
+            <div className="centre__facility">
+              {this.renderCentreFacilities(bedIcon, 'Bed', beds)}
+              {this.renderCentreFacilities(bathroomIcon, 'Bathroom', bathrooms)}
+            </div>
           </div>
-        </div>
+        </button>
       </div>
     );
   }
@@ -88,7 +98,9 @@ CentreCard.propTypes = {
   guestHouseName: PropTypes.string.isRequired,
   guestHouseLocation: PropTypes.string.isRequired,
   beds: PropTypes.number.isRequired,
-  bathrooms: PropTypes.number.isRequired
+  bathrooms: PropTypes.number.isRequired,
+  handleOnEdit: PropTypes.func.isRequired,
+  // guestHouseData: PropTypes.object.isRequired
 };
 
 export default CentreCard;

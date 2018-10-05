@@ -5,10 +5,15 @@ import {
   FETCH_ACCOMMODATION_CENTRES,
   FETCH_ACCOMMODATION_CENTRES_SUCCESS,
   FETCH_ACCOMMODATION_CENTRES_FAILURE,
+  EDIT_ACCOMMODATION_DATA,
+  EDIT_ACCOMMODATION_DATA_SUCCESS,
+  EDIT_ACCOMMODATION_DATA_FAILURE,
 } from '../constants/actionTypes';
 
 const initialState = {
   postAccommodationData: [],
+  editAccommodationData: {},
+  editingAccommodation: false,
   errors: []
 };
 
@@ -46,6 +51,14 @@ const accommodation = (state = initialState, action) => {
       guestHouses: null,
       accommodationError: action.error
     };
+  case EDIT_ACCOMMODATION_DATA:
+    return { ...state, editingAccommodation: true, guestHouseData: action.guestHouseData, guestHouseId: action.guestHouseId };
+  case EDIT_ACCOMMODATION_DATA_SUCCESS:
+    return { ...state, editingAccommodation: false,
+      guestHouseData: action.guestHouseData,
+      error: '', };
+  case EDIT_ACCOMMODATION_DATA_FAILURE:
+    return { ...state, editingAccommodation: false, error: action.error };
   default: return state;
   }
 };

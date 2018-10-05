@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
 import Script from 'react-load-script';
 import axios from 'axios';
-import AccommodationAPI from '../../../services/AccommodationAPI'
+import AccommodationAPI from '../../../services/AccommodationAPI';
 import { FormContext } from '../FormsAPI';
 import { errorMessage } from '../../../helper/toast';
 import SubmitArea from '../NewRequestForm/FormFieldsets/SubmitArea';
@@ -13,32 +13,59 @@ import addPhoto from '../../../images/add_photo_alternate_24px.svg';
 class NewAccommodation extends PureComponent {
   constructor(props) {
     super(props);
+    const { modalType, guestHouseToEdit } = this.props;
     const defaultRoom = this.defaultRoom(0);
+    const houseName = (modalType === 'edit accomodation'  && guestHouseToEdit) 
+      ? guestHouseToEdit.houseName : '';
+    const location = (modalType === 'edit accomodation'  && guestHouseToEdit) 
+      ? guestHouseToEdit.location : '';
+    const bathRooms = (modalType === 'edit accomodation'  && guestHouseToEdit) 
+      ? guestHouseToEdit.bathRooms : '';
+    const image = (modalType === 'edit accomodation'  && guestHouseToEdit) 
+      ? guestHouseToEdit.imageUrl : '';
+    const rooms = (modalType === 'edit accomodation'  && guestHouseToEdit) 
+      ? guestHouseToEdit.rooms : ''; 
     this.defaultState = {
       values: {
-        houseName: '',
-        location: '',
-        bathRooms: '',
-        image: '',
-        preview: '',
-        ...defaultRoom
+        houseName,
+        location,
+        bathRooms,
+        image,
+        preview: image,
+        ...defaultRoom,
+        ...this.populateRoomsDefaultStateValues(rooms)
       },
-      rooms: [{}],
+      rooms: modalType === 'edit accomodation' ? guestHouseToEdit.rooms : [{}],
       errors: {},
-      documentId: 1,
+      documentId: modalType === 'edit accomodation' ? guestHouseToEdit.rooms.length: 1,
       hasBlankFields: true
     };
     this.state = { ...this.defaultState };
   }
 
   componentDidMount(){
-    this.addRoomOnClick()
+    console.log('$$$$$$$$$$$$$$', this.props);
+    this.addRoomOnClick();
   }
 
   componentWillUnmount() {
     const { fetchAccommodation } = this.props;
     this.handleFormCancel();
     fetchAccommodation();
+  }
+
+  populateRoomsDefaultStateValues = (rooms) => {
+    const { modalType,  } = this.props;
+    if (modalType === 'edit accomodation') {
+      const stateValues = {};
+      rooms.map((room, i) => {
+        stateValues[`roomName-${i}`] = room.roomName;
+        stateValues[`roomType-${i}`] = room.roomType;
+        stateValues[`bedCount-${i}`] = room.bedCount;
+      });
+      // localStorage.removeItem('houseName');
+      return  stateValues;
+    }
   }
 
   defaultRoom = (index) => ({
@@ -198,15 +225,17 @@ class NewAccommodation extends PureComponent {
 
   handleInputSubmit = async event => {
     event.preventDefault();
-    const { createAccommodation } = this.props;
+    const { createAccommodation, editAccommodation, guestHouseToEdit, editAccommodationData, modalType } = this.props;
     const { values, rooms } = this.state;
     const fd = new FormData();
+    console.log(this.props)
     fd.append('file', values.image);
     fd.append('upload_preset', process.env.REACT_APP_PRESET_NAME);
     try {
       delete axios.defaults.headers.common['Authorization'];
       const imageData = await axios.post(process.env.REACT_APP_CLOUNDINARY_API, fd);
       const imageUrl = imageData.data.secure_url;
+      console.log(imageUrl)
       AccommodationAPI.setToken();
       const guestHouse = {
         houseName: values.houseName,
@@ -215,16 +244,25 @@ class NewAccommodation extends PureComponent {
         imageUrl: imageUrl,
         rooms: rooms
       };
-      if (this.validate()) {
+      if (this.validate() && modalType === 'edit accomodation') {
+        editAccommodation(guestHouseToEdit.id, guestHouse);
+      } else {
         createAccommodation(guestHouse);
       }
+      // if (this.validate()) {
+      //   if (modalType === 'edit accomodation')
+      //     return editAccommodation(editAccommodationData.id, guestHouse)
+      //   createAccommodation(guestHouse);
+      // }
     } catch (error) {
       errorMessage('Unable to upload Image')
     }
   };
- 
+
   render() {
     const { values, errors, hasBlankFields, documentId } = this.state;
+    const {modalType}= this.props;
+    console.log(this.props);
     return (
       <FormContext targetForm={this} errors={errors} validatorName="validate">
         <form onSubmit={this.handleInputSubmit} className="new-request">
@@ -255,6 +293,8 @@ class NewAccommodation extends PureComponent {
 NewAccommodation.propTypes = {
   createAccommodation: PropTypes.func.isRequired,
   fetchAccommodation: PropTypes.func.isRequired,
+  editAccommodationData: PropTypes.func.isRequired,
+  modalType: PropTypes.string.isRequired,
 };
 
 export default NewAccommodation;

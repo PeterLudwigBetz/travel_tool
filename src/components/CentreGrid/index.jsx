@@ -6,6 +6,9 @@ import CentreCard from './CentreCard';
 import './CentreGrid.scss';
 
 export class CentreGrid extends PureComponent {
+  state = {
+    // guestHouseToEdit: '',
+  };
   getCountryFlag(guestHouseLocation) {
     const country = guestHouseLocation.split(' ')[1];
     const countryCode = lookup.countries({name: country})[0].alpha2;
@@ -16,6 +19,20 @@ export class CentreGrid extends PureComponent {
     const bedCount = rooms.reduce((room, value) => room + value.bedCount, 0);
     return bedCount;
   }
+
+  // editComment = (guestHouses) => {
+  //   this.setState ({
+  //     // guestHouseToEdit: guestHouses.id,
+  //   });
+  // }
+
+  // handleClickRequest = guestHouseId => {
+  //   console.log('this has been clicked')
+  //   // const {
+  //   //   history
+  //   // } = this.props;
+  //   // history.push('/accommodation');
+  // };
 
   renderNoGuestHouse(guestHouses) {
     if(guestHouses && guestHouses.length === 0) {
@@ -36,11 +53,15 @@ export class CentreGrid extends PureComponent {
   }
 
   renderGuesthouses(guestHouses) {
+    const { handleOnEdit} = this.props;
     if (guestHouses && guestHouses.length > 0) {
       return (
-        <div className="mdl-grid accommodation-grid">
+        <div className="mdl-grid accommodation-grid"> 
           { guestHouses.map(guestHouse => (
             <CentreCard
+              guestHouseId={guestHouse.id}
+              handleOnEdit={handleOnEdit}
+              guestHouse={guestHouse}
               key={guestHouse.id}
               cardImage={guestHouse.imageUrl}
               imageAlt={`${guestHouse.houseName} image`}
@@ -49,7 +70,8 @@ export class CentreGrid extends PureComponent {
               guestHouseLocation={guestHouse.location}
               beds={this.getBedCount(guestHouse.rooms)}
               bathrooms={guestHouse.bathRooms}
-            />))
+            />
+          ))
           }
         </div>
       );
@@ -75,7 +97,8 @@ CentreGrid.propTypes = {
     houseName: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     rooms: PropTypes.array.isRequired,
-    bathRooms: PropTypes.number.isRequired
+    bathRooms: PropTypes.number.isRequired,
+    handleOnEdit: PropTypes.func.isRequired,
   })),
   error: PropTypes.string
 };

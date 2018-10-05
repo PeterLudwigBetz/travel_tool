@@ -5,6 +5,9 @@ import {
   CREATE_ACCOMMODATION_DATA,
   CREATE_ACCOMMODATION_DATA_SUCCESS,
   CREATE_ACCOMMODATION_DATA_FAILURE,
+  EDIT_ACCOMMODATION_DATA,
+  EDIT_ACCOMMODATION_DATA_SUCCESS, 
+  EDIT_ACCOMMODATION_DATA_FAILURE
 } from '../constants/actionTypes';
 
 export const fetchAccommodation = () => ({
@@ -33,5 +36,21 @@ export const createAccommodationSuccess = accommodationData => ({
 
 export const createAccommodationFailure = error => ({
   type: CREATE_ACCOMMODATION_DATA_FAILURE,
+  error,
+});
+
+export const editAccommodation  = (guestHouseId, guestHouseData) => ({
+  type: EDIT_ACCOMMODATION_DATA,
+  guestHouseId,
+  guestHouseData,
+});
+
+export const editAccommodationSuccess = accommodationData => ({
+  type: EDIT_ACCOMMODATION_DATA_SUCCESS,
+  accommodationData,
+});
+
+export const editAccommodationFailure = error => ({
+  type: EDIT_ACCOMMODATION_DATA_FAILURE,
   error,
 });

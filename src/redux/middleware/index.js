@@ -31,7 +31,7 @@ import {
   markSingleNotificationAsReadSaga
 } from './notificationsSaga';
 
-import { watchCreateAccommodationSagaAsync, watchFetchAccommodation } from './accommodationSaga';
+import { watchCreateAccommodationSagaAsync, watchFetchAccommodation, watchEditAccommodation } from './accommodationSaga';
 import { watchUpdateUserProfileAsync } from './UserProfileSaga';
 
 function* rootSaga() {
@@ -59,6 +59,7 @@ function* rootSaga() {
     watchUpdateAllNotificationStatus(),
     watchCreateAccommodationSagaAsync(),
     markSingleNotificationAsReadSaga(),
+    watchEditAccommodation()
   ]);
 }
 
