@@ -90,7 +90,7 @@ function* rootSaga() {
     watchFetchOccupations(),
     watchFetchCenters(),
     watchUpdateUserCenterAsync(),
-    watchFetchAvailableRooms(),
+    watchFetchAvailableRooms()
 
   ]);
 }

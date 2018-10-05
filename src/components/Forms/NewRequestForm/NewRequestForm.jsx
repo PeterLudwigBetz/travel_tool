@@ -435,7 +435,6 @@ NewRequestForm.propTypes = {
   requestOnEdit: PropTypes.object.isRequired,
   fetchUserRequests: PropTypes.func.isRequired,
   fetchAvailableRooms: PropTypes.func.isRequired,
-  availableRooms: PropTypes.func.isRequired,
   occupations: PropTypes.array.isRequired,
 };
 
