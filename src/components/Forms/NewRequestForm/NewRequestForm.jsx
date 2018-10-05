@@ -279,7 +279,6 @@ class NewRequestForm extends PureComponent {
     const {
       handleCreateRequest,
       handleEditRequest,
-      getUserData,
       modalType,
       requestOnEdit,
       updateUserProfile,
@@ -313,7 +312,7 @@ class NewRequestForm extends PureComponent {
         const userId = user.UserInfo.id;
         // this adds user profile to the database *do not remove
         updateUserProfile(values, userId);
-        getUserData(userId);
+        userData(userId);
       }
     }
   };
@@ -492,7 +491,6 @@ NewRequestForm.propTypes = {
   fetchAvailableRooms: PropTypes.func.isRequired,
   availableRooms: PropTypes.func.isRequired,
   occupations: PropTypes.array.isRequired,
-  getUserData: PropTypes.func.isRequired
 };
 
 NewRequestForm.defaultProps = {
