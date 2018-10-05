@@ -125,7 +125,7 @@ export class Requests extends Base {
     );
   }
   renderNewRequestForm() {
-    const {updateUserProfile,userData,user,createNewRequest,loading,errors,closeModal,shouldOpen,
+    const {updateUserProfile,userData, getUserData, user,createNewRequest,loading,errors,closeModal,shouldOpen,
       modalType,managers,requestOnEdit,editRequest,fetchUserRequests,occupations, fetchAvailableRooms,  availableRooms} = this.props;
     const { url } = this.state;
     return (
@@ -151,7 +151,7 @@ export class Requests extends Base {
           fetchUserRequests={() => fetchUserRequests(url)}
           fetchAvailableRooms={fetchAvailableRooms}
           occupations={occupations}
-          getUserData={userData} />
+          getUserData={getUserData} />
       </Modal>
     );
   }
