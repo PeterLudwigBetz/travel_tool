@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import { Requests, mapStateToProps } from '..';
+import beds from '../../AvailableRooms/__mocks__/mockData/availableRooms';
 
 const props = {
   requests: [
@@ -17,7 +18,8 @@ const props = {
         {
           departureDate: '2018-09-20',
           origin: 'Lagos',
-          destination: 'Angola'
+          destination: 'Angola',
+          bedId: beds[0].id
         }
       ],
       department: 'TDD',
@@ -33,7 +35,8 @@ const props = {
         {
           departureDate: '2018-09-20',
           origin: 'Lagos',
-          destination: 'Angola'
+          destination: 'Angola',
+          bedId: beds[0].id
         }
       ],
       department: 'TDD',
@@ -49,7 +52,8 @@ const props = {
         {
           departureDate: '2018-09-20',
           origin: 'Lagos',
-          destination: 'Angola'
+          destination: 'Angola',
+          bedId: beds[0].id
         }
       ],
       department: 'TDD',
@@ -77,9 +81,13 @@ const props = {
         returnDate: '2018-09-30',
         createdAt: '2018-09-27T18:49:03.626Z',
         updatedAt: '2018-09-27T18:49:43.803Z',
-        requestId: 'NfR-9KoCP'
+        requestId: 'NfR-9KoCP',
+        bedId: beds[0].id
       }
     ]
+  },
+  availableRooms: {
+    beds
   },
   userData: {
     result: {
@@ -107,6 +115,7 @@ const props = {
   fetchUserRequests: sinon.spy(() => Promise.resolve()),
   fetchRoleUsers: sinon.spy(() => Promise.resolve()),
   updateUserProfile: sinon.spy(() => Promise.resolve()),
+  fetchAvailableRooms: sinon.spy(() => Promise.resolve()),
   fetchUserRequestsError: null,
   openRequestsCount: 1,
   pastRequestsCount: 1,
@@ -179,7 +188,7 @@ describe('<Requests>', () => {
 
   it('calls the componentDidMount method', () => {
     const spy = sinon.spy(Requests.prototype, 'componentDidMount');
-    const { fetchUserRequests, fetchRoleUsers, requestId, openModal } = props;
+    const { fetchUserRequests, fetchRoleUsers, requestId, openModal, fetchAvailableRooms } = props;
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
@@ -193,6 +202,7 @@ describe('<Requests>', () => {
     expect(fetchRoleUsers.called).toEqual(true);
     expect(openModal.called).toEqual(true);
     expect(fetchRoleUsers.calledWith(53019)).toEqual(true);
+    expect(fetchAvailableRooms.called).toEqual(true);
     wrapper.unmount();
   });
 
@@ -355,13 +365,13 @@ describe('<Requests>', () => {
       }
     };
     const user = {
-      userData: {}
+      getUserData: {}
     };
     const props = mapStateToProps({ requests, modal, user });
     expect(props).toEqual({
       ...requests,
       ...modal.modal,
-      getUserData: user.getUserData
+      userData: user.getUserData
     });
   });
 });
