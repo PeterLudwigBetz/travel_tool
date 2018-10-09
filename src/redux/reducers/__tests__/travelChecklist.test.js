@@ -58,7 +58,8 @@ describe('Travel checklists reducer', () => {
 
         done();
       });
-    describe('Update travel checklists reducer', () => {
+
+    describe('Update travel checklist item reducer', () => {
       it('test an action', (done) => {
         done();
       });
