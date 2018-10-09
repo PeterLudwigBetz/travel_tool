@@ -71,6 +71,9 @@ const props = {
   history: {
     push: jest.fn()
   },
+  editRequest: jest.fn(),
+  travelChecklists: [],
+  showTravelChecklist: jest.fn()
 };
 
 const wrapper = shallow(<Table {...props} />);
@@ -122,6 +125,6 @@ describe('<Requests />', () => {
       .find('div')
       .at(0);
     requestId.simulate('click');
-    expect(wrapper.find('Modal').length).toEqual(1);
+    expect(wrapper.find('Modal').length).toEqual(2);
   });
 });
