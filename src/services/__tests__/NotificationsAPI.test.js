@@ -42,5 +42,5 @@ describe('NotificationsAPI', () => {
     expect(response.data)
       .toEqual({ message: 'notification update was successful' });
   });
-})
+});
 
