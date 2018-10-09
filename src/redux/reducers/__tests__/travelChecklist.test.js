@@ -7,6 +7,7 @@ import {
 import travelChecklistMockData from '../../__mocks__/travelChecklistsMockData';
 
 
+
 describe('Travel checklists reducer', () => {
   describe('Fetch travel checklists reducer', () => {
     it(`should update 'isLoading' state to true
