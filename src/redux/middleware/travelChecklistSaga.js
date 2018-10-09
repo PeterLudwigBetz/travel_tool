@@ -82,3 +82,4 @@ export function* updateChecklistAsync(action) {
 export function* watchUpdateChecklist() {
   yield takeLatest(UPDATE_TRAVEL_CHECKLIST, updateChecklistAsync);
 }
+

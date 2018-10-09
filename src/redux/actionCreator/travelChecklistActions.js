@@ -70,3 +70,4 @@ export const fetchTravelChecklistFailure = (error) => ({
   type: FETCH_TRAVEL_CHECKLIST_FAILURE,
   error
 });
+
