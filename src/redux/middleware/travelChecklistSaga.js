@@ -66,6 +66,7 @@ export function* watchFetchAllChecklists() {
   yield takeLatest(FETCH_TRAVEL_CHECKLIST, fetchAllChecklistsSync);
 }
 
+
 export function* updateChecklistAsync(action) {
   try {
     const { checklistItemId, checklistItemData } = action;
