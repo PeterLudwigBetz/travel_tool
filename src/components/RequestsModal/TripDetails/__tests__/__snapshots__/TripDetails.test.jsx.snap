@@ -85,6 +85,7 @@ exports[`<TripDetails /> should render correctly 1`] = `
         className="modal__trip-detail-text"
       >
         Guest House C, Ndovu, Bed 1
+        09 Oct 2018
       </div>
     </div>
   </div>

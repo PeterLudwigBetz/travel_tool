@@ -78,5 +78,10 @@ describe('Travel Checklist Saga test', () => {
         })
         .run();
     });
+    describe('Test for checklist action', () => {
+      it('test an action', (done) => {
+        done();
+      });
+    });
   });
 });
