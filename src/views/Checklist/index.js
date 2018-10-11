@@ -33,7 +33,7 @@ export class Checklist extends Component {
     // only admins should be able to visit this page?
   }
 
-  setItemToDelete(checklistItemId) {
+  setItemToDelete = (checklistItemId) => {
     const { openModal } = this.props;
     this.setState({ checklistItemId });
     openModal(true, 'delete checklist item');
@@ -87,7 +87,7 @@ export class Checklist extends Component {
         closeModal={closeModal}
         width="480px"
         visibility={
-          shouldOpen && (modalType === 'edit cheklistItem' || 'add cheklistItem') ? 'visible' : 'invisible'
+          shouldOpen && (modalType === 'edit cheklistItem' || modalType === 'add cheklistItem') ? 'visible' : 'invisible'
         }
         title={`${modalType === 'edit cheklistItem' ? 'Edit' : 'Add'} Travel Checklist Item`}
       >
@@ -111,7 +111,7 @@ export class Checklist extends Component {
         closeModal={closeModal}
         customModalStyles="delete-checklist-item"
         visibility={
-          shouldOpen && modalType === 'delete checklist item' ? 'visible' : 'invisible'
+          shouldOpen && modalType.match('delete checklist item') ? 'visible' : 'invisible'
         }
         title="Delete Travel Checklist Item"
       >
@@ -190,8 +190,14 @@ export class Checklist extends Component {
                             Edit
                         </button>
                       </td>
-                      <td className="mdl-data-table__cell--non-numeric" onClick={() => this.setItemToDelete(checklistItem.id)}> {/* eslint-disable-line */}
-                        Delete
+                      <td className="mdl-data-table__cell--non-numeric">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            this.setItemToDelete(checklistItem.id);
+                          }}>
+                            Delete
+                        </button>
                       </td>
                     </tr>
                   );
