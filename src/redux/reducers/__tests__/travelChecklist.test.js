@@ -132,6 +132,8 @@ describe('Travel checklists reducer', () => {
 
         expect(newState).toEqual(expectedState);
       });
+    });
+  });
   describe('Delete travelChecklist reducer', () => {
     let action, newState, expectedState;
 
@@ -149,20 +151,14 @@ describe('Travel checklists reducer', () => {
 
       newState = travelChecklistReducer(initialState, action);
       expectedState = {
-        checklistItems: [
-          {
-            id: 'wsis45cUe',
-            label: 'application guide'
-          },
-          {
-            id: 'zcis7csUe',
-            label: 'yellow card'
-          }
-        ],
+        checklistItems: [],
+        creatingChecklist: false,
         deletingChecklist: true,
         error: '',
+        fetchingChecklists: false,
+        isLoading: false,
         updatingChecklist: false
-      };
+      },
 
       expect(newState).toEqual(expectedState);
     });
@@ -176,16 +172,14 @@ describe('Travel checklists reducer', () => {
       newState = travelChecklistReducer(initialState, action);
 
       expectedState = {
-        checklistItems: [
-          {
-            id: 'zcis7csUe',
-            'label': 'yellow card'
-          }
-        ],
+        checklistItems: [],
+        creatingChecklist: false,
         deletingChecklist: false,
         error: '',
-        'updatingChecklist': false
-      };
+        fetchingChecklists: false,
+        isLoading: false,
+        updatingChecklist: false
+      },
       expect(newState).toEqual(expectedState);
     });
 
@@ -205,4 +199,3 @@ describe('Travel checklists reducer', () => {
     });
   });
 });
-
