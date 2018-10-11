@@ -5,7 +5,8 @@ import apiErrorHandler from '../../services/apiErrorHandler';
 import {
   FETCH_TRAVEL_CHECKLIST,
   UPDATE_TRAVEL_CHECKLIST,
-  CREATE_TRAVEL_CHECKLIST
+  CREATE_TRAVEL_CHECKLIST,
+  DELETE_TRAVEL_CHECKLIST,
 } from '../constants/actionTypes';
 import {
   fetchTravelChecklistFailure,
@@ -14,6 +15,8 @@ import {
   updateChecklistFailure,
   createChecklistFailure,
   createChecklistSuccess,
+  deleteChecklistSuccess,
+  deleteChecklistFailure,
 } from '../actionCreator/travelChecklistActions';
 import { closeModal } from '../actionCreator/modalActions';
 
@@ -83,5 +86,25 @@ export function* updateChecklistAsync(action) {
 
 export function* watchUpdateChecklist() {
   yield takeLatest(UPDATE_TRAVEL_CHECKLIST, updateChecklistAsync);
+}
+
+export function* deleteChecklistAsync(action) {
+  try {
+    const { checklistItemId, deleteReason } = action;
+    // delete deleteReason.checklistItemId;
+    const response = yield call(TravelChecklistAPI.deleteChecklistItem, {checklistItemId, deleteReason});
+    yield put(deleteChecklistSuccess(checklistItemId));
+    toast.success(response.data.message);
+    yield put(closeModal());
+  }
+  catch(error) {
+    const errorMessage = apiErrorHandler(error);
+    yield put(deleteChecklistFailure(errorMessage));
+    toast.error(errorMessage);
+  }
+}
+
+export function* watchDeleteChecklist() {
+  yield takeLatest(DELETE_TRAVEL_CHECKLIST, deleteChecklistAsync);
 }
 
