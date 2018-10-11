@@ -91,7 +91,6 @@ export function* watchUpdateChecklist() {
 export function* deleteChecklistAsync(action) {
   try {
     const { checklistItemId, deleteReason } = action;
-    // delete deleteReason.checklistItemId;
     const response = yield call(TravelChecklistAPI.deleteChecklistItem, {checklistItemId, deleteReason});
     yield put(deleteChecklistSuccess(checklistItemId));
     toast.success(response.data.message);

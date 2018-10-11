@@ -49,7 +49,7 @@ describe('TravelChecklistAPI', () => {
       .toEqual({ travelChecklists: [] });
   });
 
-  it('should send a put request to delete a travelchecklist item with reason', async () => {
+  it('should send a delete request to delete a travelchecklist item with reason', async () => {
     const checklistItemId = '3';
     const data = {
       deleteReason: 'No longer applicable'
