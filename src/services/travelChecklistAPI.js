@@ -19,6 +19,11 @@ class TravelChecklistAPI {
   static updateChecklistItem(checklistItemData, checklistItemId) {
     return axios.put(`${baseUrl}/checklist/${checklistItemId}`, checklistItemData);
   }
+
+  static deleteChecklistItem({checklistItemId, deleteReason}) {
+    return axios.patch(`${baseUrl}/checklists/${checklistItemId}`, deleteReason);
+  }
+
 }
 
 export default TravelChecklistAPI;

@@ -7,7 +7,10 @@ import {
 import {
   fetchTravelChecklist,
   fetchTravelChecklistFailure,
-  fetchTravelChecklistSuccess
+  fetchTravelChecklistSuccess,
+  deleteTravelChecklist,
+  deleteChecklistFailure,
+  deleteChecklistSuccess
 } from '../travelChecklistActions';
 import travelChecklistMockData from '../../__mocks__/travelChecklistsMockData';
 
@@ -55,5 +58,35 @@ describe('Travel checklists actions test', () => {
 
         done();
       });
+  });
+
+  describe('Delete Travel Checklist Actions', () => {
+    it('should return action of type DELETE_TRAVEL_CHECKLIST', () => {
+      const expectedAction = {
+        type: 'DELETE_TRAVEL_CHECKLIST',
+        checklistItemId: 'zdy6fs77sq',
+        deleteReason: 'No longer applicable',
+      };
+      const newAction = deleteTravelChecklist('zdy6fs77sq', 'No longer applicable');
+      expect(newAction).toEqual(expectedAction);
+    });
+
+    it('should return action of type DELETE_TRAVEL_CHECKLIST_SUCCESS', () => {
+      const expectedAction = {
+        type: 'DELETE_TRAVEL_CHECKLIST_SUCCESS',
+        checklistItemId: 'zdy6fs77sq',
+      };
+      const newAction = deleteChecklistSuccess('zdy6fs77sq');
+      expect(newAction).toEqual(expectedAction);
+    });
+
+    it('should return action of type DELETE_TRAVEL_CHECKLIST_FAILURE', () => {
+      const expectedAction = {
+        type: 'DELETE_TRAVEL_CHECKLIST_FAILURE',
+        error: 'Checklist item not found'
+      };
+      const newAction = deleteChecklistFailure('Checklist item not found');
+      expect(newAction).toEqual(expectedAction);
+    });
   });
 });
