@@ -47,11 +47,11 @@ import {
   watchFetchTrips,
   watchUpdateTrip
 } from './tripsSaga';
-
 import {
   watchCreateChecklist,
   watchFetchAllChecklists,
-  watchUpdateChecklist
+  watchUpdateChecklist,
+  watchDeleteChecklist
 } from './travelChecklistSaga';
 
 function* rootSaga() {
@@ -90,7 +90,8 @@ function* rootSaga() {
     watchFetchOccupations(),
     watchFetchAllChecklists(),
     watchUpdateChecklist(),
-    watchCreateChecklist()
+    watchCreateChecklist(),
+    watchDeleteChecklist()
   ]);
 }
 

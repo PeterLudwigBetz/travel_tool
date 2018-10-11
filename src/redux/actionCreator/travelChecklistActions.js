@@ -8,6 +8,9 @@ import {
   UPDATE_TRAVEL_CHECKLIST,
   UPDATE_TRAVEL_CHECKLIST_SUCCESS,
   UPDATE_TRAVEL_CHECKLIST_FAILURE,
+  DELETE_TRAVEL_CHECKLIST,
+  DELETE_TRAVEL_CHECKLIST_SUCCESS,
+  DELETE_TRAVEL_CHECKLIST_FAILURE,
 } from '../constants/actionTypes';
 
 export const createTravelChecklist = (checklistItemData) => ({
@@ -66,6 +69,23 @@ export const fetchTravelChecklistSuccess = (response) => ({
   type: FETCH_TRAVEL_CHECKLIST_SUCCESS,
   travelChecklists: response.travelChecklists
 });
+
+export const deleteTravelChecklist = (checklistItemId, deleteReason) => ({
+  type: DELETE_TRAVEL_CHECKLIST,
+  checklistItemId,
+  deleteReason
+});
+
+export const deleteChecklistSuccess = (checklistItemId) => ({
+  type: DELETE_TRAVEL_CHECKLIST_SUCCESS,
+  checklistItemId,
+});
+
+export const deleteChecklistFailure = (error) => ({
+  type: DELETE_TRAVEL_CHECKLIST_FAILURE,
+  error,
+});
+
 
 export const fetchTravelChecklistFailure = (error) => ({
   type: FETCH_TRAVEL_CHECKLIST_FAILURE,

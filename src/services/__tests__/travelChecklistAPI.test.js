@@ -47,7 +47,23 @@ describe('TravelChecklistAPI', () => {
     expect(response.status).toEqual(200);
     expect(response.data)
       .toEqual({ travelChecklists: [] });
-    // done();
+  });
+
+  it('should send a put request to delete a travelchecklist item with reason', async () => {
+    const checklistItemId = '3';
+    const data = {
+      deleteReason: 'No longer applicable'
+    };
+
+    moxios.stubRequest(`${baseUrl}/checklists/${checklistItemId}`, {
+      status: 200,
+      response: 'Checklist item deleted successfully'
+    });
+
+    const response = await TravelChecklistAPI.deleteChecklistItem({checklistItemId, data});
+
+    expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/checklists/${checklistItemId}`);
+    expect(response.data).toEqual('Checklist item deleted successfully');
   });
 
   it('should send a PUT request to update checklist item', async () =>{

@@ -4,15 +4,25 @@ import { connect } from 'react-redux';
 import Modal from '../../components/modal/Modal';
 import WithLoadingRoleTable from '../../components/RoleTable';
 import ChecklistPanelHeader from '../../components/ChecklistPanelHeader';
-import { NewChecklistForm } from '../../components/Forms';
+import {
+  NewChecklistForm,
+} from '../../components/Forms';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
-import { createTravelChecklist, fetchTravelChecklist, updateTravelChecklist } from '../../redux/actionCreator/travelChecklistActions';
+import {
+  createTravelChecklist,
+  fetchTravelChecklist,
+  updateTravelChecklist,
+  deleteTravelChecklist
+} from '../../redux/actionCreator/travelChecklistActions';
 import './ChecklistTable.scss';
+import error from '../../images/error.svg';
 
 
 export class Checklist extends Component {
   state = {
     itemToEdit: null,
+    deleteReason: '',
+    checklistItemId: ''
   }
 
   componentDidMount() {
@@ -21,6 +31,12 @@ export class Checklist extends Component {
     fetchTravelChecklist(null, adminLocation);
     // fetch checklists for admins location
     // only admins should be able to visit this page?
+  }
+
+  setItemToDelete(checklistItemId) {
+    const { openModal } = this.props;
+    this.setState({ checklistItemId });
+    openModal(true, 'delete checklist item');
   }
 
   openAddModal = () => {
@@ -41,6 +57,17 @@ export class Checklist extends Component {
   handleEditItem = (checklistItem) => {
     this.setState(() => ({itemToEdit: checklistItem}));
     this.openEditModal();
+  }
+
+  handleInputChange = (event) => {
+    this.setState({ deleteReason: event.target.value });
+  }
+
+  deleteChecklistItem = (event) => {
+    event.preventDefault();
+    const { deleteTravelChecklist } = this.props;
+    const { checklistItemId } = this.state;
+    deleteTravelChecklist(checklistItemId, this.state);
   }
 
   renderChecklistPanelHeader() {
@@ -77,6 +104,52 @@ export class Checklist extends Component {
     );
   }
 
+  renderDeleteChecklistForm() {
+    const { closeModal, shouldOpen, modalType } = this.props;
+    return (
+      <Modal
+        closeModal={closeModal}
+        customModalStyles="delete-checklist-item"
+        visibility={
+          shouldOpen && modalType === 'delete checklist item' ? 'visible' : 'invisible'
+        }
+        title="Delete Travel Checklist Item"
+      >
+        <p className="delete-checklist-item__reason">Reason</p>
+        <textarea
+          type="text"
+          className="delete-checklist-item__input"
+          onChange={this.handleInputChange}
+        />
+        <span className="delete-checklist-item__disclaimer">
+          <img
+            src={error}
+            alt="profile"
+            className="delete-checklist-item__disclaimer--error"
+          />
+          This action cannot be undone
+        </span>
+        <div className="delete-checklist-item__hr" />
+        <div className="delete-checklist-item__footer">
+          <button
+            type="button"
+            className="delete-checklist-item__footer--cancel"
+            onClick={() => closeModal()}
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            className="delete-checklist-item__footer--delete"
+            onClick={this.deleteChecklistItem}
+          >
+            Delete
+          </button>
+        </div>
+      </Modal>
+    );
+  }
+
   renderChecklistPage() {
     return (
       <Fragment>
@@ -87,7 +160,7 @@ export class Checklist extends Component {
   }
 
   renderChecklistItems() {
-    const { checklistItems } = this.props;
+    const { checklistItems, openModal } = this.props;
     const filtered = checklistItems.filter(checklist => {
       // TODO: get the destination from the store
       // to get it from the store, hit the api to get users
@@ -117,7 +190,7 @@ export class Checklist extends Component {
                             Edit
                         </button>
                       </td>
-                      <td className="mdl-data-table__cell--non-numeric">
+                      <td className="mdl-data-table__cell--non-numeric" onClick={() => this.setItemToDelete(checklistItem.id)}> {/* eslint-disable-line */}
                         Delete
                       </td>
                     </tr>
@@ -134,6 +207,7 @@ export class Checklist extends Component {
     return (
       <Fragment>
         {this.renderChecklistForm()}
+        {this.renderDeleteChecklistForm()}
         {this.renderChecklistPage()}
       </Fragment>
     );
@@ -149,6 +223,7 @@ const mapDispatchToProps = {
   openModal,
   closeModal,
   createTravelChecklist,
+  deleteTravelChecklist,
   fetchTravelChecklist
 };
 
@@ -161,6 +236,7 @@ Checklist.propTypes = {
   openModal: PropTypes.func,
   closeModal: PropTypes.func,
   createTravelChecklist: PropTypes.func,
+  deleteTravelChecklist: PropTypes.func,
   fetchTravelChecklist: PropTypes.func,
   shouldOpen: PropTypes.bool.isRequired,
   modalType: PropTypes.string,
@@ -171,6 +247,7 @@ Checklist.defaultProps = {
   openModal: () => {},
   closeModal: () => {},
   createTravelChecklist: () => {},
+  deleteTravelChecklist: () => {},
   fetchTravelChecklist: () => {},
   modalType: ''
 };

@@ -77,5 +77,14 @@ Array [
         </div>
     </div>
 </div>,
+  <div>
+    <button
+        onClick={[Function]}
+        type="button"
+    >
+        Hello worlddd
+    </button>
+</div>,
+  "",
 ]
 `;
