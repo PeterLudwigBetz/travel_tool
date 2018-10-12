@@ -1,0 +1,39 @@
+
+.maintainance-form{
+  padding-left: 30px;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  height: 410px;
+  width: 600px;
+  border-radius: 2px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.15);
+}
+
+
+form.maintainance-form{
+  fieldset {
+    .input-group {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    input{
+      height: 40px;
+      width: 300px;
+      border-radius: 2px;
+      background-color: #F8F8F8;
+    }
+    .input{
+      height: 40px;
+      width: 300px;
+      border-radius: 2px;
+      background-color: #F8F8F8;
+    }
+    label{
+      color: #4F4F4F;
+      font-family: "DIN Pro";
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+}

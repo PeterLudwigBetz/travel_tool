@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
+import MaintainceForm from '../../Forms/MaintainanceForm';
 import tick from '../../../images/Tick/tick.svg';
+
 
 
 class RoomLabel extends PureComponent {
@@ -16,22 +18,28 @@ class RoomLabel extends PureComponent {
 
 
   showId = (id, status) =>{
-    const {updateRoomState, timelineDateRange, guestHouseId} = this.props;
-    const [startDateString, endDateString] = timelineDateRange;
-    let data;
-    if (status == true){
-      data = { fault: false };
-      updateRoomState(data, id, startDateString, endDateString, guestHouseId);
-    }
-    else{
-      data = { fault: true };
-      updateRoomState(data, id, startDateString, endDateString, guestHouseId);
-    }
+    const {updateRoomState, timelineDateRange, guestHouseId, handleMaintainence} = this.props;
+    // const [startDateString, endDateString] = timelineDateRange;
+    // let data;
+    // if (status == true){
+    //   data = { fault: false };
+    //   updateRoomState(data, id, startDateString, endDateString, guestHouseId);
+    // }
+    // else{
+    //   data = { fault: true };
+    //   updateRoomState(data, id, startDateString, endDateString, guestHouseId);
+    // }
+  }
+
+  renderMainteinanceForm(){
+    return(
+      <MaintainceForm />
+    );
   }
 
   render() {
     const {showMarkUnavailable} = this.state;
-    const {name, id, status} = this.props;
+    const {name, id, status, handleMaintainence} = this.props;
     const visibility = showMarkUnavailable ? 'is-visible' : 'is-hidden';
     return (
       <div className="room-name item-row">

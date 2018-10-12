@@ -193,11 +193,12 @@ class Timeline extends PureComponent {
       timelineViewType,
       periodOffset
     } = this.state;
-    const {rooms, updateRoomState, guestHouseId} = this.props;
+    const {rooms, updateRoomState, guestHouseId, handleMaintainence} = this.props;
     const { timelineDayWidth, noOfSegments } = this.getTimelineViewTypeProperties();
     return (
       <div className="timeline">
         <TimelineVerticalAxis
+          handleMaintainence={handleMaintainence}
           rooms={rooms}
           updateRoomState={updateRoomState}
           timelineDateRange={this.getTimelineRange()}

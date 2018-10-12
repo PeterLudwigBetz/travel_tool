@@ -43,7 +43,7 @@ import {
 } from './accommodationSaga';
 
 import { watchUpdateRoomsAsync } from './roomUpdateSaga';
-
+import {watchAddMainteinanceAsync} from './MaintenenceSaga';
 
 import {
   watchFetchTrips,
@@ -79,7 +79,8 @@ function* rootSaga() {
     watchFetchTimelneData(),
     markSingleNotificationAsReadSaga(),
     watchFetchTrips(),
-    watchUpdateTrip()
+    watchUpdateTrip(),
+    watchAddMainteinanceAsync()
 
   ]);
 }

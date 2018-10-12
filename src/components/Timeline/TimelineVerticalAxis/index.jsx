@@ -7,7 +7,7 @@ import './TimelineVerticalAxis.scss';
 
 class TimelineVerticalAxis extends PureComponent {
   render() {
-    const {rooms, updateRoomState, timelineDateRange, guestHouseId} = this.props;
+    const {rooms, updateRoomState, timelineDateRange, guestHouseId, handleMaintainence} = this.props;
     const roomAxisLabels = rooms.map(room => (
       <div key={room.id} className="room-axis-wrapper">
         <RoomLabel
@@ -17,6 +17,7 @@ class TimelineVerticalAxis extends PureComponent {
           updateRoomState={updateRoomState}
           timelineDateRange={timelineDateRange}
           guestHouseId={guestHouseId}
+          handleMaintainence={handleMaintainence}
         />
         {room.beds.map(bed => (
           <div key={bed.id} className="bed-name item-row">

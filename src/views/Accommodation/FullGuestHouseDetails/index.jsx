@@ -11,6 +11,8 @@ import {
 import greyBedIcon from '../../../images/icons/accomodation_inactive.svg';
 import Modal from '../../../components/modal/Modal';
 import { NewAccommodationForm } from '../../../components/Forms';
+import  MaintainceForm  from '../../../components/Forms/MaintainanceForm';
+import addMaintenenceRecord from '../../../redux/actionCreator/maintenanceAction';
 import {
   openModal,
   closeModal
@@ -23,6 +25,11 @@ export class GuestHouseDetails extends PureComponent {
     let { openModal } = this.props;
     openModal(true, 'edit accomodation');
   };
+
+  handleMaintainence=()=>{
+    let { openModal } = this.props;
+    openModal(true);
+  }
 
   renderGuestHouseDetailsNameBar = () => {
     const { match, history, guestHouse, userId } = this.props;
@@ -119,7 +126,7 @@ export class GuestHouseDetails extends PureComponent {
   }
 
   render() {
-    const { guestHouse, updateRoomState } = this.props;
+    const { guestHouse, updateRoomState, addMaintenenceRecord } = this.props;
     return (
       <div className="guesthouse-details-wrapper">
         {this.renderEditAccommodationForm()}
@@ -142,11 +149,13 @@ export class GuestHouseDetails extends PureComponent {
           </div>
         </div>
         <Timeline
+          handleMaintainence={this.handleMaintainence}
           rooms={guestHouse.rooms}
           guestHouseId={guestHouse.id}
           fetchTimelineRoomsData={this.fetchTimelineRoomsData}
           updateRoomState={updateRoomState}
         />
+        <MaintainceForm addMaintenenceRecord={addMaintenenceRecord} />
       </div>
     );
   }
@@ -186,7 +195,8 @@ const actionCreators = {
   openModal,
   closeModal,
   editAccommodation,
-  fetchAccommodation
+  fetchAccommodation,
+  addMaintenenceRecord
 };
 
 export default connect(
