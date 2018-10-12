@@ -30,16 +30,17 @@ class MaintainceForm extends PureComponent {
     this.state = { ...this.defaultState };
   }
 
-  submitProfileForm = event => {
+  submitMaintainanceData = event => {
     event.preventDefault();
     const { values } = this.state;
-    const {addMaintenenceRecord} = this.props;
+    const {addMaintenenceRecord, id, closeModal, showId, status} = this.props;
     if (this.validate) {
       let data = { ...values };
       data.start = data.maintainceStart;
       data.end = data.maintainceEnd;
-      console.log(data);
-      addMaintenenceRecord(data, 'room-id-1');
+      addMaintenenceRecord(data, id);
+      showId(id, status);
+      closeModal(true, 'new model');
     }
   };
 
@@ -51,21 +52,15 @@ class MaintainceForm extends PureComponent {
     let { values, errors } = this.state;
     [errors, values] = [{ ...errors }, { ...values }];
     let hasBlankFields = false;
-
     !values[field]
       ? (errors[field] = 'This field is required')
       : (errors[field] = '');
-
-    // check if the form has any other blank fields
-    // this will qualify the form as fully filled or not
     hasBlankFields = Object.keys(values).some(key => !values[key]);
-    // update the form's validity and return a boolean to use on Submit
     this.setState(prevState => {
       return { ...prevState, errors, hasBlankFields };
     });
     return !hasBlankFields;
   };
-
 
   render() {
     const { values, errors, hasBlankFields } = this.state;
@@ -73,24 +68,27 @@ class MaintainceForm extends PureComponent {
 
     return (
       <FormContext targetForm={this} validatorName="validate" errors={errors}>
-        <form onSubmit={this.submitProfileForm} className="maintainance-form">
+        <form onSubmit={this.submitMaintainanceData} className="maintainance-form">
           <MaintainanceFieldSets values={values} hasBlankFields={hasBlankFields} />
-          {hasBlankFields ? (
-            <div>
-              <button type="submit" disabled={hasBlankFields} className="bg-btn bg-btn--inactive">
-                Save Changes
-              </button>
-            </div>) :
-            (
-              <div>
-                <button type="submit" className="bg-btn bg-btn--active">
+          <div className="maintainence-line" />
+          <div className="maintainence-submit-area">
+            {hasBlankFields ? (
+              <div className="maintainence-submit-area_false">
+                <button type="submit" disabled={hasBlankFields} className="bg-btn bg-btn--inactive">
                 Save Changes
                 </button>
-                <button type="button" className="bg-btn bg-btn--inactive" onClick={this.handleClearForm} id="btn-cancel">
+              </div>) :
+              (
+                <div className="maintainence-submit-area">
+                  <button type="button" className="bg-btn bg-btn--inactive btn-cancel" onClick={this.handleClearForm} id="btn-cancel">
                 Cancel
-                </button>
-              </div>
-            )}
+                  </button>
+                  <button type="submit" className="bg-btn bg-btn--active">
+                Save Changes
+                  </button>
+                </div>
+              )}
+          </div>
 
         </form>
       </FormContext>
@@ -100,6 +98,11 @@ class MaintainceForm extends PureComponent {
 
 MaintainceForm.propTypes = {
   managers: PropTypes.array,
+  addMaintenenceRecord: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  showId: PropTypes.func.isRequired,
+  status: PropTypes.string.isRequired,
 };
 MaintainceForm.defaultProps = {
   managers: [],

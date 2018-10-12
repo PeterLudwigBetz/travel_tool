@@ -63,6 +63,16 @@ class Timeline extends PureComponent {
     }, this.fetchTimelineData);
   }
 
+  handleGoToToday = () => {
+    this.setState(prevState => {
+      const { timelineViewType } = prevState;
+      return {
+        ...prevState,
+        timelineStartDate: moment().startOf(timelineViewType)
+      };
+    }, this.fetchTimelineData);
+  }
+
   getTimelineRange = () => {
     const {timelineStartDate, timelineViewType} = this.state;
     const cloneStartDate = timelineStartDate.clone();
@@ -193,16 +203,20 @@ class Timeline extends PureComponent {
       timelineViewType,
       periodOffset
     } = this.state;
-    const {rooms, updateRoomState, guestHouseId, handleMaintainence} = this.props;
+    const {rooms, updateRoomState, guestHouseId,openModal,shouldOpen, addMaintenenceRecord, closeModal, modalType} = this.props;
     const { timelineDayWidth, noOfSegments } = this.getTimelineViewTypeProperties();
     return (
       <div className="timeline">
         <TimelineVerticalAxis
-          handleMaintainence={handleMaintainence}
+          shouldOpen={shouldOpen}
+          openModal={openModal}
+          addMaintenenceRecord={addMaintenenceRecord}
+          modalType={modalType}
           rooms={rooms}
           updateRoomState={updateRoomState}
           timelineDateRange={this.getTimelineRange()}
           guestHouseId={guestHouseId}
+          closeModal={closeModal}
         />
         <TimelineHeader
           selectedTimeDisplay={this.constructSelectedPeriodDisplay()}
@@ -211,6 +225,7 @@ class Timeline extends PureComponent {
           currentTimelineViewType={timelineViewType}
           onNavigateTime={this.handleNavigateTime}
           showChoices={timelineChoicesOpen}
+          goToToday={this.handleGoToToday}
         />
         <div className="timeline__body">
           <div className="timeline__body-segments">
@@ -228,11 +243,17 @@ class Timeline extends PureComponent {
   }
 }
 
+
 Timeline.propTypes = {
   rooms: PropTypes.array,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  shouldOpen: PropTypes.bool.isRequired,
+  addMaintenenceRecord: PropTypes.func.isRequired,
   fetchTimelineRoomsData: PropTypes.func.isRequired,
   updateRoomState: PropTypes.func.isRequired,
   guestHouseId: PropTypes.string.isRequired,
+  modalType: PropTypes.string.isRequired,
 };
 
 Timeline.defaultProps = {

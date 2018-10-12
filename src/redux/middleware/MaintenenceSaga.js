@@ -6,9 +6,7 @@ import maintenanceAction from '../actionCreator/maintenanceAction';
 
 export function* AddMainteinanceSaga(action) {
   try {
-    console.log('me')
     const response = yield call(MaintainaceApi.addMaintainanceRecord, action.data, action.roomId);
-    console.log('you')
     const message = response.data.message;
     toast.success(message);
   } catch (error) { /* istanbul ignore next */

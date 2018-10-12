@@ -7,17 +7,21 @@ import './TimelineVerticalAxis.scss';
 
 class TimelineVerticalAxis extends PureComponent {
   render() {
-    const {rooms, updateRoomState, timelineDateRange, guestHouseId, handleMaintainence} = this.props;
+    const {rooms, updateRoomState, timelineDateRange, guestHouseId,closeModal, openModal, shouldOpen, addMaintenenceRecord, modalType} = this.props;
     const roomAxisLabels = rooms.map(room => (
       <div key={room.id} className="room-axis-wrapper">
         <RoomLabel
+          modalType={modalType}
+          shouldOpen={shouldOpen}
+          openModal={openModal}
+          closeModal={closeModal}
           name={room.roomName}
           id={room.id}
           status={room.faulty}
           updateRoomState={updateRoomState}
           timelineDateRange={timelineDateRange}
           guestHouseId={guestHouseId}
-          handleMaintainence={handleMaintainence}
+          addMaintenenceRecord={addMaintenenceRecord}
         />
         {room.beds.map(bed => (
           <div key={bed.id} className="bed-name item-row">
@@ -37,9 +41,14 @@ class TimelineVerticalAxis extends PureComponent {
 
 TimelineVerticalAxis.propTypes = {
   rooms: PropTypes.array.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
   updateRoomState: PropTypes.func.isRequired,
   timelineDateRange: PropTypes.array.isRequired,
   guestHouseId: PropTypes.string.isRequired,
+  shouldOpen: PropTypes.bool.isRequired,
+  addMaintenenceRecord: PropTypes.func.isRequired,
+  modalType: PropTypes.string.isRequired,
 };
 
 export default TimelineVerticalAxis;

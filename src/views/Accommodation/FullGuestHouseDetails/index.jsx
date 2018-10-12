@@ -26,14 +26,8 @@ export class GuestHouseDetails extends PureComponent {
     openModal(true, 'edit accomodation');
   };
 
-  handleMaintainence=()=>{
-    let { openModal } = this.props;
-    openModal(true);
-  }
-
   renderGuestHouseDetailsNameBar = () => {
     const { match, history, guestHouse, userId } = this.props;
-    const { params } = match;
     return (
       <div className="guesthouse-details-wrapper--top">
         <div className="details-wrapper-top-right">
@@ -82,7 +76,7 @@ export class GuestHouseDetails extends PureComponent {
 
   getAvailableBedsCount = rooms => {
     return rooms.reduce((currSum, room) => {
-      return room.faulty ? currSum + 0 : currSum + room.bedCount;
+      return room.faulty ? currSum : (currSum + room.bedCount);
     }, 0);
   };
 
@@ -125,8 +119,10 @@ export class GuestHouseDetails extends PureComponent {
     );
   }
 
+
   render() {
-    const { guestHouse, updateRoomState, addMaintenenceRecord } = this.props;
+    const { guestHouse, updateRoomState, addMaintenenceRecord, modal, closeModal, openModal } = this.props;
+    const { shouldOpen, modalType } = modal;
     return (
       <div className="guesthouse-details-wrapper">
         {this.renderEditAccommodationForm()}
@@ -149,13 +145,13 @@ export class GuestHouseDetails extends PureComponent {
           </div>
         </div>
         <Timeline
-          handleMaintainence={this.handleMaintainence}
+          modalType={modalType} shouldOpen={shouldOpen} openModal={openModal} modal={modal} closeModal={closeModal} handleMaintainence={this.handleMaintainence}
           rooms={guestHouse.rooms}
           guestHouseId={guestHouse.id}
           fetchTimelineRoomsData={this.fetchTimelineRoomsData}
           updateRoomState={updateRoomState}
+          addMaintenenceRecord={addMaintenenceRecord}
         />
-        <MaintainceForm addMaintenenceRecord={addMaintenenceRecord} />
       </div>
     );
   }
@@ -170,6 +166,7 @@ GuestHouseDetails.propTypes = {
   // guestHouse: PropTypes.object.isRequired,
   guestHouse: PropTypes.object,
   updateRoomState: PropTypes.func.isRequired,
+  addMaintenenceRecord:PropTypes.func.isRequired,
   userId: PropTypes.string,
   modal: PropTypes.func.isRequired,
   fetchAccommodation: PropTypes.func.isRequired,

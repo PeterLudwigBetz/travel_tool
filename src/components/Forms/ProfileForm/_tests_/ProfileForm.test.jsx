@@ -32,6 +32,7 @@ describe ('<ProfileForm />', () =>{
   };
   const {user} = props;
 
+  
   beforeEach(() => {
     wrapper = mount(<ProfileForm {...props} />);
   });
