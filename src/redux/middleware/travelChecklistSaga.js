@@ -12,6 +12,7 @@ import {
   updateChecklistFailure,
 } from '../actionCreator/travelChecklistActions';
 
+
 export function* watchFetchAllChecklists() {
   yield takeLatest(FETCH_TRAVEL_CHECKLIST, fetchAllChecklistsSync);
 }
@@ -32,6 +33,7 @@ export function* updateChecklistAsync(action) {
   try {
     const { checklistItemId, checklistItemData } = action;
     const response = yield call(TravelChecklistAPI.updateChecklist, {checklistItemId, checklistItemData});
+
     yield put(updateChecklistSuccess(response.data, checklistItemId));
   }
   catch(error) {
@@ -43,4 +45,3 @@ export function* updateChecklistAsync(action) {
 export function* watchUpdateChecklist() {
   yield takeLatest(UPDATE_TRAVEL_CHECKLIST, updateChecklistAsync);
 }
-

@@ -14,7 +14,6 @@ import {
 import travelChecklistMockData from '../../__mocks__/travelChecklistsMockData';
 
 
-
 describe('Travel Checklist Saga test', () => {
   describe('Fetch travel checklist', () => {
     const response = {
