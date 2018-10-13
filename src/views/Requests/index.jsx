@@ -16,6 +16,7 @@ import {
 import updateUserProfile from '../../redux/actionCreator/userProfileActions';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 import { fetchRoleUsers } from '../../redux/actionCreator/roleActions';
+import { fetchTravelChecklist } from '../../redux/actionCreator/travelChecklistActions';
 
 
 export class Requests extends Base {
@@ -36,7 +37,6 @@ export class Requests extends Base {
     const { url } = this.state;
     fetchUserRequests(url);
     fetchRoleUsers(53019);
-
     if(requestId){
       openModal(true, 'request details', page);
       this.storeRequestIdRequest(requestId);
@@ -47,6 +47,12 @@ export class Requests extends Base {
     const { openModal, fetchEditRequest } = this.props;
     fetchEditRequest(requestId);
     openModal(true, 'edit request');
+  }
+
+  handleShowTravelChecklist = (requestId) => {
+    const { fetchTravelChecklist, openModal } = this.props;
+    fetchTravelChecklist(requestId);
+    openModal(true, 'travel checklist');
   }
 
 
@@ -108,13 +114,20 @@ export class Requests extends Base {
   }
 
   renderRequests(requests, isLoading, error, message) {
-    const { history, location, openModal, closeModal, shouldOpen, modalType } = this.props;
-    const {requestId} = this.state;
+    const {
+      history, location, openModal,
+      closeModal, shouldOpen, modalType ,
+      travelChecklists
+    } = this.props;
+    const { requestId } = this.state;
+
     return (
       <div className="rp-table">
         <WithLoadingTable
           type="requests"
           editRequest={this.handleEditRequest}
+          travelChecklists={travelChecklists}
+          showTravelChecklist={this.handleShowTravelChecklist}
           location={location}
           history={history}
           requestId={requestId}
@@ -133,7 +146,8 @@ export class Requests extends Base {
   }
   renderNewRequestForm() {
     const { updateUserProfile, user, createNewRequest, loading, errors, closeModal,
-      shouldOpen, modalType, manager, requestOnEdit, editRequest } = this.props;
+      shouldOpen, modalType, manager, requestOnEdit, editRequest, fetchUserRequests } = this.props;
+    const { url } = this.state;
     return (
       <Modal
         closeModal={closeModal}
@@ -152,6 +166,7 @@ export class Requests extends Base {
           managers={manager}
           modalType={modalType}
           requestOnEdit={requestOnEdit}
+          fetchUserRequests={() => fetchUserRequests(url)}
         />
       </Modal>
     );
@@ -215,10 +230,13 @@ Requests.defaultProps = {
   user: {}
 };
 
-export const mapStateToProps = ({ requests, modal, role, user }) => ({
+export const mapStateToProps = ({
+  requests, modal, role, user, travelChecklist
+}) => ({
   ...requests,
   ...modal.modal,
   ...role,
+  travelChecklists: travelChecklist.checklistItems,
   getUserData: user.getUserData,
 });
 
@@ -231,6 +249,7 @@ const actionCreators = {
   openModal,
   closeModal,
   updateUserProfile,
+  fetchTravelChecklist
 };
 
 export default connect(

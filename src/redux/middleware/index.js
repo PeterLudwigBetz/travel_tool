@@ -31,24 +31,26 @@ import {
   markSingleNotificationAsReadSaga
 } from './notificationsSaga';
 
-
-
 import { watchUpdateUserProfileAsync } from './UserProfileSaga';
 
 import {
   watchCreateAccommodationSagaAsync,
   watchFetchAccommodation,
-  watchFetchTimelneData
+  watchFetchTimelneData,
+  watchEditAccommodation,
 } from './accommodationSaga';
 
 import { watchUpdateRoomsAsync } from './roomUpdateSaga';
-
 
 import {
   watchFetchTrips,
   watchUpdateTrip
 } from './tripsSaga';
 
+import {
+  watchFetchAllChecklists,
+  watchUpdateChecklist
+} from './travelChecklistSaga';
 
 function* rootSaga() {
   yield all([
@@ -72,13 +74,15 @@ function* rootSaga() {
     watchEditRequest(),
     watchAddNotification(),
     watchFetchAccommodation(),
+    watchEditAccommodation(),
     watchUpdateAllNotificationStatus(),
     watchCreateAccommodationSagaAsync(),
     watchFetchTimelneData(),
     markSingleNotificationAsReadSaga(),
     watchFetchTrips(),
-    watchUpdateTrip()
-
+    watchUpdateTrip(),
+    watchFetchAllChecklists(),
+    watchUpdateChecklist(),
   ]);
 }
 

@@ -6,6 +6,7 @@ import Modal from '../modal/Modal';
 import './Table.scss';
 import withLoading from '../Hoc/withLoading';
 import TableMenu from '../TableMenu/TableMenu';
+import TravelChecklist from '../TravelCheckList';
 
 export class Table extends Component {
   state = {
@@ -66,7 +67,7 @@ export class Table extends Component {
   }
 
   renderRequestStatus(request) {
-    const { editRequest, type } = this.props;
+    const { editRequest, type, showTravelChecklist } = this.props;
 
     const { menuOpen } = this.state;
     return (
@@ -86,6 +87,7 @@ export class Table extends Component {
           </div>
           <TableMenu
             editRequest={editRequest}
+            showTravelChecklist={showTravelChecklist}
             requestStatus={request.status}
             type={type}
             menuOpen={menuOpen}
@@ -207,6 +209,28 @@ export class Table extends Component {
     );
   }
 
+  renderTravelCheckListModal() {
+    const { closeModal, shouldOpen, modalType, travelChecklists } = this.props;
+    const { menuOpen: { id } } = this.state;
+    return (
+      <Modal
+        closeModal={closeModal}
+        width="600px"
+        modalId="travel-checkList-modal"
+        modalContentId="travel-checkList-modal-content"
+        visibility={
+          shouldOpen && modalType === 'travel checklist'
+            ? 'visible'
+            : 'invisible'
+        }
+        title="Travel Checklist"
+        modalBar={(<div className="table__modal-bar-text">{id}</div>)}
+      >
+        <TravelChecklist travelChecklists={travelChecklists} />
+      </Modal>
+    );
+  }
+
   render() {
     const { requests, type, fetchRequestsError, message } = this.props;
     return (
@@ -226,6 +250,7 @@ export class Table extends Component {
             !requests.length &&
             this.renderNoRequests(message)}
           {this.renderDetailsModal()}
+          {this.renderTravelCheckListModal()}
         </div>
       </Fragment>
     );
@@ -243,6 +268,8 @@ Table.propTypes = {
   message: PropTypes.string,
   page: PropTypes.string,
   editRequest: PropTypes.func.isRequired,
+  travelChecklists: PropTypes.array.isRequired,
+  showTravelChecklist: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
 };

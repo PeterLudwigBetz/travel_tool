@@ -85,7 +85,36 @@
     &--key-details {
       display: flex;
       justify-content: space-between;
+      flex-flow: wrap;
       margin-bottom: 50px;
+      @media (max-width: 640px) {
+        .guesthouse-detail-card {
+          flex-basis: 40%;
+          margin-bottom: 15px;
+        }
+      }
+      @media (max-width: 450px) {
+        .guesthouse-detail-card {
+          flex-basis: 100%;
+          margin-bottom: 15px;
+        }
+      }
     }
+  }
+  .edit-btn{
+    height: 21px;		
+    color: #3359DB;	
+    font-family: "DIN Pro";	
+    font-size: 16px;	
+    line-height: 21px;	
+    text-align: right;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+
+  }
+  .edit-btn:hover{
+    text-decoration: underline;
   }
 }
