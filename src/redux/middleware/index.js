@@ -89,6 +89,7 @@ function* rootSaga() {
     watchFetchOccupations(),
     watchFetchAllChecklists(),
     watchUpdateChecklist(),
+    watchCreateChecklist()
   ]);
 }
 
