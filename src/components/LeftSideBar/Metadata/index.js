@@ -53,6 +53,17 @@ const NavItemsMetadata = [
       inactive: inactiveAccommodationIcon
     }
   },
+  // Trip planner
+  {
+    text: 'Trip Planner',
+    link_to: '/checklist',
+    activateOnLogin: false,
+    isDropdown: false,
+    icons: {
+      active: activeAccommodationIcon,
+      inactive: inactiveAccommodationIcon
+    }
+  },
   // Settings
   {
     text: 'Settings',

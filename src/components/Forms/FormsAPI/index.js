@@ -22,6 +22,9 @@ class InputRenderer {
     case 'date':
       inputProps.selectedDate = values[name];
       return inputProps;
+    // case 'checkbox':
+    //   // inputProps.checked = true;
+    //   return inputProps;
     default:
       return inputProps;
     }
