@@ -4,12 +4,16 @@ import { resolveBaseUrl } from '.';
 const baseUrl = resolveBaseUrl();
 
 class TravelChecklistAPI {
-  static getAllChecklists(requestId) {
-    const url = (requestId)
-      ? `${baseUrl}/checklists?requestId=${requestId}`
+  static getAllChecklists(requestId, destinationName) {
+    const url = (requestId || destinationName)
+      ? `${baseUrl}/checklists?requestId=${requestId}?destinationName=${destinationName}`
       : `${baseUrl}/checklists`;
 
     return axios.get(url);
+  }
+
+  static createChecklist(checklistItemData) {
+    return axios.post(`${baseUrl}/checklist`, checklistItemData);
   }
 
   static updateChecklistItem(checklistItemData, checklistItemId) {

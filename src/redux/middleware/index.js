@@ -48,6 +48,7 @@ import {
 } from './tripsSaga';
 
 import {
+  watchCreateChecklist,
   watchFetchAllChecklists,
   watchUpdateChecklist
 } from './travelChecklistSaga';
@@ -83,6 +84,7 @@ function* rootSaga() {
     watchUpdateTrip(),
     watchFetchAllChecklists(),
     watchUpdateChecklist(),
+    watchCreateChecklist()
   ]);
 }
 

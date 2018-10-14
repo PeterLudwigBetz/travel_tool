@@ -23,6 +23,9 @@ export default function apiErrorHandler(error) {
       errorMessage = error.response.data.message;
       validationErrors = error.response.data.message;
       break;
+    case 401:
+      errorMessage = 'Access denied';
+      break;
     default:
       errorMessage = error.response.data.error;
     }

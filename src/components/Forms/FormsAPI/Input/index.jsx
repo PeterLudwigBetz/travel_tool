@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
-import { HtmlInput, DropdownSelect, DateInput, ButtonToggler, NumberInput } from './InputFields';
+import { HtmlInput, DropdownSelect, DateInput, ButtonToggler, NumberInput, CheckBox } from './InputFields';
 import createEventHandlersFor from '../formEventHandlers';
 import './_input.scss';
 
@@ -27,7 +27,7 @@ class Input extends PureComponent {
         onChange: onChange ||  eventHandlers.handleInputChange
       };
       return NumberInput;
-    } 
+    }
     else { // explore other input options
       return this.switchInputWithProps(type, eventHandlers);
     }
@@ -58,6 +58,12 @@ class Input extends PureComponent {
         onChange: onChange || eventHandlers.handleSelectDropdown,
       };
       return DropdownSelect;
+    case 'checkbox':
+      this.props = {
+        ...this.props,
+        onChange: onChange || eventHandlers.handleCheckBoxChange
+      };
+      return CheckBox;
     }
   }
 
