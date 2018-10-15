@@ -3,25 +3,32 @@ import PropTypes from 'prop-types';
 import { FormContext } from '../FormsAPI';
 import SubmitArea from '../NewRequestForm/FormFieldsets/SubmitArea';
 import ChecklistFieldSet from './FormFieldSets';
-import { closeModal } from '../../../redux/actionCreator/modalActions';
 
 export default class NewChecklistForm extends PureComponent {
   constructor(props) {
     super(props);
+    const { modalType, checklistItem } = this.props;
     // const defaultResource = this.defaultResource[0];
+    const itemName = (modalType == 'edit cheklistItem' && checklistItem) ? checklistItem.name : '' ;
+    const requiresFiles = (modalType == 'edit cheklistItem' && checklistItem) ? checklistItem.requiresFiles : '' ;
+    const link = (modalType == 'edit cheklistItem' && checklistItem.resources[0])
+      ? checklistItem.resources[0].link : '' ;
+    const label = (modalType == 'edit cheklistItem' && checklistItem.resources[0])
+      ? checklistItem.resources[0].label : '' ;
+
     this.defaultState = {
       values: {
-        itemName: '',
-        label: '',
-        link: '',
-        requiresFiles: 'false',
+        itemName,
+        label,
+        link,
+        requiresFiles,
         // ...defaultResource
       },
       // resources: [{}],
       errors: {},
       hasBlankFields: true
     };
-  
+
     this.state = { ...this.defaultState };
   }
 
@@ -39,11 +46,34 @@ export default class NewChecklistForm extends PureComponent {
     closeModal();
   };
 
+  closeEditModal = () => {
+    let { closeModal } = this.props;
+    closeModal(true, 'edit cheklistItem');
+  }
+
   handleSubmit = event => {
     event.preventDefault();
-    const { createTravelChecklist } = this.props;
+    const {
+      createTravelChecklist,
+      updateTravelChecklist,
+      checklistItem,
+      modalType
+    } = this.props;
+
     const { values } = this.state;
-    if (this.validate()) {
+    const checklistItemData = {
+      itemName: values.itemName,
+      requiresFiles: values.requiresFiles,
+      resources: [{
+        link: values.link,
+        label: values.label
+      }]
+    };
+
+    if (this.validate() && modalType === 'edit cheklistItem') {
+      let data = {checklistItemId: checklistItem.id, checklistItemData};
+      updateTravelChecklist(data);
+    } else {
       let data = values;
       createTravelChecklist(data);
     }
@@ -66,6 +96,7 @@ export default class NewChecklistForm extends PureComponent {
 
   render() {
     const { values, errors, hasBlankFields } = this.state;
+    const { modalType } = this.props;
     return (
       <FormContext targetForm={this} errors={errors} validatorName="validate">
         <form onSubmit={this.handleSubmit} className="new-request">
@@ -73,13 +104,15 @@ export default class NewChecklistForm extends PureComponent {
             values={values}
             value="232px"
             handleCheckboxChange={this.handleCheckboxChange}
+            modalType={modalType}
           />
           <hr />
           <SubmitArea
             onCancel={this.handleCancel}
             hasBlankFields={hasBlankFields}
-            send="Add Item"
+            send={modalType === 'edit cheklistItem' ? 'Save Item' : 'Add Item'}
             cancel="Cancel"
+            modalType={modalType}
           />
         </form>
       </FormContext>
@@ -91,4 +124,8 @@ NewChecklistForm.propTypes = {
   createTravelChecklist: PropTypes.func.isRequired,
   fetchTravelChecklist: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
+  updateTravelChecklist: PropTypes.func.isRequired,
+  modalType: PropTypes.string.isRequired,
+  checklistItem: PropTypes.object.isRequired
 };
+

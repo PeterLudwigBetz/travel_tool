@@ -6,11 +6,15 @@ import WithLoadingRoleTable from '../../components/RoleTable';
 import ChecklistPanelHeader from '../../components/ChecklistPanelHeader';
 import { NewChecklistForm } from '../../components/Forms';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
-import { createTravelChecklist, fetchTravelChecklist } from '../../redux/actionCreator/travelChecklistActions';
+import { createTravelChecklist, fetchTravelChecklist, updateTravelChecklist } from '../../redux/actionCreator/travelChecklistActions';
 import './ChecklistTable.scss';
 
 
 export class Checklist extends Component {
+  state = {
+    itemToEdit: null,
+  }
+
   componentDidMount() {
     const { fetchTravelChecklist } = this.props;
     const adminLocation = 'lagos';
@@ -19,30 +23,55 @@ export class Checklist extends Component {
     // only admins should be able to visit this page?
   }
 
+  openAddModal = () => {
+    let { openModal } = this.props;
+    openModal(true, 'add cheklistItem');
+  }
+
+  openEditModal = () => {
+    let { openModal } = this.props;
+    openModal(true, 'edit cheklistItem');
+  }
+
+  closeEditModal = () => {
+    let { closeModal } = this.props;
+    closeModal(true, 'edit cheklistItem');
+  }
+
+  handleEditItem = (checklistItem) => {
+    this.setState(() => ({itemToEdit: checklistItem}));
+    this.openEditModal();
+  }
+
   renderChecklistPanelHeader() {
-    const { openModal } = this.props;
     return (
       <div className="rp-role__header">
-        <ChecklistPanelHeader openModal={openModal} />
+        <ChecklistPanelHeader openModal={this.openAddModal} />
       </div>
     );
   }
 
   renderChecklistForm() {
     const { closeModal, shouldOpen, modalType, createTravelChecklist } = this.props;
+    const { itemToEdit } = this.state;
+
     return (
       <Modal
         closeModal={closeModal}
         width="480px"
         visibility={
-          shouldOpen && modalType === 'new model' ? 'visible' : 'invisible'
+          shouldOpen && (modalType === 'edit cheklistItem' || 'add cheklistItem') ? 'visible' : 'invisible'
         }
-        title="Add Travel Checklist Item"
+        title={`${modalType === 'edit cheklistItem' ? 'Edit' : 'Add'} Travel Checklist Item`}
       >
         <NewChecklistForm
           closeModal={closeModal}
           createTravelChecklist={createTravelChecklist}
           fetchTravelChecklist={fetchTravelChecklist}
+          modalType={modalType}
+          closeEditModal={this.closeEditModal}
+          updateTravelChecklist={updateTravelChecklist}
+          checklistItem={itemToEdit}
         />
       </Modal>
     );
@@ -80,7 +109,13 @@ export class Checklist extends Component {
                         {checklistItem.name}
                       </td>
                       <td className="mdl-data-table__cell--non-numeric">
-                        Edit
+                        <button
+                          type="button"
+                          onClick={() => {
+                            this.handleEditItem(checklistItem);
+                          }}>
+                            Edit
+                        </button>
                       </td>
                       <td className="mdl-data-table__cell--non-numeric">
                         Delete
