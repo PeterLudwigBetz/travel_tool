@@ -183,6 +183,11 @@ form .form-input {
         transition-delay: 0.25s;
         /* Don't reduce this */
     }
+
+    .input.select .select-menu {
+        transition-delay: 0.25s;
+        /* Don't reduce this */
+    }
     .calendar-icon {
       position: absolute;
       right: 15px;

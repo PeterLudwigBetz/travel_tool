@@ -253,7 +253,8 @@ const actionCreators = {
   openModal,
   closeModal,
   updateUserProfile,
-  fetchTravelChecklist
+  fetchTravelChecklist,
+  getOccupation
 };
 
 export default connect(
