@@ -8,15 +8,21 @@ import {
   FETCH_AVAILABLE_ROOMS_SUCCESS,
   FETCH_AVAILABLE_ROOMS_FAILURE
 } from '../../constants/actionTypes';
-import availableRooms from '../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
+import beds from '../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
 
 describe('Available rooms action types', () => {
-  it('should return action of type  FETCH_AVAILABLE_ROOMS', (action) => {
+  it('should return action of type  FETCH_AVAILABLE_ROOMS', () => {
+    const action = {
+      gender: 'Male',
+      arrivalDate: '2018-12-23',
+      departureDate: '2018-12-29',
+      location: 'Lagos,Nigeria'
+    };
     const expectedAction = {
       type: FETCH_AVAILABLE_ROOMS,
       action
     };
-    const newAction = fetchAvailableRooms();
+    const newAction = fetchAvailableRooms(action);
     expect(newAction).toEqual(expectedAction);
   });
   it('should return action of type  FETCH_AVAILABLE_ROOMS_FAILURE', () => {
@@ -33,12 +39,12 @@ describe('Available rooms action types', () => {
       data: {
         success: true,
         message: 'Available rooms fetched',
-        availableRooms
+        beds
       }
     };
     const expectedAction = {
       type: FETCH_AVAILABLE_ROOMS_SUCCESS,
-      availableRooms
+      beds
     };
     const newAction = fetchAvailableRoomsSuccess(response.data);
     expect(newAction).toEqual(expectedAction);

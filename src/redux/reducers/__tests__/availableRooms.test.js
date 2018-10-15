@@ -4,13 +4,13 @@ import {
   FETCH_AVAILABLE_ROOMS_SUCCESS,
   FETCH_AVAILABLE_ROOMS_FAILURE
 } from '../../constants/actionTypes';
-import availableRooms from '../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
+import beds from '../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
 
 describe('Fetch available rooms reducer', () => {
   const initialState = {
     isLoading: false,
-    availableRooms: [],
-    availableRoomsError: []
+    beds: [],
+    bedsError: []
   };
   const error = 'Error occured while fetching available rooms';
   it('should return correct initial state', () => {
@@ -30,12 +30,12 @@ describe('Fetch available rooms reducer', () => {
   it('should return correct state for FETCH_AVAILABLE_ROOMS_SUCCESS', () => {
     const action = {
       type: FETCH_AVAILABLE_ROOMS_SUCCESS,
-      availableRooms
+      beds
     };
     expect(availableRoomsReducer(initialState, action)).toEqual({
       ...initialState,
       isLoading: false,
-      availableRooms
+      beds
     });
   });
   it('should return correct state for FETCH_AVAILABLE_ROOMS_FAILURE', () => {
@@ -46,7 +46,7 @@ describe('Fetch available rooms reducer', () => {
     expect(availableRoomsReducer(initialState, action)).toEqual({
       ...initialState,
       isLoading: false,
-      availableRoomsError: error
+      bedsError: error
     });
   });
 });
