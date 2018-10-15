@@ -49,4 +49,27 @@ describe('TravelChecklistAPI', () => {
       .toEqual({ travelChecklists: [] });
     // done();
   });
+
+  it('should send a PUT request to update checklist item', async () =>{
+    const checklistItemData = {
+      name: 'Travel Visa',
+      requireFiles: true,
+    };
+    const checklistItemId = 'Er4HTD2xz';
+
+    moxios.stubRequest(`${baseUrl}/checklist/${checklistItemId}`, {
+      status: 200,
+      response: {
+        message: 'Checklist item sucessfully updated',
+      }
+    });
+
+    const response = await TravelChecklistAPI.updateChecklistItem(checklistItemData, checklistItemId);
+
+    expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/checklist/${checklistItemId}`);
+    expect(response.data).toEqual({
+      message: 'Checklist item sucessfully updated',
+    });
+  });
 });
+

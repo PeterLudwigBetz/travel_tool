@@ -16,7 +16,7 @@ class TravelChecklistAPI {
     return axios.post(`${baseUrl}/checklist`, checklistItemData);
   }
 
-  static updateChecklistItem(checklistItemData, checklistItemId) {
+  static updateChecklistItem(checklistItemId, checklistItemData) {
     return axios.put(`${baseUrl}/checklist/${checklistItemId}`, checklistItemData);
   }
 }

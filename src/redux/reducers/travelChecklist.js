@@ -18,8 +18,8 @@ export const initialState = {
   checklistItems: [],
   error: ''
 };
-
 const traveChecklist = (state = initialState, action) => {
+  let checklistItems;
   switch (action.type) {
   case FETCH_TRAVEL_CHECKLIST:
     return { ...state, isLoading: true };
@@ -41,7 +41,8 @@ const traveChecklist = (state = initialState, action) => {
   case UPDATE_TRAVEL_CHECKLIST:
     return { ...state, updatingChecklist: true };
   case UPDATE_TRAVEL_CHECKLIST_SUCCESS:
-    return { ...state, checklistItems: [...state.checklistItems], updatingChecklist: false };
+    checklistItems = state.checklistItems.filter(checklistItem => checklistItem.id !== action.checklistItemId);
+    return { ...state, checklistItems: [...checklistItems, action.updatedChecklistItem], updatingChecklist: false };
   case UPDATE_TRAVEL_CHECKLIST_FAILURE:
     return { ...state, updatingChecklist: false, error: action.error };
   default: return state;
