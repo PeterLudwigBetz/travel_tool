@@ -39,6 +39,7 @@ import {
   watchFetchTimelneData,
   watchEditAccommodation,
 } from './accommodationSaga';
+import { watchFetchOccupations } from './occupationSaga';
 
 import { watchUpdateRoomsAsync } from './roomUpdateSaga';
 
@@ -84,7 +85,8 @@ function* rootSaga() {
     watchUpdateTrip(),
     watchFetchAllChecklists(),
     watchUpdateChecklist(),
-    watchCreateChecklist()
+    watchCreateChecklist(),
+    watchFetchOccupations(),
   ]);
 }
 

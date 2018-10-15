@@ -125,6 +125,7 @@ const props ={
     }
   },
   createNewRequest: jest.fn(),
+  getOccupation: jest.fn(),
   loading: false,
   errors: [],
   shouldOpen: false,
