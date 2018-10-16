@@ -66,12 +66,14 @@ export function* watchFetchAllChecklists() {
   yield takeLatest(FETCH_TRAVEL_CHECKLIST, fetchAllChecklistsSync);
 }
 
+
 export function* updateChecklistAsync(action) {
   try {
     const { checklistItemId, checklistItemData } = action;
-    const response = yield call(TravelChecklistAPI.updateChecklist, {checklistItemId, checklistItemData});
-
-    yield put(updateChecklistSuccess(response.data, checklistItemId));
+    const response = yield call(TravelChecklistAPI.updateChecklistItem, checklistItemId, checklistItemData);
+    yield put(updateChecklistSuccess(response.data.updatedChecklistItem, checklistItemId));
+    yield put(closeModal());
+    toast.success(response.data.message);
   }
   catch(error) {
     const errorMessage = apiErrorHandler(error);
@@ -82,3 +84,4 @@ export function* updateChecklistAsync(action) {
 export function* watchUpdateChecklist() {
   yield takeLatest(UPDATE_TRAVEL_CHECKLIST, updateChecklistAsync);
 }
+

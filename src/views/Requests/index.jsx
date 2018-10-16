@@ -18,6 +18,8 @@ import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 import { fetchRoleUsers } from '../../redux/actionCreator/roleActions';
 import { fetchTravelChecklist } from '../../redux/actionCreator/travelChecklistActions';
 
+import { getOccupation } from '../../redux/actionCreator/occupationActions';
+
 
 export class Requests extends Base {
 
@@ -33,10 +35,12 @@ export class Requests extends Base {
   };
 
   componentDidMount() {
-    const { openModal, fetchUserRequests, fetchRoleUsers, page, match: { params: { requestId} } } = this.props;
+    const { openModal, fetchUserRequests,getOccupation, fetchRoleUsers, page, match: { params: { requestId } } } = this.props;
     const { url } = this.state;
     fetchUserRequests(url);
     fetchRoleUsers(53019);
+    getOccupation();
+
     if(requestId){
       openModal(true, 'request details', page);
       this.storeRequestIdRequest(requestId);
@@ -146,7 +150,7 @@ export class Requests extends Base {
   }
   renderNewRequestForm() {
     const { updateUserProfile, user, createNewRequest, loading, errors, closeModal,
-      shouldOpen, modalType, manager, requestOnEdit, editRequest, fetchUserRequests } = this.props;
+      shouldOpen, modalType, manager, requestOnEdit, editRequest, fetchUserRequests,occupations } = this.props;
     const { url } = this.state;
     return (
       <Modal
@@ -167,6 +171,7 @@ export class Requests extends Base {
           modalType={modalType}
           requestOnEdit={requestOnEdit}
           fetchUserRequests={() => fetchUserRequests(url)}
+          occupations={occupations}
         />
       </Modal>
     );
@@ -249,6 +254,7 @@ const actionCreators = {
   openModal,
   closeModal,
   updateUserProfile,
+  getOccupation,
   fetchTravelChecklist
 };
 

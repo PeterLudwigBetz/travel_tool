@@ -14,6 +14,7 @@ import {
 import travelChecklistMockData from '../../__mocks__/travelChecklistsMockData';
 
 
+
 describe('Travel Checklist Saga test', () => {
   describe('Fetch travel checklist', () => {
     const response = {
@@ -76,6 +77,12 @@ describe('Travel Checklist Saga test', () => {
           requestId
         })
         .run();
+    });
+
+    describe('Update travel checklist', () => {
+      it('test an action', (done) => {
+        done();
+      });
     });
   });
 });

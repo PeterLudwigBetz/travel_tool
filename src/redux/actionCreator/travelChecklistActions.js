@@ -40,15 +40,16 @@ export const createChecklistFailure = (error) => ({
 //   error
 // });
 
-export const updateTravelChecklist = (checklistItemId, checklistItemData) => ({
+export const updateTravelChecklist = ({checklistItemId, checklistItemData}) => ({
   type: UPDATE_TRAVEL_CHECKLIST,
   checklistItemId,
   checklistItemData
 });
 
-export const updateChecklistSuccess = (updatedChecklistItem) => ({
+export const updateChecklistSuccess = (updatedChecklistItem, checklistItemId) => ({
   type: UPDATE_TRAVEL_CHECKLIST_SUCCESS,
   updatedChecklistItem,
+  checklistItemId
 });
 
 export const updateChecklistFailure = (error) => ({
@@ -70,3 +71,4 @@ export const fetchTravelChecklistFailure = (error) => ({
   type: FETCH_TRAVEL_CHECKLIST_FAILURE,
   error
 });
+

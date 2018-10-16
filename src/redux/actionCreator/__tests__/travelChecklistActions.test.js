@@ -55,5 +55,11 @@ describe('Travel checklists actions test', () => {
 
         done();
       });
+
+    describe('Update TravelChecklist actions', () => {
+      it('test an action', (done) => {
+        done();
+      });
+    });
   });
 });
