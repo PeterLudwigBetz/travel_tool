@@ -62,7 +62,7 @@ export default class NewChecklistForm extends PureComponent {
 
     const { values } = this.state;
     const checklistItemData = {
-      itemName: values.itemName,
+      name: values.itemName,
       requiresFiles: values.requiresFiles,
       resources: [{
         link: values.link,

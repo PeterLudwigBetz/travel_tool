@@ -79,7 +79,7 @@ export class Checklist extends Component {
   }
 
   renderChecklistForm() {
-    const { closeModal, shouldOpen, modalType, createTravelChecklist } = this.props;
+    const { closeModal, shouldOpen, modalType, createTravelChecklist, updateTravelChecklist } = this.props;
     const { itemToEdit } = this.state;
 
     return (
@@ -230,7 +230,8 @@ const mapDispatchToProps = {
   closeModal,
   createTravelChecklist,
   deleteTravelChecklist,
-  fetchTravelChecklist
+  fetchTravelChecklist,
+  updateTravelChecklist
 };
 
 export default connect(
@@ -243,6 +244,7 @@ Checklist.propTypes = {
   closeModal: PropTypes.func,
   createTravelChecklist: PropTypes.func,
   deleteTravelChecklist: PropTypes.func,
+  updateTravelChecklist: PropTypes.func,
   fetchTravelChecklist: PropTypes.func,
   shouldOpen: PropTypes.bool.isRequired,
   modalType: PropTypes.string,
@@ -254,6 +256,7 @@ Checklist.defaultProps = {
   closeModal: () => {},
   createTravelChecklist: () => {},
   deleteTravelChecklist: () => {},
+  updateTravelChecklist: () => {},
   fetchTravelChecklist: () => {},
   modalType: ''
 };
