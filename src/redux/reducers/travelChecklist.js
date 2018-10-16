@@ -44,8 +44,8 @@ const traveChecklist = (state = initialState, action) => {
   case UPDATE_TRAVEL_CHECKLIST:
     return { ...state, updatingChecklist: true };
   case UPDATE_TRAVEL_CHECKLIST_SUCCESS:
-    checklistItems = state.checklistItems.filter(checklistItem => checklistItem.id !== action.checklistItemId);
-    return { ...state, checklistItems: [...checklistItems, action.updatedChecklistItem], updatingChecklist: false };
+    checklistItems = state.checklistItems.map(item => action.checklistItemId === item.id && action.updatedChecklistItem || item);
+    return { ...state, checklistItems: [...checklistItems], updatingChecklist: false };
   case UPDATE_TRAVEL_CHECKLIST_FAILURE:
     return { ...state, updatingChecklist: false, error: action.error };
   case DELETE_TRAVEL_CHECKLIST:

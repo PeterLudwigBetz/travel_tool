@@ -1,7 +1,10 @@
 import {
   FETCH_TRAVEL_CHECKLIST,
   FETCH_TRAVEL_CHECKLIST_FAILURE,
-  FETCH_TRAVEL_CHECKLIST_SUCCESS
+  FETCH_TRAVEL_CHECKLIST_SUCCESS,
+  UPDATE_TRAVEL_CHECKLIST,
+  UPDATE_TRAVEL_CHECKLIST_SUCCESS,
+  UPDATE_TRAVEL_CHECKLIST_FAILURE
 } from '../../constants/actionTypes';
 
 import {
@@ -10,7 +13,10 @@ import {
   fetchTravelChecklistSuccess,
   deleteTravelChecklist,
   deleteChecklistFailure,
-  deleteChecklistSuccess
+  deleteChecklistSuccess,
+  updateTravelChecklist,
+  updateChecklistSuccess,
+  updateChecklistFailure
 } from '../travelChecklistActions';
 import travelChecklistMockData from '../../__mocks__/travelChecklistsMockData';
 
@@ -60,7 +66,44 @@ describe('Travel checklists actions test', () => {
       });
 
     describe('Update TravelChecklist actions', () => {
-      it('test an action', (done) => {
+      it('should return action of type UPDATE_TRAVEL_CHECKLIST', (done) => {
+        const expectedAction = {
+          type: UPDATE_TRAVEL_CHECKLIST,
+          checklistItemId: '20',
+          checklistItemData: {name: 'itemToUpdate'}
+        };
+
+        const newAction = updateTravelChecklist({
+          checklistItemId: '20',
+          checklistItemData: {name: 'itemToUpdate'}
+        });
+        expect(newAction).toEqual(expectedAction);
+
+        done();
+      });
+
+      it('should return action of type UPDATE_TRAVEL_CHECKLIST_SUCCESS', (done) => {
+        const expectedAction = {
+          type: UPDATE_TRAVEL_CHECKLIST_SUCCESS,
+          updatedChecklistItem: {name: 'updatedItem'},
+          checklistItemId: '20',
+        };
+        const newAction = updateChecklistSuccess({name: 'updatedItem'}, '20');
+
+        expect(newAction).toEqual(expectedAction);
+
+        done();
+      });
+
+      it('should return action of type UPDATE_TRAVEL_CHECKLIST_FAILURE', (done) => {
+        const expectedAction = {
+          type: UPDATE_TRAVEL_CHECKLIST_FAILURE,
+          error: {name: 'error'},
+        };
+        const newAction = updateChecklistFailure({name: 'error'});
+
+        expect(newAction).toEqual(expectedAction);
+
         done();
       });
     });

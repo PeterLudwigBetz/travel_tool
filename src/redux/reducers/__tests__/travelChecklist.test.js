@@ -105,13 +105,13 @@ describe('Travel checklists reducer', () => {
         expectedState = {
           updatingChecklist: false,
           checklistItems: [
-            {name: 'Passport', id: '34ffr4'},
-            {name: 'Tax clearance', id: 'sd343f4'}
+            {name: 'Tax clearance', id: 'sd343f4'},
+            {name: 'Passport', id: '34ffr4'}
           ],
           error: ''
         };
 
-        expect(newState).toEqual(expectedState);
+        expect(newState).toMatchObject(expectedState);
       });
       it('should handle UPDATE_TRAVEL_CHECKLIST_FAILURE', () => {
         action = {
