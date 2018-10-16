@@ -17,6 +17,7 @@ import {
   createChecklistSuccess,
   deleteChecklistSuccess,
   deleteChecklistFailure,
+  fetchTravelChecklist,
 } from '../actionCreator/travelChecklistActions';
 import { closeModal } from '../actionCreator/modalActions';
 
@@ -75,6 +76,7 @@ export function* updateChecklistAsync(action) {
     const { checklistItemId, checklistItemData } = action;
     const response = yield call(TravelChecklistAPI.updateChecklistItem, checklistItemId, checklistItemData);
     yield put(updateChecklistSuccess(response.data.updatedChecklistItem, checklistItemId));
+    yield put (fetchTravelChecklist());
     yield put(closeModal());
     toast.success(response.data.message);
   }

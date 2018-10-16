@@ -1,9 +1,10 @@
 import { call } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
-import * as matchers from 'redux-saga-test-plan/matchers';
 import {
-  watchFetchAllChecklists, watchDeleteChecklist
+  watchFetchAllChecklists,
+  watchDeleteChecklist,
+  watchUpdateChecklist,
 } from '../travelChecklistSaga';
 import TravelChecklistAPI from '../../../services/travelChecklistAPI';
 import {
@@ -12,7 +13,10 @@ import {
   FETCH_TRAVEL_CHECKLIST_SUCCESS,
   DELETE_TRAVEL_CHECKLIST,
   DELETE_TRAVEL_CHECKLIST_SUCCESS,
-  DELETE_TRAVEL_CHECKLIST_FAILURE
+  DELETE_TRAVEL_CHECKLIST_FAILURE,
+  UPDATE_TRAVEL_CHECKLIST,
+  UPDATE_TRAVEL_CHECKLIST_SUCCESS,
+  UPDATE_TRAVEL_CHECKLIST_FAILURE,
 } from '../../constants/actionTypes';
 import travelChecklistMockData from '../../__mocks__/travelChecklistsMockData';
 
@@ -131,6 +135,67 @@ describe('Travel Checklist Saga test', () => {
           type: DELETE_TRAVEL_CHECKLIST,
           checklistItemId,
           deleteReason
+        })
+        .run();
+    });
+  });
+
+  describe('Update Checklist Item Saga', () => {
+    const data = {
+      checklistItemId: '20',
+      checklistItemData: {name: 'ItemUpdates'}
+    };
+
+    const response = {
+      data: {
+        updatedChecklistItem: { name: 'updatedItem'}
+      }
+    };
+
+    const error = {
+      response: {
+        status: 422,
+        data: {
+          errors: ['update error']
+        }
+      }
+    };
+
+    it('Updates Checklist Item successfully', () => {
+      expectSaga(watchUpdateChecklist)
+        .provide([
+          [call(TravelChecklistAPI.updateChecklistItem, data.checklistItemId, data.checklistItemData), response]
+        ])
+        .put({
+          type: UPDATE_TRAVEL_CHECKLIST_SUCCESS,
+          updatedChecklistItem: { name: 'updatedItem'},
+          checklistItemId: '20'
+        })
+        .put({
+          type: FETCH_TRAVEL_CHECKLIST,
+          requestId: undefined,
+        })
+        .dispatch({
+          type: UPDATE_TRAVEL_CHECKLIST,
+          checklistItemId: '20',
+          checklistItemData: {name: 'ItemUpdates'}
+        })
+        .run();
+    });
+
+    it('throws an error when updating fails', (done) => {
+      expectSaga(watchUpdateChecklist)
+        .provide([
+          [call(TravelChecklistAPI.updateChecklistItem, data.checklistItemId, data.checklistItemData), throwError(error)]
+        ])
+        .put({
+          type: UPDATE_TRAVEL_CHECKLIST_FAILURE,
+          error,
+        })
+        .dispatch({
+          type: UPDATE_TRAVEL_CHECKLIST,
+          checklistItemId: '20',
+          checklistItemData: {name: 'ItemUpdates'}
         })
         .run();
     });
