@@ -9,23 +9,14 @@ import {
   createAccommodation,
   fetchAccommodation,
   editAccommodation,
-  initFetchTimelineData
 } from '../../redux/actionCreator/accommodationActions';
 import WithLoadingCentreGrid from '../../components/CentreGrid';
+import checkUserPermission from '../../helper/permissions';
 
 export class Accommodation extends Component {
   componentDidMount() {
-    const { fetchAccommodation, getCurrentUserRole, history } = this.props;
-    const isAdmin = getCurrentUserRole && getCurrentUserRole;
-    if (
-      isAdmin &&
-      isAdmin !== 'Super Administrator' &&
-      isAdmin !== 'Travel Administrator'
-    ) {
-      history.push('/');
-    } else {
-      fetchAccommodation();
-    }
+    const { fetchAccommodation } = this.props;
+    fetchAccommodation();
   }
 
   renderAccommodationPanelHeader() {
@@ -67,7 +58,11 @@ export class Accommodation extends Component {
   }
 
   render() {
-    const { guestHouses, isLoading, accommodationError } = this.props;
+    const { guestHouses, isLoading, accommodationError, isLoaded, getCurrentUserRole, history } = this.props;
+    if (isLoaded) {
+      const allowedRoles = ['Travel Administrator', 'Super Administrator'];
+      checkUserPermission(history, allowedRoles, getCurrentUserRole );
+    }
     return (
       <Fragment>
         {this.renderAccommodationPanelHeader()}
@@ -87,7 +82,7 @@ export class Accommodation extends Component {
 Accommodation.propTypes = {
   history: PropTypes.shape({}).isRequired,
   shouldOpen: PropTypes.bool.isRequired,
-  getCurrentUserRole: PropTypes.bool.isRequired,
+  getCurrentUserRole: PropTypes.array.isRequired,
   openModal: PropTypes.func.isRequired,
   createAccommodation: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,

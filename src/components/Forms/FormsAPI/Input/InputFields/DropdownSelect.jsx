@@ -83,7 +83,7 @@ export default class DropdownSelect extends Component {
   }
 
   render() {
-    const {choices, value, className, size} = this.props;
+    const {choices, value, size} = this.props;
     const options = this.getSelectOptions(choices);
     return (
       <div style={{position:'relative'}}>
@@ -91,7 +91,11 @@ export default class DropdownSelect extends Component {
           {...this.getPropsObject()}
         >
           <div className="value" style={{width: size}}>
+<<<<<<< HEAD
             {this.valueToChoiceLabel(choices, value)}
+=======
+            {value}
+>>>>>>> feat(role): enable travel administrators create travel team members
             <div className={`select-dropdown ${this.getDropdownStatus()}`}>
               <img src={selectDropdownIcon} alt="icn" />
             </div>

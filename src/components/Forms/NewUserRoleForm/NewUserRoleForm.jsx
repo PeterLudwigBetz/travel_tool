@@ -5,9 +5,12 @@ import PersonalDetailsFieldset from './FormFieldsets/PersonalDetails';
 import SubmitArea from '../NewRequestForm/FormFieldsets/SubmitArea';
 
 class NewUserRoleForm extends PureComponent {
-  defaultState = {
-    values: {
+  constructor(props) {
+    super(props);
+    const { role } = this.props;
+    const defaultValues = {
       email: '',
+<<<<<<< HEAD
       roleName: ''
     },
     errors: {},
@@ -16,6 +19,28 @@ class NewUserRoleForm extends PureComponent {
 
   state = { ...this.defaultState };
   validate = getDefaultBlanksValidatorFor(this);
+=======
+      roleName: role,
+    };
+    const initialValues = role &&
+    role.toLowerCase() === 'travel team member' ? {
+        ...defaultValues,
+        center: ''
+      } : defaultValues;
+    this.defaultState = {
+      values: initialValues,
+      errors: {},
+      hasBlankFields: true
+    };
+    this.state = { ...this.defaultState };
+  }
+  componentDidMount() {
+    const { role, fetchCenters } = this.props;
+    if (role && role.toLowerCase() === 'travel team member') {
+      fetchCenters();
+    }
+  }
+>>>>>>> feat(role): enable travel administrators create travel team members
 
   componentWillUnmount() {
     const { getRoleData } = this.props;
@@ -39,7 +64,7 @@ class NewUserRoleForm extends PureComponent {
 
   render() {
     const { values, errors, hasBlankFields } = this.state;
-    const { updatingRole } = this.props;
+    const { updatingRole, role, centers } = this.props;
     return (
       <FormContext targetForm={this} values={values} errors={errors} validatorName="validate">
         {updatingRole && (
@@ -49,7 +74,11 @@ class NewUserRoleForm extends PureComponent {
           </h5>
         )}
         <form onSubmit={this.handleSubmit} className="new-request">
-          <PersonalDetailsFieldset values={values} value="232px" />
+          <PersonalDetailsFieldset
+            values={values}
+            roleName={role}
+            centers={centers}
+          />
           <hr />
           <SubmitArea
             onCancel={this.handleCancel}

@@ -10,7 +10,7 @@ exports[`<TripGeometry /> renders correctly 1`] = `
   role="presentation"
   style={
     Object {
-      "left": "-8928px",
+      "left": "-8990px",
     }
   }
   tabIndex="-1"
@@ -19,7 +19,7 @@ exports[`<TripGeometry /> renders correctly 1`] = `
     className="geom-trip geom-trip--outer"
     style={
       Object {
-        "background": "hsl(196,62%,75%)",
+        "background": "hsl(275,69%,67%)",
         "minHeight": "20px",
         "width": "217px",
       }
@@ -29,7 +29,11 @@ exports[`<TripGeometry /> renders correctly 1`] = `
       className="geom-trip geom-trip--inner"
       style={
         Object {
+<<<<<<< HEAD
           "background": "hsl(196,72%,55%)",
+=======
+          "background": "hsl(275,79%,47%)",
+>>>>>>> feat(role): enable travel administrators create travel team members
           "width": "100%",
         }
       }

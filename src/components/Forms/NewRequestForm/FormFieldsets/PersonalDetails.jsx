@@ -10,7 +10,6 @@ class PersonalDetailsFieldset extends Component {
     disableInputs:''
   }
   handleDisableInputs = (value) => {
-    const { disableInputs } = this.state;
     const newState = value==='clicked'?'disable-details':'';
     this.setState({
       disableInputs: newState
@@ -58,14 +57,24 @@ class PersonalDetailsFieldset extends Component {
 
 
   render() {
+<<<<<<< HEAD
     const { collapsible, collapse, title, position, line, values} = this.props;
     this.inputRenderer = new InputRenderer(formMetadata);
     const { renderInput } = this.inputRenderer;
+=======
+    const { managers, collapsible, collapse, title, position, line, values, occupations } = this.props;
+    const managerNames = managers.map(manager => manager.fullName);
+    const occupationsNames = occupations.map(occupation => occupation.occupationName);
+    formMetadata.dropdownSelectOptions.manager = managerNames;
+    formMetadata.dropdownSelectOptions.role = occupationsNames;
+    this.inputRenderer = new InputRenderer(this.props, formMetadata);
+>>>>>>> feat(role): enable travel administrators create travel team members
 
     const disabledFields= values.state==='clicked'?'disable-details':null;
     return (
       <fieldset className={`personal-details ${disabledFields}`}>
-        <legend style={{ width: '100%' , borderBottom: line }}>
+        <legend style={{ width: '100%' , borderBottom: line,
+          fontFamily: 'DIN Pro Medium',	fontSize: '18px', paddingTop: '12px' }}>
           Personal Details
           <span className="required-field">
           * Required Field

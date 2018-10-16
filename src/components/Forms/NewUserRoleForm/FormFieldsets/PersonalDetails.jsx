@@ -6,14 +6,28 @@ class PersonalDetailsFiedset extends Component {
   render() {
     this.inputRenderer = new InputRenderer(formMetadata);
     const { renderInput } = this.inputRenderer;
+    const { roleName, centers } = this.props;
+    const centerLocations = centers && centers.map(center => center.location);
+    formMetadata.dropdownSelectOptions.center = centerLocations;
 
     return (
       <fieldset className="personal-details">
-        <div className="input-group">
-          <div style={{ width: ' 232px', marginRight: '30px' }}>
+        <div>
+          <div style={{ paddingTop: '14px' }}>
             {renderInput('email', 'text')}
           </div>
-          {renderInput('roleName', 'dropdown-select')}
+          <div>
+            {
+              centers &&
+                renderInput('center', 'dropdown-select')
+            }
+          </div>
+          <div>
+            {
+              !roleName &&
+              renderInput('roleName', 'dropdown-select')
+            }
+          </div>
         </div>
       </fieldset>
     );
