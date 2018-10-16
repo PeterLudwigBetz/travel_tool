@@ -71,12 +71,6 @@ class Input extends PureComponent {
         onChange: onChange ||  eventHandlers.handleSelectDropdown
       };
       return filterDropdownSelect;
-    case 'checkbox':
-      this.props = {
-        ...this.props,
-        onChange: onChange || eventHandlers.handleCheckBoxChange
-      };
-      return CheckBox;
     }
   }
 
