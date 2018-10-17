@@ -5,13 +5,14 @@ import '../RolePanelHeader/RolePanelHeader.scss';
 
 class ChecklistPanelHeader extends PureComponent {
   render() {
-    const { openModal } = this.props;
+    const { openModal, location } = this.props;
     return (
       <div className="role-panel-header">
         <PageHeader
           title="TRAVEL CHECKLIST"
           actionBtn="Add Item"
           openModal={openModal}
+          location={location}
         />
       </div>
     );
@@ -19,7 +20,12 @@ class ChecklistPanelHeader extends PureComponent {
 }
 
 ChecklistPanelHeader.propTypes = {
-  openModal: PropTypes.func.isRequired
+  openModal: PropTypes.func.isRequired,
+  location: PropTypes.func,
+};
+
+ChecklistPanelHeader.defaultProps = {
+  location: ''
 };
 
 export default ChecklistPanelHeader;

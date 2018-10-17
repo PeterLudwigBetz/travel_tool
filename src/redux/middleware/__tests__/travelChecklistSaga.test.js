@@ -1,10 +1,12 @@
 import { call } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
+import { matchers } from 'redux-saga-test-plan/matchers';
 import {
   watchFetchAllChecklists,
   watchDeleteChecklist,
   watchUpdateChecklist,
+  watchCreateChecklist
 } from '../travelChecklistSaga';
 import TravelChecklistAPI from '../../../services/travelChecklistAPI';
 import {
@@ -17,12 +19,64 @@ import {
   UPDATE_TRAVEL_CHECKLIST,
   UPDATE_TRAVEL_CHECKLIST_SUCCESS,
   UPDATE_TRAVEL_CHECKLIST_FAILURE,
+  CREATE_TRAVEL_CHECKLIST,
+  CREATE_TRAVEL_CHECKLIST_SUCCESS,
+  CREATE_TRAVEL_CHECKLIST_FAILURE
 } from '../../constants/actionTypes';
 import travelChecklistMockData from '../../__mocks__/travelChecklistsMockData';
 
-
-
 describe('Travel Checklist Saga test', () => {
+  describe('Delete travel checklist item', () => {
+    const checklistItemId = '23ErGDS6';
+    const deleteReason = 'Hello world';
+    const response = {
+      data: {
+        travelChecklists: travelChecklistMockData
+      }
+    };
+  
+    it('deletes a travel checklist item successfully', () => {
+      return expectSaga(watchDeleteChecklist)
+        .provide([[
+          call(TravelChecklistAPI.deleteChecklistItem, {
+            checklistItemId, deleteReason
+          }),
+          response
+        ]])
+        .put({
+          type: DELETE_TRAVEL_CHECKLIST_SUCCESS,
+          checklistItemId
+        })
+        .dispatch({
+          type: DELETE_TRAVEL_CHECKLIST,
+          checklistItemId,
+          deleteReason
+        })
+        .run();
+      })
+      it('handles failed travel checklist item delete', () => {
+        const error = new Error('Server error, try again');
+        error.response = { status: 500 };
+  
+        return expectSaga(watchDeleteChecklist)
+          .provide([[
+            call(TravelChecklistAPI.deleteChecklistItem, {
+              checklistItemId, deleteReason
+            }),
+            throwError(error)
+          ]])
+          .put({
+            type: DELETE_TRAVEL_CHECKLIST_FAILURE,
+            error: error.message
+          })
+          .dispatch({
+            type: DELETE_TRAVEL_CHECKLIST,
+            checklistItemId,
+            deleteReason
+          })
+          .run();
+      });
+  });
   describe('Fetch travel checklist', () => {
     const response = {
       data: {
@@ -35,7 +89,7 @@ describe('Travel Checklist Saga test', () => {
     it('fetches all travel checklist for a requestId', () => {
       return expectSaga(watchFetchAllChecklists)
         .provide([[
-          call(TravelChecklistAPI.getAllChecklists, requestId),
+          matchers.call.fn(TravelChecklistAPI.getAllChecklists, requestId),
           response
         ]])
         .put({
@@ -52,7 +106,7 @@ describe('Travel Checklist Saga test', () => {
     it('fetches all travel checklist', () => {
       return expectSaga(watchFetchAllChecklists)
         .provide([[
-          call(TravelChecklistAPI.getAllChecklists, undefined),
+          matchers.call.fn(TravelChecklistAPI.getAllChecklists, undefined),
           response
         ]])
         .put({
@@ -72,7 +126,7 @@ describe('Travel Checklist Saga test', () => {
 
       return expectSaga(watchFetchAllChecklists)
         .provide([[
-          call(TravelChecklistAPI.getAllChecklists, requestId),
+          matchers.call.fn(TravelChecklistAPI.getAllChecklists, requestId),
           throwError(error)
         ]])
         .put({
@@ -87,56 +141,66 @@ describe('Travel Checklist Saga test', () => {
     });
   });
 
-  describe('Delete travel checklist item', () => {
-    const checklistItemId = '23ErGDS6';
-    const deleteReason = 'Hello world';
-    const response = {
-      data: {
-        travelChecklists: travelChecklistMockData
+  describe('Create travel checklist', () => {
+    const action = {
+      checklist: {
+        'id': 3434343,
+        'name': 'Visa Application',
+        'resources': [
+          {
+            'label': 'Application guide',
+            'link': 'https://google.com/application-guide'
+          }
+        ],
       }
     };
 
-    it('deletes a travel checklist item successfully', () => {
-      return expectSaga(watchDeleteChecklist)
+    const response = {
+      data: {
+        travelChecklist: action.checklist
+      }
+    };
+
+    it('creates a travel checklist successfully', () => {
+      return expectSaga(watchCreateChecklist, TravelChecklistAPI)
         .provide([[
-          call(TravelChecklistAPI.deleteChecklistItem, {
-            checklistItemId, deleteReason
-          }),
+          matchers.call.fn(TravelChecklistAPI.createChecklist),
           response
         ]])
         .put({
-          type: DELETE_TRAVEL_CHECKLIST_SUCCESS,
-          checklistItemId
+          type: CREATE_TRAVEL_CHECKLIST_SUCCESS,
+          checklistItem: response.data
         })
         .dispatch({
-          type: DELETE_TRAVEL_CHECKLIST,
-          checklistItemId,
-          deleteReason
+          type: CREATE_TRAVEL_CHECKLIST,
+          checklistItemData: action.checklist
         })
         .run();
     });
+    it('handles failed travel checklist creation', () => {
+      const error = {
+        response: {
+          status: 422,
+          data: {
+            errors: ['Comment saga error']
+          }
+        }
+      };
 
-    it('handles failed travel checklist item delete', () => {
-      const error = new Error('Server error, try again');
-      error.response = { status: 500 };
-
-      return expectSaga(watchDeleteChecklist)
+      return expectSaga(watchCreateChecklist, TravelChecklistAPI)
         .provide([[
-          call(TravelChecklistAPI.deleteChecklistItem, {
-            checklistItemId, deleteReason
-          }),
+          matchers.call.fn(TravelChecklistAPI.createChecklist),
           throwError(error)
         ]])
         .put({
-          type: DELETE_TRAVEL_CHECKLIST_FAILURE,
-          error: error.message
+          type: CREATE_TRAVEL_CHECKLIST_FAILURE,
+          error: 'Bad request. '
         })
         .dispatch({
-          type: DELETE_TRAVEL_CHECKLIST,
-          checklistItemId,
-          deleteReason
+          type: CREATE_TRAVEL_CHECKLIST,
+          checklistItemData: action.checklist
         })
-        .run();
+        .run()
     });
   });
 

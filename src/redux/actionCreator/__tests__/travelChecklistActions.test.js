@@ -4,11 +4,14 @@ import {
   FETCH_TRAVEL_CHECKLIST_SUCCESS,
   UPDATE_TRAVEL_CHECKLIST,
   UPDATE_TRAVEL_CHECKLIST_SUCCESS,
-  UPDATE_TRAVEL_CHECKLIST_FAILURE
+  UPDATE_TRAVEL_CHECKLIST_FAILURE,
+  CREATE_TRAVEL_CHECKLIST,
+  CREATE_TRAVEL_CHECKLIST_FAILURE,
+  CREATE_TRAVEL_CHECKLIST_SUCCESS
 } from '../../constants/actionTypes';
 
 import {
-  fetchTravelChecklist,
+  fetchTravelChecklist, 
   fetchTravelChecklistFailure,
   fetchTravelChecklistSuccess,
   deleteTravelChecklist,
@@ -16,7 +19,10 @@ import {
   deleteChecklistSuccess,
   updateTravelChecklist,
   updateChecklistSuccess,
-  updateChecklistFailure
+  updateChecklistFailure,
+  createTravelChecklist,
+  createChecklistSuccess,
+  createChecklistFailure
 } from '../travelChecklistActions';
 import travelChecklistMockData from '../../__mocks__/travelChecklistsMockData';
 
@@ -135,6 +141,39 @@ describe('Travel checklists actions test', () => {
         error: 'Checklist item not found'
       };
       const newAction = deleteChecklistFailure('Checklist item not found');
+      expect(newAction).toEqual(expectedAction);
+    });
+  });
+
+  describe('Create travel checklist', () => {
+    const checklistItemData = {
+      name: 'Visa aplication',
+      requiresFiles: 'true',
+      label: 'Visa',
+      link: 'http://visa@test.com'
+    };
+    it('should return action of type CREATE_TRAVEL_CHECKLIST', () => {
+      const expectedAction = {
+        type: CREATE_TRAVEL_CHECKLIST,
+        checklistItemData: { ...checklistItemData },
+      };
+      const newAction = createTravelChecklist(checklistItemData);
+      expect(newAction).toEqual(expectedAction);
+    });
+    it('should return action of type CREATE_TRAVEL_CHECKLIST_SUCCESS', () => {
+      const expectedAction = {
+        type: CREATE_TRAVEL_CHECKLIST_SUCCESS,
+        checklistItem: { ...checklistItemData },
+      };
+      const newAction = createChecklistSuccess(checklistItemData);
+      expect(newAction).toEqual(expectedAction);
+    });
+    it('should return action of type CREATE_TRAVEL_CHECKLIST_FAILURE', () => {
+      const expectedAction = {
+        type: CREATE_TRAVEL_CHECKLIST_FAILURE,
+        error: 'error',
+      };
+      const newAction = createChecklistFailure('error');
       expect(newAction).toEqual(expectedAction);
     });
   });

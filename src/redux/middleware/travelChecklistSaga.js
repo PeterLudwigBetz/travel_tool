@@ -23,8 +23,6 @@ import { closeModal } from '../actionCreator/modalActions';
 
 export function* createChecklistAsync(action) {
   try {
-
-
     const { requiresFiles, label, link, itemName } = action.checklistItemData;
     // restructure data from CREATE_TRAVEL_CHECKLIST action
     // to match what the api is expecting
@@ -40,8 +38,8 @@ export function* createChecklistAsync(action) {
     };
     const response = yield call(TravelChecklistAPI.createChecklist, checklistItemData);
     yield put(createChecklistSuccess(response.data));
-    yield put(closeModal());
     toast.success(response.data.message);
+    yield put(closeModal());
   }
   catch(error) {
     const errorMessage = apiErrorHandler(error);
