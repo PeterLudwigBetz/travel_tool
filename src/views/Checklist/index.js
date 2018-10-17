@@ -175,12 +175,12 @@ export class Checklist extends Component {
       <div className="checklist-item">
         <div id="item-name">{checklistItem.name}</div>
         {checklistItem.id && (
-          <button type="button" id="edit-btn" onClick={() => {this.handleEditItem(checklistItem)}}>
+          <button type="button" id="edit-btn" onClick={() => {this.handleEditItem(checklistItem);}}>
             Edit
           </button>
         )}
         {checklistItem.id && (
-          <button type="button" id="delete-btn" onClick={() => {this.setItemToDelete(checklistItem.id)}}>
+          <button type="button" id="delete-btn" onClick={() => {this.setItemToDelete(checklistItem.id);}}>
             Delete
           </button>
         )}
@@ -191,7 +191,7 @@ export class Checklist extends Component {
   renderChecklistItems() {
     const { checklistItems, openModal, currentUser } = this.props;
     const filtered = checklistItems.filter(checklist => {
-      return checklist.destination === currentUser.location;
+      return checklist.destination.includes(currentUser.location);
     });
     return (
       <div className="">
