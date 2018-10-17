@@ -70,48 +70,42 @@ describe('Travel checklists actions test', () => {
 
         done();
       });
+  });
+  describe('Update TravelChecklist actions', () => {
+    it('should return action of type UPDATE_TRAVEL_CHECKLIST', (done) => {
+      const expectedAction = {
+        type: UPDATE_TRAVEL_CHECKLIST,
+        checklistItemId: '20',
+        checklistItemData: {name: 'itemToUpdate'}
+      };
+      const newAction = updateTravelChecklist('20', {name: 'itemToUpdate'});
+      expect(newAction).toEqual(expectedAction);
+      done();
+    });
 
-    describe('Update TravelChecklist actions', () => {
-      it('should return action of type UPDATE_TRAVEL_CHECKLIST', (done) => {
-        const expectedAction = {
-          type: UPDATE_TRAVEL_CHECKLIST,
-          checklistItemId: '20',
-          checklistItemData: {name: 'itemToUpdate'}
-        };
+    it('should return action of type UPDATE_TRAVEL_CHECKLIST_SUCCESS', (done) => {
+      const expectedAction = {
+        type: UPDATE_TRAVEL_CHECKLIST_SUCCESS,
+        updatedChecklistItem: {name: 'updatedItem'},
+        checklistItemId: '20',
+      };
+      const newAction = updateChecklistSuccess({name: 'updatedItem'}, '20');
 
-        const newAction = updateTravelChecklist({
-          checklistItemId: '20',
-          checklistItemData: {name: 'itemToUpdate'}
-        });
-        expect(newAction).toEqual(expectedAction);
+      expect(newAction).toEqual(expectedAction);
 
-        done();
-      });
+      done();
+    });
 
-      it('should return action of type UPDATE_TRAVEL_CHECKLIST_SUCCESS', (done) => {
-        const expectedAction = {
-          type: UPDATE_TRAVEL_CHECKLIST_SUCCESS,
-          updatedChecklistItem: {name: 'updatedItem'},
-          checklistItemId: '20',
-        };
-        const newAction = updateChecklistSuccess({name: 'updatedItem'}, '20');
+    it('should return action of type UPDATE_TRAVEL_CHECKLIST_FAILURE', (done) => {
+      const expectedAction = {
+        type: UPDATE_TRAVEL_CHECKLIST_FAILURE,
+        error: {name: 'error'},
+      };
+      const newAction = updateChecklistFailure({name: 'error'});
 
-        expect(newAction).toEqual(expectedAction);
+      expect(newAction).toEqual(expectedAction);
 
-        done();
-      });
-
-      it('should return action of type UPDATE_TRAVEL_CHECKLIST_FAILURE', (done) => {
-        const expectedAction = {
-          type: UPDATE_TRAVEL_CHECKLIST_FAILURE,
-          error: {name: 'error'},
-        };
-        const newAction = updateChecklistFailure({name: 'error'});
-
-        expect(newAction).toEqual(expectedAction);
-
-        done();
-      });
+      done();
     });
   });
 

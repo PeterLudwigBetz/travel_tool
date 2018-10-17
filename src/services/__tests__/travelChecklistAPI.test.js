@@ -65,7 +65,7 @@ describe('TravelChecklistAPI', () => {
     expect(response.data).toEqual('Checklist item deleted successfully');
   });
 
-  it('should send a PUT request to update checklist item', async () =>{
+  it('should send a PUT request to update checklist item', async () => {
     const checklistItemData = {
       name: 'Travel Visa',
       requireFiles: true,
@@ -79,7 +79,7 @@ describe('TravelChecklistAPI', () => {
       }
     });
 
-    const response = await TravelChecklistAPI.updateChecklistItem(checklistItemData, checklistItemId);
+    const response = await TravelChecklistAPI.updateChecklistItem(checklistItemId, checklistItemData);
 
     expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/checklist/${checklistItemId}`);
     expect(response.data).toEqual({
