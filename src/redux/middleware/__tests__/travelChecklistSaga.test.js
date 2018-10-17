@@ -1,7 +1,7 @@
 import { call } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
-import { matchers } from 'redux-saga-test-plan/matchers';
+import * as  matchers from 'redux-saga-test-plan/matchers';
 import {
   watchFetchAllChecklists,
   watchDeleteChecklist,
@@ -53,29 +53,29 @@ describe('Travel Checklist Saga test', () => {
           deleteReason
         })
         .run();
-      })
-      it('handles failed travel checklist item delete', () => {
-        const error = new Error('Server error, try again');
-        error.response = { status: 500 };
+    })
+    it('handles failed travel checklist item delete', () => {
+      const error = new Error('Server error, try again');
+      error.response = { status: 500 };
   
-        return expectSaga(watchDeleteChecklist)
-          .provide([[
-            call(TravelChecklistAPI.deleteChecklistItem, {
-              checklistItemId, deleteReason
-            }),
-            throwError(error)
-          ]])
-          .put({
-            type: DELETE_TRAVEL_CHECKLIST_FAILURE,
-            error: error.message
-          })
-          .dispatch({
-            type: DELETE_TRAVEL_CHECKLIST,
-            checklistItemId,
-            deleteReason
-          })
-          .run();
-      });
+      return expectSaga(watchDeleteChecklist)
+        .provide([[
+          call(TravelChecklistAPI.deleteChecklistItem, {
+            checklistItemId, deleteReason
+          }),
+          throwError(error)
+        ]])
+        .put({
+          type: DELETE_TRAVEL_CHECKLIST_FAILURE,
+          error: error.message
+        })
+        .dispatch({
+          type: DELETE_TRAVEL_CHECKLIST,
+          checklistItemId,
+          deleteReason
+        })
+        .run();
+    });
   });
   describe('Fetch travel checklist', () => {
     const response = {
@@ -247,14 +247,14 @@ describe('Travel Checklist Saga test', () => {
         .run();
     });
 
-    it('throws an error when updating fails', (done) => {
+    it('throws an error when updating fails', () => {
       expectSaga(watchUpdateChecklist)
         .provide([
           [call(TravelChecklistAPI.updateChecklistItem, data.checklistItemId, data.checklistItemData), throwError(error)]
         ])
         .put({
           type: UPDATE_TRAVEL_CHECKLIST_FAILURE,
-          error,
+          error: 'Bad Request. ',
         })
         .dispatch({
           type: UPDATE_TRAVEL_CHECKLIST,
