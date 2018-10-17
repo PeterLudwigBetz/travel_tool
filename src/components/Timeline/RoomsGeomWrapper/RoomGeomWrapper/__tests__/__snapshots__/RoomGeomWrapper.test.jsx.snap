@@ -6,7 +6,41 @@ exports[`<RoomGeomWrapper /> renders properly 1`] = `
 >
   <div
     className="room-status-bar item-row"
-  />
+  >
+    <TimelineBarWrapper
+      setBookingDetailsAbsolutePos={[Function]}
+      toggleBookingDetails={[Function]}
+      tripStats={
+        Object {
+          "length": 1,
+          "stayPercentage": "100%",
+          "tripTimelineOffsetLeft": -78678,
+        }
+      }
+    >
+      <TimelineBar
+        customStyle={
+          Object {
+            "background": "#FF5359",
+          }
+        }
+        tripDayWidth={31}
+        tripStats={
+          Object {
+            "length": 1,
+            "stayPercentage": "100%",
+            "tripTimelineOffsetLeft": -78678,
+          }
+        }
+      >
+        <div
+          className="maintainance-bar inner"
+        >
+          Unavailable
+        </div>
+      </TimelineBar>
+    </TimelineBarWrapper>
+  </div>
   <BedGeomWrapper
     timelineStartDate={"2018-09-30T21:00:00.000Z"}
     timelineViewType="month"

@@ -4,6 +4,15 @@ form .form-input {
   height: 64px;
   margin: 0 0 20px 0;
   transition: height 0.5s ease-out;
+    @media (max-width: 450px) {
+    width: 100%;
+    .arrival-date {
+      width: calc(100% - 10px) !important;
+      .calendar-icon {
+        right: 20px !important;
+      }
+    }
+  }
   &.full-width {
     width: 100%;
     height: 64px;
@@ -99,8 +108,16 @@ form .form-input {
         transition: transform 0.05s ease-out;
         transform-origin: center;
       }
+      @media(max-width: 450px) {
+        width: 100% !important;
+      }
     }
   }
+
+  .novisibility{
+    visibility: hidden;
+}
+
   label {
     span {
       color: #999999;
@@ -145,7 +162,10 @@ form .form-input {
       }
     }
   }
-  .date-wrapper {
+  .date-wrapper, .date-wrapper > div {
+    @media (max-width: 450px) {
+      width: 100%;
+    }
     display: flex;
     position: relative;
     input {
@@ -154,11 +174,24 @@ form .form-input {
       text-shadow: 0 0 0 #999999;
       width: 190px;
       cursor: context-menu;
+      @media (max-width: 450px) {
+        width: 100%;
+      }
+    }
+
+    .input.select .select-menu {
+        transition-delay: 0.25s;
+        /* Don't reduce this */
     }
     .calendar-icon {
       position: absolute;
       right: 15px;
       top: 20px;
+    }
+    .react-datepicker-wrapper, .react-datepicker__input-container {
+      @media (max-width: 450px) {
+        width: 100%;
+      }
     }
   }
   input:disabled {

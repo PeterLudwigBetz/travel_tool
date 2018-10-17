@@ -29,11 +29,13 @@ describe('<MaintainanceForm />' , () =>{
     ]
   };
 
+
   beforeEach(() => {
     wrapper = shallow(<MaintainceForm {...props} />);
   });
 
   it('renders correctly', () => {
+    const mountWrapper = mount(<MaintainceForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -62,6 +64,13 @@ describe('<MaintainanceForm />' , () =>{
     sinon.spy(shallowRender.instance(), 'handleClearForm');
     shallowRender.instance().handleClearForm();
     expect(shallowRender.instance().handleClearForm.calledOnce).toEqual(true);
+  });
+
+  it('Renders error message if field is empty', ()=>{
+    const Mountwrapper = mount(<MaintainceForm {...props} />);
+    Mountwrapper.find('input[name="reason"]').simulate('blur');
+    Mountwrapper.update();
+    expect(Mountwrapper.state().errors.reason).toBe('This field is required');
   });
 });
 

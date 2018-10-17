@@ -41,6 +41,7 @@ import {
   watchFetchTimelneData,
   watchEditAccommodation,
 } from './accommodationSaga';
+import { watchFetchOccupations } from './occupationSaga';
 
 import { watchUpdateRoomsAsync } from './roomUpdateSaga';
 import {watchAddMainteinanceAsync} from './MaintenenceSaga';
@@ -80,8 +81,8 @@ function* rootSaga() {
     markSingleNotificationAsReadSaga(),
     watchFetchTrips(),
     watchUpdateTrip(),
-    watchAddMainteinanceAsync()
-
+    watchAddMainteinanceAsync(),
+    watchFetchOccupations(),
   ]);
 }
 

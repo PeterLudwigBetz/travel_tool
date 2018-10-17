@@ -31,7 +31,6 @@ class RoomLabel extends PureComponent {
 
   renderMainteinanceForm(type){
     const {closeModal, name, id, status,shouldOpen, addMaintenenceRecord, modalType} = this.props;
-
     return(
       <Modal
         closeModal={closeModal}
