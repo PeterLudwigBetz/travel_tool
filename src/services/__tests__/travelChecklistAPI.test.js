@@ -19,8 +19,7 @@ describe('TravelChecklistAPI', () => {
       response: { travelChecklists: [] }
     });
 
-    const response = await TravelChecklistAPI
-      .getAllChecklists();
+    const response = await TravelChecklistAPI.getAllChecklists();
     const request = moxios.requests.mostRecent();
     expect(request.url)
       .toEqual(`${baseUrl}/checklists`);
@@ -39,7 +38,7 @@ describe('TravelChecklistAPI', () => {
     });
 
     const response = await TravelChecklistAPI
-      .getAllChecklists('request-test-id');
+      .getAllChecklists('request-test-id', null);
     const request = moxios.requests.mostRecent();
     expect(request.url)
       .toEqual(`${baseUrl}/checklists?requestId=request-test-id`);
@@ -66,7 +65,7 @@ describe('TravelChecklistAPI', () => {
     expect(response.data).toEqual('Checklist item deleted successfully');
   });
 
-  it('should send a PUT request to update checklist item', async () =>{
+  it('should send a PUT request to update checklist item', async () => {
     const checklistItemData = {
       name: 'Travel Visa',
       requireFiles: true,
@@ -80,7 +79,7 @@ describe('TravelChecklistAPI', () => {
       }
     });
 
-    const response = await TravelChecklistAPI.updateChecklistItem(checklistItemData, checklistItemId);
+    const response = await TravelChecklistAPI.updateChecklistItem(checklistItemId, checklistItemData);
 
     expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/checklist/${checklistItemId}`);
     expect(response.data).toEqual({
@@ -88,4 +87,3 @@ describe('TravelChecklistAPI', () => {
     });
   });
 });
-

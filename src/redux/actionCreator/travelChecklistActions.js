@@ -28,22 +28,7 @@ export const createChecklistFailure = (error) => ({
   error,
 });
 
-// export const fetchTravelChecklist = (query) => ({
-//   type: FETCH_TRAVEL_CHECKLIST,
-//   query
-// });
-
-// export const fetchTravelChecklistSuccess = (checklistItems) => ({
-//   type: FETCH_TRAVEL_CHECKLIST_SUCCESS,
-//   checklistItems
-// });
-
-// export const fetchTravelChecklistFailure = (error) => ({
-//   type: FETCH_TRAVEL_CHECKLIST_FAILURE,
-//   error
-// });
-
-export const updateTravelChecklist = ({checklistItemId, checklistItemData}) => ({
+export const updateTravelChecklist = (checklistItemId, checklistItemData) => ({
   type: UPDATE_TRAVEL_CHECKLIST,
   checklistItemId,
   checklistItemData
@@ -60,9 +45,10 @@ export const updateChecklistFailure = (error) => ({
   error,
 });
 
-export const fetchTravelChecklist = (requestId) => ({
+export const fetchTravelChecklist = (requestId, destinationName) => ({
   type: FETCH_TRAVEL_CHECKLIST,
-  requestId
+  requestId,
+  destinationName
 });
 
 export const fetchTravelChecklistSuccess = (response) => ({

@@ -2,12 +2,13 @@ import travelChecklistReducer, { initialState } from '../travelChecklist';
 import {
   fetchTravelChecklist,
   fetchTravelChecklistFailure,
-  fetchTravelChecklistSuccess
+  fetchTravelChecklistSuccess,
+  createChecklistFailure,
+  createTravelChecklist,
+  createChecklistSuccess
 } from '../../actionCreator/travelChecklistActions';
 import travelChecklistMockData from '../../__mocks__/travelChecklistsMockData';
 import { DELETE_TRAVEL_CHECKLIST_FAILURE, DELETE_TRAVEL_CHECKLIST_SUCCESS, DELETE_TRAVEL_CHECKLIST } from '../../constants/actionTypes';
-
-
 
 describe('Travel checklists reducer', () => {
   describe('Fetch travel checklists reducer', () => {
@@ -73,7 +74,7 @@ describe('Travel checklists reducer', () => {
 
     let action, newState, expectedState;
 
-    describe('TravelChecklist Reducer', () => {
+  
       it('should handle UPDATE_TRAVEL_CHECKLIST', () => {
         action = {
           type: 'UPDATE_TRAVEL_CHECKLIST',
@@ -132,8 +133,8 @@ describe('Travel checklists reducer', () => {
 
         expect(newState).toEqual(expectedState);
       });
-    });
   });
+
   describe('Delete travelChecklist reducer', () => {
     let action, newState, expectedState;
 
@@ -197,5 +198,57 @@ describe('Travel checklists reducer', () => {
       };
       expect(newState).toMatchObject(expectedState);
     });
+  });
+  describe('Create travel checklist reducer', () => {
+    it('should return initial state', () => {
+      expect(travelChecklistReducer(undefined, {})).toEqual(initialState);
+    });
+
+    it('should handle CREATE_TRAVEL_CHECKLIST', () => {
+      const action = createTravelChecklist({
+        name: 'name',
+        requiresFiles: true,
+        label: 'label',
+        link: 'link'
+      });
+      const newState = travelChecklistReducer(initialState, action);
+      expect(newState.creatingChecklist).toBe(true);
+    });
+
+    it('should handle CREATE_TRAVEL_CHECKLIST_SUCCESS',
+      () => {
+        const currentState = {
+          ...initialState,
+          creatingChecklist: true,
+          checklistItems: travelChecklistMockData
+        };
+        const checklist = {
+          name: 'name',
+          requiresFiles: true,
+          label: 'label',
+          link: 'link'
+        };
+
+        const action = createChecklistSuccess(checklist);
+        const newState = travelChecklistReducer(currentState, action);
+
+        expect(newState.creatingChecklist).toBe(false);
+        expect(newState.checklistItem).toBe(checklist);
+        expect(newState.checklistItems).toMatchObject(travelChecklistMockData);
+      });
+
+    it('should handle CREATE_TRAVEL_CHECKLIST_FAILURE',
+      () => {
+        const currentState = {
+          ...initialState,
+          creatingChecklist: true,
+          checklistItems: travelChecklistMockData
+        };
+        const error = 'Error';
+        const action = createChecklistFailure(error);
+        const newState = travelChecklistReducer(currentState, action);
+        expect(newState.creatingChecklist).toEqual(false);
+        expect(newState.error).toEqual(error);
+      });
   });
 });

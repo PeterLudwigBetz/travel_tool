@@ -27,6 +27,15 @@ export function* createCommentAsync(action) {
   }
 }
 
+export function* watchCreateComment() {
+  yield takeLatest(CREATE_COMMENT, createCommentAsync);
+}
+
+
+
+
+
+
 export function* editCommentAsync(action) {
   try {
     const { requestId, comment, id } = action;
@@ -53,9 +62,7 @@ export function* deleteCommentAsync(action) {
   }
 }
 
-export function* watchCreateComment() {
-  yield takeLatest(CREATE_COMMENT, createCommentAsync);
-}
+
 
 export function* watchEditComment() {
   yield takeLatest(EDIT_COMMENT, editCommentAsync);

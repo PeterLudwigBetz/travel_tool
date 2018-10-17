@@ -31,6 +31,7 @@ describe('User Reducer', () => {
     postUserData: [],
     getUserData: {},
     getCurrentUserRole: '',
+    currentUser: {},
     errors: []
   };
 

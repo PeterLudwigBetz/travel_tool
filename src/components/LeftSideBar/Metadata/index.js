@@ -5,6 +5,8 @@ import inactiveSettingsIcon from '../../../images/icons/settings_inactive.svg';
 import inactiveLogoutIcon from '../../../images/icons/logout_inactive.svg';
 import activeAccommodationIcon from '../../../images/icons/accommodation-blue.svg';
 import inactiveAccommodationIcon from '../../../images/icons/accomodation-grey.svg';
+import activeChecklistIcon from '../../../images/icons/checklist-active.svg';
+import inactiveChecklistIcon from '../../../images/icons/checklist-inactive.svg';
 
 const NavItemsMetadata = [
   // Requests
@@ -60,8 +62,8 @@ const NavItemsMetadata = [
     activateOnLogin: false,
     isDropdown: false,
     icons: {
-      active: activeAccommodationIcon,
-      inactive: inactiveAccommodationIcon
+      active: activeChecklistIcon,
+      inactive: inactiveChecklistIcon
     }
   },
   // Settings

@@ -23,7 +23,7 @@ exports[`<LeftSideNavItems /> renders correctly 1`] = `
       >
         <img
           alt="icon"
-          src="accomodation-grey.svg"
+          src="checklist-inactive.svg"
         />
       </div>
       <div
