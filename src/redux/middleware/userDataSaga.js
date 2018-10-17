@@ -13,8 +13,6 @@ import {
   getUserDataFailure,
 } from '../actionCreator/userActions';
 
-const usersStagingUrl = process.env.REACT_APP_ALL_USERS_STAGING;
-
 export function* watchPostUserDataSagaAsync() {
   yield takeLatest(postUserData().type, postUserDataSagaAsync);
 }
@@ -24,8 +22,11 @@ export function* postUserDataSagaAsync(action) {
     const dataFromStagingApi = yield call(UserAPI.getUserDataFromStagingApi,
       action.userData.email,
     );
-    const location = dataFromStagingApi.data.values[0].location.name;
-    action.userData.location = location || process.env.REACT_APP_DEFAULT_LOCATION;
+    const location = dataFromStagingApi.data.values[0].location;
+    if (location !== null) {
+      action.userData.location = location.name;
+    }
+    action.userData.location = process.env.REACT_APP_DEFAULT_LOCATION;
     const response = yield call(UserAPI.postNewUsers, action.userData);
     yield put(postUserDataSuccess(response.data));
   } catch (error) {
