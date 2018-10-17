@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import '../_input.scss';
+
 export default class CheckBox extends Component {
   constructor(props) {
     super(props);
@@ -21,12 +23,17 @@ export default class CheckBox extends Component {
     const { name } = this.props;
     const { condition } = this.state;
     return (
-      <input
-        type="checkbox"
-        name={name}
-        checked={condition}
-        onChange={this.handleChange}
-      />
+      <label htmlFor="checkbox" className="container">
+        Require file attachment
+        <input
+          type="checkbox"
+          id="checkbox"
+          name={name}
+          checked={condition}
+          onChange={this.handleChange}
+        />
+        <span className="checkmark" />
+      </label>
     );
   }
 }

@@ -8,7 +8,6 @@ export default class NewChecklistForm extends PureComponent {
   constructor(props) {
     super(props);
     const { modalType, checklistItem } = this.props;
-    // const defaultResource = this.defaultResource[0];
     const itemName = (modalType == 'edit cheklistItem' && checklistItem) ? checklistItem.name : '' ;
     const requiresFiles = (modalType == 'edit cheklistItem' && checklistItem) ? checklistItem.requiresFiles : '' ;
     const link = (modalType == 'edit cheklistItem' && checklistItem.resources[0])
@@ -22,9 +21,7 @@ export default class NewChecklistForm extends PureComponent {
         label,
         link,
         requiresFiles,
-        // ...defaultResource
       },
-      // resources: [{}],
       errors: {},
       hasBlankFields: true
     };
@@ -33,11 +30,8 @@ export default class NewChecklistForm extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.handleCancel();
-    const { fetchTravelChecklist } = this.props;
-    const adminLocation = 'lagos';
-    fetchTravelChecklist(null, adminLocation);
-    // fetch checklist items
+    const { currentUser, fetchTravelChecklist, closeModal } = this.props;
+    fetchTravelChecklist(null, currentUser.location);
   }
 
   handleCancel = () => {
@@ -126,6 +120,6 @@ NewChecklistForm.propTypes = {
   closeModal: PropTypes.func.isRequired,
   updateTravelChecklist: PropTypes.func.isRequired,
   modalType: PropTypes.string.isRequired,
-  checklistItem: PropTypes.object.isRequired
+  checklistItem: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
-

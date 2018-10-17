@@ -2,7 +2,6 @@ import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Modal from '../../components/modal/Modal';
-import WithLoadingRoleTable from '../../components/RoleTable';
 import ChecklistPanelHeader from '../../components/ChecklistPanelHeader';
 import {
   NewChecklistForm,
@@ -14,7 +13,7 @@ import {
   updateTravelChecklist,
   deleteTravelChecklist
 } from '../../redux/actionCreator/travelChecklistActions';
-import './ChecklistTable.scss';
+import './index.scss';
 import error from '../../images/error.svg';
 
 
@@ -26,11 +25,8 @@ export class Checklist extends Component {
   }
 
   componentDidMount() {
-    const { fetchTravelChecklist } = this.props;
-    const adminLocation = 'lagos';
-    fetchTravelChecklist(null, adminLocation);
-    // fetch checklists for admins location
-    // only admins should be able to visit this page?
+    const { fetchTravelChecklist, currentUser } = this.props;
+    fetchTravelChecklist(null, currentUser.location);
   }
 
   setItemToDelete = (checklistItemId) => {
@@ -71,15 +67,16 @@ export class Checklist extends Component {
   }
 
   renderChecklistPanelHeader() {
+    const { currentUser } = this.props;
     return (
       <div className="rp-role__header">
-        <ChecklistPanelHeader openModal={this.openAddModal} />
+        <ChecklistPanelHeader openModal={this.openAddModal} location={currentUser.location} />
       </div>
     );
   }
 
   renderChecklistForm() {
-    const { closeModal, shouldOpen, modalType, createTravelChecklist, updateTravelChecklist } = this.props;
+    const { closeModal, shouldOpen, modalType, createTravelChecklist, updateTravelChecklist, currentUser, fetchTravelChecklist } = this.props;
     const { itemToEdit } = this.state;
 
     return (
@@ -99,6 +96,7 @@ export class Checklist extends Component {
           closeEditModal={this.closeEditModal}
           updateTravelChecklist={updateTravelChecklist}
           checklistItem={itemToEdit}
+          currentUser={currentUser}
         />
       </Modal>
     );
@@ -151,62 +149,62 @@ export class Checklist extends Component {
   }
 
   renderChecklistPage() {
+    const defaultChecklistItem = {
+      name: 'Trip Ticket',
+      resources: {
+        label: '',
+        link: ''
+      }
+    };
+    const { isLoading } = this.props;
     return (
       <Fragment>
         {this.renderChecklistPanelHeader()}
-        {this.renderChecklistItems()}
+        <div className="checklist-page">
+          <div id="default-item-header">Default item</div>
+          {this.renderChecklistItem(defaultChecklistItem)}
+          <div id="added-item-header">Added Items</div>
+          {isLoading ? <div id="loading">Loading...</div> : this.renderChecklistItems()}
+        </div>
       </Fragment>
     );
   }
 
+  renderChecklistItem(checklistItem) {
+    return (
+      <div className="checklist-item">
+        <div id="item-name">{checklistItem.name}</div>
+        {checklistItem.id && (
+          <button type="button" id="edit-btn" onClick={() => {this.handleEditItem(checklistItem)}}>
+            Edit
+          </button>
+        )}
+        {checklistItem.id && (
+          <button type="button" id="delete-btn" onClick={() => {this.setItemToDelete(checklistItem.id)}}>
+            Delete
+          </button>
+        )}
+      </div>
+    );
+  }
+
   renderChecklistItems() {
-    const { checklistItems, openModal } = this.props;
+    const { checklistItems, openModal, currentUser } = this.props;
     const filtered = checklistItems.filter(checklist => {
-      // TODO: get the destination from the store
-      // to get it from the store, hit the api to get users
-      return checklist.destination === 'Lagos, Nigeria';
+      return checklist.destination === currentUser.location;
     });
     return (
-      <Fragment>
-        <div className="table__container">
-          <table className="mdl-data-table mdl-js-data-table table__requests">
-            <thead>
-              head
-            </thead>
-            <tbody className="table__body">
-              {
-                filtered[0] && filtered[0].checklist.map(checklistItem => {
-                  return (
-                    <tr key={checklistItem.id} className="table__row">
-                      <td className="mdl-data-table__cell--non-numeric">
-                        {checklistItem.name}
-                      </td>
-                      <td className="mdl-data-table__cell--non-numeric">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            this.handleEditItem(checklistItem);
-                          }}>
-                            Edit
-                        </button>
-                      </td>
-                      <td className="mdl-data-table__cell--non-numeric">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            this.setItemToDelete(checklistItem.id);
-                          }}>
-                            Delete
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })
-              }
-            </tbody>
-          </table>
-        </div>
-      </Fragment>
+      <div className="">
+        {
+          filtered[0] && filtered[0].checklist.map(checklistItem => {
+            return (
+              <div key={checklistItem.id}>
+                {this.renderChecklistItem(checklistItem)}
+              </div>
+            );
+          })
+        }
+      </div>
     );
   }
   render() {
@@ -220,9 +218,12 @@ export class Checklist extends Component {
   }
 }
 
-const mapStateToProps = ({ modal, travelChecklist }) => ({
+export const mapStateToProps = ({ modal, travelChecklist, user }) => ({
   ...modal.modal,
-  checklistItems: travelChecklist.checklistItems
+  checklistItems: travelChecklist.checklistItems,
+  currentUser: user.currentUser,
+  // getCurrentUserRole: user.getCurrentUserRole,
+  isLoading: travelChecklist.isLoading
 });
 
 const mapDispatchToProps = {
@@ -240,23 +241,23 @@ export default connect(
 )(Checklist);
 
 Checklist.propTypes = {
-  openModal: PropTypes.func,
-  closeModal: PropTypes.func,
-  createTravelChecklist: PropTypes.func,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  createTravelChecklist: PropTypes.func.isRequired,
+  fetchTravelChecklist: PropTypes.func.isRequired,
   deleteTravelChecklist: PropTypes.func,
   updateTravelChecklist: PropTypes.func,
-  fetchTravelChecklist: PropTypes.func,
   shouldOpen: PropTypes.bool.isRequired,
   modalType: PropTypes.string,
-  checklistItems: PropTypes.array.isRequired
+  checklistItems: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  // getCurrentUserRole: PropTypes.string.isRequired,
+  // history: PropTypes.object.isRequired
 };
 
 Checklist.defaultProps = {
-  openModal: () => {},
-  closeModal: () => {},
-  createTravelChecklist: () => {},
   deleteTravelChecklist: () => {},
   updateTravelChecklist: () => {},
-  fetchTravelChecklist: () => {},
   modalType: ''
 };

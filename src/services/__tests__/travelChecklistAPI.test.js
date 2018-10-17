@@ -19,8 +19,7 @@ describe('TravelChecklistAPI', () => {
       response: { travelChecklists: [] }
     });
 
-    const response = await TravelChecklistAPI
-      .getAllChecklists();
+    const response = await TravelChecklistAPI.getAllChecklists();
     const request = moxios.requests.mostRecent();
     expect(request.url)
       .toEqual(`${baseUrl}/checklists`);
@@ -39,7 +38,7 @@ describe('TravelChecklistAPI', () => {
     });
 
     const response = await TravelChecklistAPI
-      .getAllChecklists('request-test-id');
+      .getAllChecklists('request-test-id', null);
     const request = moxios.requests.mostRecent();
     expect(request.url)
       .toEqual(`${baseUrl}/checklists?requestId=request-test-id`);
@@ -88,4 +87,3 @@ describe('TravelChecklistAPI', () => {
     });
   });
 });
-
