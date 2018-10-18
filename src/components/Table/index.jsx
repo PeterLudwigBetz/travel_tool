@@ -116,7 +116,7 @@ export class Table extends Component {
   }
 
   renderRequest(request, type) {
-    const { trips } = request;
+    const { trips, travelCompletion } = request;
     const tripTypeFormatted = this.formatTripType(request.tripType);
     const travelDuration =
       request.tripType !== 'oneWay'
@@ -146,6 +146,11 @@ export class Table extends Component {
         <td className="mdl-data-table__cell--non-numeric table__data">
           {moment(request.departureDate).format('DD MMM YYYY')}
         </td>
+        { type === 'requests' && (
+          <td className="mdl-data-table__cell--non-numeric table__data">
+            {travelCompletion || '0% complete'}
+          </td>
+        )}
         <td className="mdl-data-table__cell--non-numeric table__requests__status table__data">
           {this.renderRequestStatus(request)}
         </td>
@@ -180,6 +185,11 @@ export class Table extends Component {
         <th className="mdl-data-table__cell--non-numeric table__head">
           Start Date
         </th>
+        { type === 'requests' && (
+          <th className="mdl-data-table__cell--non-numeric table__head">
+            Travel checklist
+          </th>
+        )}
         <th className="mdl-data-table__cell--non-numeric table__head table__head--last">
           Status
         </th>
@@ -271,7 +281,8 @@ Table.propTypes = {
   travelChecklists: PropTypes.array.isRequired,
   showTravelChecklist: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  // percentage: PropTypes.string
 };
 
 Table.defaultProps = {
@@ -283,7 +294,8 @@ Table.defaultProps = {
   modalType: null,
   message: '',
   page: '',
-  requestId: ''
+  requestId: '',
+  // percentage: ''
 };
 
 export default withLoading(Table);

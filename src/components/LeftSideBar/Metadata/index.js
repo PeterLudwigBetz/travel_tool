@@ -58,7 +58,7 @@ const NavItemsMetadata = [
   // Trip planner
   {
     text: 'Trip Planner',
-    link_to: '/checklist',
+    link_to: '/checklists',
     activateOnLogin: false,
     isDropdown: false,
     icons: {
