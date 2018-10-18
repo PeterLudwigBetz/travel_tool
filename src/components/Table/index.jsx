@@ -295,7 +295,6 @@ Table.defaultProps = {
   message: '',
   page: '',
   requestId: '',
-  // percentage: ''
 };
 
 export default withLoading(Table);

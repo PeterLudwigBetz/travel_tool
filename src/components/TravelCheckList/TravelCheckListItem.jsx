@@ -14,6 +14,7 @@ class TravelChecklistItem extends PureComponent {
             <a
               key={id}
               href={resource.link}
+              target="blank"
               className="travelCheckList--item__resource-link"
             >
               [{resource.label}]

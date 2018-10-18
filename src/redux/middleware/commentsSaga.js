@@ -31,11 +31,6 @@ export function* watchCreateComment() {
   yield takeLatest(CREATE_COMMENT, createCommentAsync);
 }
 
-
-
-
-
-
 export function* editCommentAsync(action) {
   try {
     const { requestId, comment, id } = action;

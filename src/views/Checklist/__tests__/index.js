@@ -64,7 +64,6 @@ describe('<Checklist> component', () => {
     expect(wrapper.find('#loading').length).toBe(1);
   });
   it('should render the right number of checklist items', () => {
-    // console.log('🔥', shallowWrapper.debug());
   });
 
   it('maps state to props and return the expected object', () => {

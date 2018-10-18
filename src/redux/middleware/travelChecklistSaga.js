@@ -23,18 +23,13 @@ import { closeModal } from '../actionCreator/modalActions';
 
 export function* createChecklistAsync(action) {
   try {
-    const { requiresFiles, label, link, itemName } = action.checklistItemData;
+    const { requiresFiles, label, link, name, resources } = action.checklistItemData;
     // restructure data from CREATE_TRAVEL_CHECKLIST action
     // to match what the api is expecting
     const checklistItemData = {
-      name: itemName,
+      name,
       requiresFiles: requiresFiles === 'true',// convert to boolean
-      resources: [
-        {
-          label,
-          link
-        }
-      ]
+      resources
     };
     const response = yield call(TravelChecklistAPI.createChecklist, checklistItemData);
     yield put(createChecklistSuccess(response.data));

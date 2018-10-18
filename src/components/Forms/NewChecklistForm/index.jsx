@@ -64,19 +64,15 @@ export default class NewChecklistForm extends PureComponent {
         label: values.label
       }]
     };
-
-    console.log('check list item data', checklistItemData);
     
     if (!values.label || !values.link) {
       checklistItemData.resources = [];
     }
-    
-    console.log('check list item data again', checklistItemData);
+
     if (this.validate() && modalType === 'edit cheklistItem') {
       updateTravelChecklist(checklistItem.id, checklistItemData);
     } else {
-      let data = values;
-      createTravelChecklist(data);
+      createTravelChecklist(checklistItemData);
     }
   };
 
