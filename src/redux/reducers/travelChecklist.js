@@ -57,8 +57,6 @@ const traveChecklist = (state = initialState, action) => {
   case DELETE_TRAVEL_CHECKLIST_SUCCESS:
     return {
       ...state,
-      checklistItems: state.checklistItems
-        .filter(item => item.checklist.id !== action.checklistItemId),
       deletingChecklist: false,
       error: ''
     };

@@ -24,6 +24,7 @@ export function* postUserDataSagaAsync(action) {
     );
     const location = dataFromStagingApi.data.values[0].location;
     if (location !== null) {
+      localStorage.setItem('location', location.name);
       action.userData.location = location.name;
     } else {
       action.userData.location = process.env.REACT_APP_DEFAULT_LOCATION;
