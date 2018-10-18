@@ -12,7 +12,6 @@ import accommodation from './accommodation';
 import trips from './trips';
 import occupations from './occupations';
 import travelChecklist from './travelChecklist';
-import occupations from './occupations';
 
 
 const rootReducer = combineReducers({
@@ -29,7 +28,6 @@ const rootReducer = combineReducers({
   trips,
   occupations,
   travelChecklist,
-  occupations,
 });
 
 export default rootReducer;
