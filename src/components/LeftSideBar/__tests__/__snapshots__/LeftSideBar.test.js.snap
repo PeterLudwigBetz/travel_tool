@@ -69,6 +69,10 @@ exports[`<LeftSideBar /> renders correctly 1`] = `
               },
               "isDropdown": false,
               "link_to": "/checklist",
+              "onlyVisibleTo": Array [
+                "Super Administrator",
+                "Travel Administrator",
+              ],
               "text": "Trip Planner",
             },
             Object {
