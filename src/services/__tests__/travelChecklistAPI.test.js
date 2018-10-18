@@ -86,4 +86,39 @@ describe('TravelChecklistAPI', () => {
       message: 'Checklist item sucessfully updated',
     });
   });
+
+  it('should send a POST request to create a checklist item', async () => {
+    const checklistItemData = {
+      name: 'Travel Visa',
+      requireFiles: true,
+    };
+
+    moxios.stubRequest(`${baseUrl}/checklist`, {
+      status: 201,
+      response: {
+        message: 'Checklist item created sucessfully',
+      }
+    });
+
+    const response = await TravelChecklistAPI.createChecklist(checklistItemData);
+
+    expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/checklist`);
+    expect(response.data).toEqual({
+      message: 'Checklist item created sucessfully',
+    });
+  });
+
+  it('should send a GET request to fetch a checklist item by destinationName', async () => {
+    moxios.stubRequest(`${baseUrl}/checklists?destinationName=Nairobi`, {
+      status: 200,
+      response: { travelChecklists: [] }
+    });
+
+    const response = await TravelChecklistAPI.getAllChecklists(null, 'Nairobi');
+
+    expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/checklists?destinationName=Nairobi`);
+    expect(response.status).toEqual(200);
+    expect(response.data)
+      .toEqual({ travelChecklists: [] });
+  });
 });

@@ -20,10 +20,11 @@ export default class NewChecklistForm extends PureComponent {
         itemName,
         label,
         link,
-        requiresFiles,
+        requiresFiles: 'false',
       },
       errors: {},
-      hasBlankFields: true
+      hasBlankFields: true,
+      optionalFields: ['label', 'link', 'requiresFiles']
     };
 
     this.state = { ...this.defaultState };
@@ -53,7 +54,7 @@ export default class NewChecklistForm extends PureComponent {
       checklistItem,
       modalType
     } = this.props;
-
+    
     const { values } = this.state;
     const checklistItemData = {
       name: values.itemName,
@@ -64,9 +65,12 @@ export default class NewChecklistForm extends PureComponent {
       }]
     };
 
+    if (!values.label || !values.link) {
+      checklistItemData.resources = [];
+    }
+
     if (this.validate() && modalType === 'edit cheklistItem') {
-      let data = {checklistItemId: checklistItem.id, checklistItemData};
-      updateTravelChecklist(data);
+      updateTravelChecklist(checklistItem.id, checklistItemData);
     } else {
       let data = values;
       createTravelChecklist(data);
@@ -74,14 +78,14 @@ export default class NewChecklistForm extends PureComponent {
   };
 
   validate = field => {
-    let { values, errors } = this.state;
+    let { values, errors, optionalFields } = this.state;
     [errors, values] = [{ ...errors }, { ...values }];
     let hasBlankFields = false;
-    !values[field]
+    !values[field] && !optionalFields.includes(field)
       ? (errors[field] = 'This field is required')
       : (errors[field] = '');
 
-    hasBlankFields = Object.keys(values).some(key => !values[key]);
+    hasBlankFields = Object.keys(values).some(key => !values[key] && !optionalFields.includes(key));
     this.setState(prevState => {
       return { ...prevState, errors, hasBlankFields };
     });

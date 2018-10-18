@@ -12,11 +12,11 @@ const SubmitArea = (props) => {
           Cancel
           </button>)
           : (
-            <button type="button" className="bg-btn bg-btn--inactive" onClick={onCancel}>
+            <button type="button" className="bg-btn bg-btn--inactive" onClick={onCancel} id="cancel">
               {cancel ? cancel : 'Clear'}
             </button>
           )}
-        <button type="submit" disabled={hasBlankFields} className="bg-btn bg-btn--active">
+        <button type="submit" disabled={hasBlankFields} className="bg-btn bg-btn--active" id="submit">
           { send }
         </button>
       </div>
