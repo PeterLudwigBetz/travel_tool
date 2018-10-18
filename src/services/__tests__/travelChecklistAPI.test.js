@@ -72,7 +72,7 @@ describe('TravelChecklistAPI', () => {
     };
     const checklistItemId = 'Er4HTD2xz';
 
-    moxios.stubRequest(`${baseUrl}/checklist/${checklistItemId}`, {
+    moxios.stubRequest(`${baseUrl}/checklists/${checklistItemId}`, {
       status: 200,
       response: {
         message: 'Checklist item sucessfully updated',
@@ -81,7 +81,7 @@ describe('TravelChecklistAPI', () => {
 
     const response = await TravelChecklistAPI.updateChecklistItem(checklistItemId, checklistItemData);
 
-    expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/checklist/${checklistItemId}`);
+    expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/checklists/${checklistItemId}`);
     expect(response.data).toEqual({
       message: 'Checklist item sucessfully updated',
     });
@@ -93,7 +93,7 @@ describe('TravelChecklistAPI', () => {
       requireFiles: true,
     };
 
-    moxios.stubRequest(`${baseUrl}/checklist`, {
+    moxios.stubRequest(`${baseUrl}/checklists`, {
       status: 201,
       response: {
         message: 'Checklist item created sucessfully',
@@ -102,7 +102,7 @@ describe('TravelChecklistAPI', () => {
 
     const response = await TravelChecklistAPI.createChecklist(checklistItemData);
 
-    expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/checklist`);
+    expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/checklists`);
     expect(response.data).toEqual({
       message: 'Checklist item created sucessfully',
     });

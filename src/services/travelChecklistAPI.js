@@ -17,11 +17,11 @@ class TravelChecklistAPI {
   }
 
   static createChecklist(checklistItemData) {
-    return axios.post(`${baseUrl}/checklist`, checklistItemData);
+    return axios.post(`${baseUrl}/checklists`, checklistItemData);
   }
 
   static updateChecklistItem(checklistItemId, checklistItemData) {
-    return axios.put(`${baseUrl}/checklist/${checklistItemId}`, checklistItemData);
+    return axios.put(`${baseUrl}/checklists/${checklistItemId}`, checklistItemData);
   }
 
   static deleteChecklistItem({checklistItemId, deleteReason}) {

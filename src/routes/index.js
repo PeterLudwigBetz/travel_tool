@@ -69,7 +69,7 @@ const Routes = () => (
             component={RequireAuth(ConnectedCheckIn)}
           />
           <Route
-            path="/checklist"
+            path="/checklists"
             exact
             component={RequireAuth(ConnectedChecklist)}
           />
