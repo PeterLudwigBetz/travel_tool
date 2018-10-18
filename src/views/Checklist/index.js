@@ -25,7 +25,7 @@ export class Checklist extends Component {
   }
 
   componentDidMount() {
-    const { fetchTravelChecklist, currentUser } = this.props;
+    const { fetchTravelChecklist } = this.props;
     fetchTravelChecklist(null, localStorage.getItem('location'));
   }
 
@@ -156,14 +156,14 @@ export class Checklist extends Component {
         link: ''
       }
     };
-    const { isLoading } = this.props;
+    const { isLoading, checklistItems } = this.props;
     return (
       <Fragment>
         {this.renderChecklistPanelHeader()}
         <div className="checklist-page">
           <div id="default-item-header">Default item</div>
           {this.renderChecklistItem(defaultChecklistItem)}
-          <div id="added-item-header">Added Items</div>
+          { checklistItems.length !== 0 && <div id="added-item-header">Added Items</div> }
           {isLoading ? <div id="loading">Loading...</div> : this.renderChecklistItems()}
         </div>
       </Fragment>
@@ -189,30 +189,42 @@ export class Checklist extends Component {
   }
 
   renderChecklistItems() {
-    const { checklistItems, openModal, currentUser } = this.props;
-    const filteredByLocation = checklistItems.length > 0 && checklistItems.filter(checklist => {
-      return checklist.destination.includes(currentUser.location);
-    });
+    const { checklistItems } = this.props;
     return (
       <div className="">
-        {
-          filteredByLocation[0] && filteredByLocation[0].checklist.map(checklistItem => {
-            return (
-              <div key={checklistItem.id}>
-                {this.renderChecklistItem(checklistItem)}
-              </div>
-            );
-          })
-        }
+        { checklistItems.length !== 0 && checklistItems[0].checklist.map(checklistItem => {
+          return (
+            <div key={checklistItem.id}>
+              {this.renderChecklistItem(checklistItem)}
+            </div>
+          );
+        }) }
       </div>
     );
   }
+
+  renderNoMessage() {
+    const { checklistItems } = this.props;
+    return (
+      <div>
+
+        <div className="checkInTable__trips--empty">
+          {
+            !checklistItems.length &&
+          'No new checklist item added yet'
+          }
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <Fragment>
         {this.renderChecklistForm()}
         {this.renderDeleteChecklistForm()}
         {this.renderChecklistPage()}
+        {this.renderNoMessage()}
       </Fragment>
     );
   }
@@ -222,7 +234,6 @@ export const mapStateToProps = ({ modal, travelChecklist, user }) => ({
   ...modal.modal,
   checklistItems: travelChecklist.checklistItems,
   currentUser: user.currentUser,
-  // getCurrentUserRole: user.getCurrentUserRole,
   isLoading: travelChecklist.isLoading
 });
 
