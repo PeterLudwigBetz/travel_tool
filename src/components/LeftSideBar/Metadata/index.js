@@ -64,7 +64,8 @@ const NavItemsMetadata = [
     icons: {
       active: activeChecklistIcon,
       inactive: inactiveChecklistIcon
-    }
+    },
+    onlyVisibleTo: ['Super Administrator', 'Travel Administrator']
   },
   // Settings
   {
