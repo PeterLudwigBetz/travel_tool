@@ -26,7 +26,7 @@ export class Checklist extends Component {
 
   componentDidMount() {
     const { fetchTravelChecklist, currentUser } = this.props;
-    fetchTravelChecklist(null, currentUser.location);
+    fetchTravelChecklist(null, localStorage.getItem('location'));
   }
 
   setItemToDelete = (checklistItemId) => {
@@ -190,13 +190,13 @@ export class Checklist extends Component {
 
   renderChecklistItems() {
     const { checklistItems, openModal, currentUser } = this.props;
-    const filtered = checklistItems.filter(checklist => {
+    const filteredByLocation = checklistItems.length > 0 && checklistItems.filter(checklist => {
       return checklist.destination.includes(currentUser.location);
     });
     return (
       <div className="">
         {
-          filtered[0] && filtered[0].checklist.map(checklistItem => {
+          filteredByLocation[0] && filteredByLocation[0].checklist.map(checklistItem => {
             return (
               <div key={checklistItem.id}>
                 {this.renderChecklistItem(checklistItem)}

@@ -10,7 +10,7 @@ exports[`<TripGeometry /> renders correctly 1`] = `
   role="presentation"
   style={
     Object {
-      "left": "-8959px",
+      "left": "-8990px",
     }
   }
   tabIndex="-1"

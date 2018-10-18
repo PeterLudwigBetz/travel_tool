@@ -6,7 +6,6 @@ import ConnectedChecklist, { Checklist, mapStateToProps } from '../index';
 import travelChecklistMockData from '../../../mockData/travelChecklistMockData';
 
 travelChecklistMockData[0].destination = 'Nairobi';
-console.log('🔥', travelChecklistMockData);
 const props = {
   openModal: jest.fn(),
   closeModal: jest.fn(),
