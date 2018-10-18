@@ -25,14 +25,12 @@ export function* postUserDataSagaAsync(action) {
     const location = dataFromStagingApi.data.values[0].location;
 
     if (location !== null) {
-      console.log('******** location ', location);
       localStorage.setItem('location', location.name);
       action.userData.location = location.name;
     } else {
       action.userData.location = process.env.REACT_APP_DEFAULT_LOCATION;
     }
 
-    console.log('******** action ', action);
     const response = yield call(UserAPI.postNewUsers, action.userData);
     yield put(postUserDataSuccess(response.data));
   } catch (error) {
