@@ -68,7 +68,7 @@ exports[`<LeftSideBar /> renders correctly 1`] = `
                 "inactive": "checklist-inactive.svg",
               },
               "isDropdown": false,
-              "link_to": "/checklist",
+              "link_to": "/checklists",
               "onlyVisibleTo": Array [
                 "Super Administrator",
                 "Travel Administrator",

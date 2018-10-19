@@ -5,7 +5,7 @@ import * as formMetadata from '../../FormsMetadata/NewChecklistForm';
 
 export default class ChecklistFieldSet extends Component {
   render() {
-    this.inputRenderer = new InputRenderer(this.props, formMetadata);
+    this.inputRenderer = new InputRenderer(formMetadata);
     const { renderInput } = this.inputRenderer;
     const { handleCheckboxChange } = this.props;
     return (

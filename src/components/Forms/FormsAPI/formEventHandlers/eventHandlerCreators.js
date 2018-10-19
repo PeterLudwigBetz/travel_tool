@@ -38,9 +38,9 @@ export function getOnBlurHandler(targetForm, validate, targetField) {
   return () => validate(targetField);
 }
 
-export function getCheckBoxHandler(validate, targetField) {
+export function getCheckBoxHandler(targetForm, validate, targetField) {
   return (checkStatus) => {
     let value = checkStatus;
-    updateFormValues.call(this, value, targetField);
+    updateFormValues.call(targetForm, value, targetField);
   };
 }

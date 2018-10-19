@@ -54,7 +54,7 @@ export default class NewChecklistForm extends PureComponent {
       checklistItem,
       modalType
     } = this.props;
-    
+
     const { values } = this.state;
     const checklistItemData = {
       name: values.itemName,
@@ -64,7 +64,7 @@ export default class NewChecklistForm extends PureComponent {
         label: values.label
       }]
     };
-    
+
     if (!values.label || !values.link) {
       checklistItemData.resources = [];
     }
@@ -95,7 +95,7 @@ export default class NewChecklistForm extends PureComponent {
     const { values, errors, hasBlankFields } = this.state;
     const { modalType } = this.props;
     return (
-      <FormContext targetForm={this} errors={errors} validatorName="validate">
+      <FormContext values={values} targetForm={this} errors={errors} validatorName="validate">
         <form onSubmit={this.handleSubmit} className="new-request">
           <ChecklistFieldSet
             values={values}
