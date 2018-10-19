@@ -54,6 +54,11 @@ import {
   watchDeleteChecklist
 } from './travelChecklistSaga';
 
+import {
+  watchFetchCenters,
+  watchUpdateUserCenterAsync
+} from './centersSaga';
+
 function* rootSaga() {
   yield all([
     userAuth(),
@@ -87,7 +92,9 @@ function* rootSaga() {
     watchFetchAllChecklists(),
     watchUpdateChecklist(),
     watchCreateChecklist(),
-    watchDeleteChecklist()
+    watchDeleteChecklist(),
+    watchFetchCenters(),
+    watchUpdateUserCenterAsync()
   ]);
 }
 
