@@ -11,7 +11,8 @@ import {
   createTravelChecklist,
   fetchTravelChecklist,
   updateTravelChecklist,
-  deleteTravelChecklist
+  deleteTravelChecklist,
+  fetchDeletedChecklistItems
 } from '../../redux/actionCreator/travelChecklistActions';
 import './index.scss';
 import error from '../../images/error.svg';
@@ -25,8 +26,9 @@ export class Checklist extends Component {
   }
 
   componentDidMount() {
-    const { fetchTravelChecklist } = this.props;
+    const { fetchTravelChecklist, fetchDeletedChecklistItems } = this.props;
     fetchTravelChecklist(null, localStorage.getItem('location'));
+    fetchDeletedChecklistItems(localStorage.getItem('location'));
   }
 
   setItemToDelete = (checklistItemId) => {
@@ -148,6 +150,31 @@ export class Checklist extends Component {
     );
   }
 
+  renderDeletedChecklistItem(deletedChecklistItem) {
+    return (
+      <div className="checklist-item">
+        <div id="deleted-item">{deletedChecklistItem.name}</div>
+        <div id="deleted-item">{deletedChecklistItem.deleteReason}</div>
+        <button type="button" id="restore-btn" onClick={() => {}}>Restore</button>
+      </div>
+    );
+  }
+
+  renderDeletedChecklistItems() {
+    const { deletedChecklistItems } = this.props;
+    return (
+      <div className="">
+        { deletedChecklistItems.length !== 0 && deletedChecklistItems.map(deleteItem => {
+          return (
+            <div key={deleteItem.id}>
+              {this.renderDeletedChecklistItem(deleteItem)}
+            </div>
+          );
+        }) }
+      </div>
+    );
+  }
+
   renderChecklistPage() {
     const defaultChecklistItem = {
       name: 'Trip Ticket',
@@ -156,15 +183,19 @@ export class Checklist extends Component {
         link: ''
       }
     };
-    const { isLoading, checklistItems } = this.props;
+    const { isLoading, checklistItems, deletedChecklistItems } = this.props;
     return (
       <Fragment>
         {this.renderChecklistPanelHeader()}
         <div className="checklist-page">
           <div id="default-item-header">Default item</div>
           {this.renderChecklistItem(defaultChecklistItem)}
-          { checklistItems.length !== 0 && <div id="added-item-header">Added Items</div> }
-          {isLoading ? <div id="loading">Loading...</div> : this.renderChecklistItems()}
+          <div id="added-item-header">Added Items</div>
+          {isLoading ? <div id="loading">Loading...</div> : 
+            (checklistItems.length !== 0) ? this.renderChecklistItems() : this.renderNoMessage()}
+          <div id="deleted-item-header">Deleted Items</div>
+          {isLoading ? <div id="loading">Loading...</div> : 
+            (deletedChecklistItems.length !== 0 ) ? this.renderDeletedChecklistItems() : this.renderNoDeletedChecklistItems()}
         </div>
       </Fragment>
     );
@@ -204,7 +235,7 @@ export class Checklist extends Component {
   }
 
   renderNoMessage() {
-    const { checklistItems } = this.props;
+    const { checklistItems, deletedChecklistItems } = this.props;
     return (
       <div>
 
@@ -218,13 +249,24 @@ export class Checklist extends Component {
     );
   }
 
+  renderNoDeletedChecklistItems() {
+    const { deletedChecklistItems } = this.props;
+    return (
+      <div className="checkInTable__trips--empty">
+        {
+          !deletedChecklistItems.length &&
+      'There are currently no deleted travel checklist items for your location'
+        }
+      </div>
+    );
+  }
+
   render() {
     return (
       <Fragment>
         {this.renderChecklistForm()}
         {this.renderDeleteChecklistForm()}
         {this.renderChecklistPage()}
-        {this.renderNoMessage()}
       </Fragment>
     );
   }
@@ -234,7 +276,8 @@ export const mapStateToProps = ({ modal, travelChecklist, user }) => ({
   ...modal.modal,
   checklistItems: travelChecklist.checklistItems,
   currentUser: user.currentUser,
-  isLoading: travelChecklist.isLoading
+  isLoading: travelChecklist.isLoading,
+  deletedChecklistItems: travelChecklist.deletedCheckListItems,
 });
 
 const mapDispatchToProps = {
@@ -243,7 +286,8 @@ const mapDispatchToProps = {
   createTravelChecklist,
   deleteTravelChecklist,
   fetchTravelChecklist,
-  updateTravelChecklist
+  updateTravelChecklist,
+  fetchDeletedChecklistItems,
 };
 
 export default connect(
@@ -258,9 +302,11 @@ Checklist.propTypes = {
   fetchTravelChecklist: PropTypes.func.isRequired,
   deleteTravelChecklist: PropTypes.func,
   updateTravelChecklist: PropTypes.func,
+  fetchDeletedChecklistItems: PropTypes.func.isRequired,
   shouldOpen: PropTypes.bool.isRequired,
   modalType: PropTypes.string,
   checklistItems: PropTypes.array.isRequired,
+  deletedChecklistItems: PropTypes.array,
   currentUser: PropTypes.object.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
@@ -268,5 +314,6 @@ Checklist.propTypes = {
 Checklist.defaultProps = {
   deleteTravelChecklist: () => {},
   updateTravelChecklist: () => {},
+  deletedChecklistItems: [],
   modalType: ''
 };

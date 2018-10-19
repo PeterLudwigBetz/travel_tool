@@ -68,7 +68,6 @@ exports[`<NewAccommodation /> renders correctly 1`] = `
           </label>
           <input
             className=" "
-            handleInputChange={[Function]}
             label="Guest House Name"
             name="houseName"
             onBlur={[Function]}
@@ -104,7 +103,6 @@ exports[`<NewAccommodation /> renders correctly 1`] = `
           </label>
           <input
             className=" "
-            handleInputChange={[Function]}
             label="Location"
             name="location"
             onBlur={[Function]}
@@ -140,7 +138,6 @@ exports[`<NewAccommodation /> renders correctly 1`] = `
           <div>
             <input
               className=" "
-              handleInputChange={[Function]}
               label="Bathrooms"
               min="1"
               name="bathRooms"
@@ -212,7 +209,6 @@ exports[`<NewAccommodation /> renders correctly 1`] = `
                 <input
                   className=" "
                   data-parentid={0}
-                  handleInputChange={[Function]}
                   label="Room Name"
                   name="roomName-0"
                   onBlur={[Function]}
@@ -264,7 +260,6 @@ exports[`<NewAccommodation /> renders correctly 1`] = `
                     data-parentid={0}
                     error=""
                     handleDropDown={[Function]}
-                    handleInputChange={[Function]}
                     label="Room Type"
                     name="roomType-0"
                     onChange={[Function]}
@@ -357,7 +352,6 @@ exports[`<NewAccommodation /> renders correctly 1`] = `
                   <input
                     className=" "
                     data-parentid={0}
-                    handleInputChange={[Function]}
                     label="No. of Beds"
                     min="1"
                     name="bedCount-0"

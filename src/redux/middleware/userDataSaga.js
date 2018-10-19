@@ -28,6 +28,7 @@ export function* postUserDataSagaAsync(action) {
       localStorage.setItem('location', location.name);
       action.userData.location = location.name;
     } else {
+      localStorage.setItem('location', process.env.REACT_APP_DEFAULT_LOCATION);
       action.userData.location = process.env.REACT_APP_DEFAULT_LOCATION;
     }
 

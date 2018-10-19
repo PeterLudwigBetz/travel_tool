@@ -4,12 +4,14 @@ import './_header.scss';
 
 class PageHeader extends PureComponent {
   render() {
-    const { title, actionBtn, openModal, location } = this.props;
+    const {
+      title, actionBtn, openModal, titleClassName, location
+    } = this.props;
 
     return (
       <div className="PageHeader">
         <div>
-          <span className="title">
+          <span className={titleClassName}>
             {title}
           </span>
           {location && (
@@ -43,10 +45,12 @@ PageHeader.propTypes = {
   actionBtn: PropTypes.string,
   openModal: PropTypes.func,
   location: PropTypes.string,
+  titleClassName: PropTypes.string,
 };
 
 PageHeader.defaultProps = {
   actionBtn: '',
   location: '',
+  titleClassName: 'title',
   openModal: () => {}
 };

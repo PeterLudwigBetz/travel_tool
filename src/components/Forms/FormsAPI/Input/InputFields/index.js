@@ -6,4 +6,12 @@ import ButtonToggler from './ButtonToggler';
 import NumberInput from './NumberInput';
 import CheckBox from './CheckBox';
 
-export { DropdownSelect, DateInput, ButtonToggler, HtmlInput, NumberInput, filterDropdownSelect, CheckBox};
+export {
+  DropdownSelect,
+  DateInput,
+  ButtonToggler,
+  HtmlInput,
+  NumberInput,
+  filterDropdownSelect,
+  CheckBox
+};

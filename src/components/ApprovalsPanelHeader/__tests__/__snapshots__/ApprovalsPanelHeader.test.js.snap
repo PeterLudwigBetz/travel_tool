@@ -9,6 +9,7 @@ exports[`should render approvals header correctly 1`] = `
     location=""
     openModal={[Function]}
     title="APPROVALS"
+    titleClassName="title"
   />
 </div>
 `;
