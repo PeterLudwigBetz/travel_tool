@@ -11,6 +11,7 @@ import LayoutShell from '../hoc/Layout';
 import ConnectedAccommodation from '../views/Accommodation';
 import ConnectedCheckIn from '../views/CheckIn';
 import ConnectedChecklist from '../views/Checklist';
+import ConnectedRoleDetails from '../views/RoleDetails';
 
 
 const Routes = () => (
@@ -77,6 +78,11 @@ const Routes = () => (
             path="/checklists"
             exact
             component={RequireAuth(ConnectedChecklist)}
+          />
+          <Route
+            path="/settings/roles/:roleId"
+            exact
+            component={RequireAuth(ConnectedRoleDetails)}
           />
         </Switch>
       </LayoutShell>
