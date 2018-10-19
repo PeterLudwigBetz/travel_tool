@@ -29,7 +29,8 @@ exports[`<TripGeometry /> renders correctly 1`] = `
       className="geom-trip geom-trip--inner"
       style={
         Object {
-          "background": "hsl(220,50%,52%)",
+          "background": "hsl(285,57%,32%)",
+         
           "width": "100%",
         }
       }
