@@ -1,0 +1,65 @@
+.personal-details-text{
+    height: 23px;
+    width: 134px;
+    color: #4F4F4F;
+    font-family: "DIN Pro";
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 23px;
+}
+
+.profile-details{
+    margin-left: 30px;
+}
+.profile-divider{
+    box-sizing: border-box;
+    height: 2px;
+    width: 980px;
+    border: 1px solid #E4E4E4;
+    margin-top: 10px;
+}
+.profile-input{
+    height: 250px;
+    width: 65%;
+}
+
+form{
+    fieldset {
+      .input-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+      }
+    }
+  }
+
+form.new-profile{
+    fieldset {
+      .input-group {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      input{
+        height: 40px;
+        width: 300px;
+        border-radius: 2px;
+        background-color: #F8F8F8;
+      }
+      .input{
+        height: 40px;
+        width: 300px;
+        border-radius: 2px;
+        background-color: #F8F8F8;
+      }
+      .input button{
+        width: 150px;
+      }
+      label{
+        color: #4F4F4F;
+        font-family: "DIN Pro";
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+}

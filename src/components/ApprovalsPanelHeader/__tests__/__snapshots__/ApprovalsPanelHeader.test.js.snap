@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render approvals header correctly 1`] = `
+<div
+  className="request-panel-header"
+>
+  <PageHeader
+    actionBtn=""
+    openModal={[Function]}
+    title="APPROVALS"
+    titleClassName="title"
+  />
+</div>
+`;

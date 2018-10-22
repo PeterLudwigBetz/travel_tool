@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render CommentBox component should match snapshot 1`] = `
+<form
+  className="editor__editor-form"
+>
+  <Editor
+    init={
+      Object {
+        "branding": false,
+        "menubar": false,
+        "mode": "textareas",
+        "plugins": "lists",
+        "skin": "lightgray",
+        "statusbar": false,
+        "toolbar": "bold italic underline   numlist bullist   outdent indent",
+      }
+    }
+    onBlur={[Function]}
+    onEditorChange={[Function]}
+    onFocus={[Function]}
+    onKeyUp={[Function]}
+    value="<p style=\\"color:#999999; font-size: 16px;	font-family: DIN Pro;	line-height: 20px; text-align: left; margin: 20px;\\">Write a comment</p>"
+  />
+  <div
+    className="editor__btn-size"
+  >
+    <span
+      className="editor__btn-wrap"
+    >
+      <button
+        className="editor__post-btn editor__post-btn post-btn-text"
+        id="post-submit"
+        onClick={[Function]}
+        type="submit"
+      >
+         
+        Post
+      </button>
+    </span>
+  </div>
+</form>
+`;

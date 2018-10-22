@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LeftSideBar /> renders correctly 1`] = `
+<div
+  className="left-sidebar"
+>
+  <div
+    className="left-sidebar__fixed_wrapper"
+  >
+    <div
+      className="left-sidebar__scrollable_wrapper"
+    >
+      <withRouter(LeftSideNavItems)
+        activeNavItem={Object {}}
+        metadata={
+          Array [
+            Object {
+              "activateOnLogin": true,
+              "dropdownItems": Array [
+                Object {
+                  "exact": true,
+                  "link_to": "/requests",
+                  "text": "My Requests",
+                },
+                Object {
+                  "link_to": "/requests/my-approvals",
+                  "text": "My Approvals",
+                },
+              ],
+              "icons": Object {
+                "active": "bookmark_active.svg",
+                "inactive": "bookmark_inactive.svg",
+              },
+              "isDropdown": true,
+              "link_to": "/requests",
+              "text": "Requests",
+            },
+            Object {
+              "activateOnLogin": false,
+              "dropdownItems": Array [
+                Object {
+                  "exact": false,
+                  "link_to": "/residence/manage",
+                  "onlyVisibleTo": Array [
+                    "Travel Administrator",
+                    "Super Administrator",
+                  ],
+                  "text": "Manage",
+                },
+                Object {
+                  "exact": false,
+                  "link_to": "/residence/checkin",
+                  "text": "Check-in",
+                },
+              ],
+              "icons": Object {
+                "active": "accommodation-blue.svg",
+                "inactive": "accomodation-grey.svg",
+              },
+              "isDropdown": true,
+              "link_to": "/residence",
+              "text": "Residence",
+            },
+            Object {
+              "activateOnLogin": false,
+              "dropdownItems": Array [
+                Object {
+                  "exact": "/settings/roles",
+                  "link_to": "/settings/roles",
+                  "onlyVisibleTo": Array [
+                    "Super Administrator",
+                  ],
+                  "text": "User Roles",
+                },
+                Object {
+                  "link_to": "/settings/profile",
+                  "text": "User Profile",
+                },
+                Object {
+                  "exact": "/settings/roles/:roleId",
+                  "link_to": "/settings/roles/339458",
+                  "onlyVisibleTo": Array [
+                    "Travel Administrator",
+                    "Super Administrator",
+                  ],
+                  "text": "Travel team",
+                },
+              ],
+              "icons": Object {
+                "active": "settings_active.svg",
+                "inactive": "settings_inactive.svg",
+              },
+              "isDropdown": true,
+              "link_to": "/settings",
+              "text": "Settings",
+            },
+            Object {
+              "activateOnLogin": false,
+              "icons": Object {
+                "inactive": "logout_inactive.svg",
+              },
+              "isDropdown": false,
+              "link_to": "/logout",
+              "onClick": "signout",
+              "text": "Logout",
+              "variantClassName": "logout-button",
+            },
+          ]
+        }
+        setActiveNavItem={[Function]}
+        userRole={Array []}
+      />
+    </div>
+  </div>
+</div>
+`;

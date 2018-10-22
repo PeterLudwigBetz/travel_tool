@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Requests> renders as expected 1`] = `
+<Fragment>
+  <Modal
+    closeDeleteCommentModal={null}
+    closeModal={[Function]}
+    customModalStyles=""
+    customOverlayStyle=""
+    modalBar={<div />}
+    modalContentId=""
+    modalId=""
+    params=""
+    requestId=""
+    showOverlay={true}
+    title="New Travel Request"
+    visibility="invisible"
+    width="1000px"
+  >
+    <NewRequestForm
+      closeModal={[Function]}
+      creatingRequest={false}
+      errors={Array []}
+      fetchUserRequests={[Function]}
+      handleCreateRequest={[Function]}
+      handleEditRequest={[Function]}
+      loading={false}
+      managers={Array []}
+      modalType={null}
+      requestOnEdit={
+        Object {
+          "createdAt": "2018-09-26T15:15:49.808Z",
+          "department": "Talent & Development",
+          "gender": "Male",
+          "id": "1",
+          "manager": "Faluyi Seun",
+          "name": "Seun Undefined",
+          "role": "Software Developer",
+          "status": "Open",
+          "tripType": "multi",
+          "trips": Array [
+            Object {
+              "createdAt": "2018-09-27T18:49:03.626Z",
+              "departureDate": "2018-09-30",
+              "destination": "Lagos Nigeria",
+              "id": "1",
+              "origin": "Abuja Nigeria",
+              "requestId": "NfR-9KoCP",
+              "returnDate": "2018-09-30",
+              "updatedAt": "2018-09-27T18:49:43.803Z",
+            },
+          ],
+          "updatedAt": "2018-09-26T15:15:49.808Z",
+          "userId": "lorem-ipsum",
+        }
+      }
+      updateUserProfile={[Function]}
+      user={
+        Object {
+          "UserInfo": Object {
+            "name": "John Doe",
+          },
+        }
+      }
+    />
+  </Modal>
+  <div
+    className="rp-requests__header"
+  >
+    <RequestPanelHeader
+      activeStatus="all"
+      fetchRequests={[Function]}
+      getRequestsWithLimit={[Function]}
+      modalType={null}
+      openModal={[Function]}
+      openRequestsCount={1}
+      pastRequestsCount={1}
+      requestsLength={3}
+      shouldOpen={false}
+      url="?page=1"
+    />
+  </div>
+  <div
+    className="rp-table"
+  >
+    <WithLoading
+      closeModal={[Function]}
+      editRequest={[Function]}
+      fetchRequestsError={null}
+      history={
+        Object {
+          "push": [Function],
+        }
+      }
+      isLoading={false}
+      location={
+        Object {
+          "pathname": "/requests",
+          "search": "?page=1",
+        }
+      }
+      modalType={null}
+      openModal={[Function]}
+      page="Requests"
+      requestId="sgjdgljgd"
+      requests={
+        Array [
+          Object {
+            "department": "TDD",
+            "gender": "Female",
+            "id": "xDh20btGz",
+            "manager": "Ezrqn Kiptanui",
+            "name": "Amarachukwo Agbo",
+            "role": "Learning Facilitator",
+            "tripType": "oneWay",
+            "trips": Array [
+              Object {
+                "departureDate": "2018-09-20",
+                "destination": "Angola",
+                "origin": "Lagos",
+              },
+            ],
+          },
+          Object {
+            "department": "TDD",
+            "gender": "Female",
+            "id": "xDh20btGy",
+            "manager": "Ezrqn Kiptanui",
+            "name": "Amarachukwo Agbo",
+            "role": "Learning Facilitator",
+            "tripType": "oneWay",
+            "trips": Array [
+              Object {
+                "departureDate": "2018-09-20",
+                "destination": "Angola",
+                "origin": "Lagos",
+              },
+            ],
+          },
+          Object {
+            "department": "TDD",
+            "gender": "Female",
+            "id": "xDh20btGx",
+            "manager": "Ezrqn Kiptanui",
+            "name": "Amarachukwo Agbo",
+            "role": "Learning Facilitator",
+            "tripType": "oneWay",
+            "trips": Array [
+              Object {
+                "departureDate": "2018-09-20",
+                "destination": "Angola",
+                "origin": "Lagos",
+              },
+            ],
+          },
+        ]
+      }
+      shouldOpen={false}
+      type="requests"
+    />
+  </div>
+  <div
+    className="rp-pagination"
+  >
+    <Pagination
+      currentPage={1}
+      onPageChange={[Function]}
+      pageCount={4}
+    />
+  </div>
+</Fragment>
+`;
