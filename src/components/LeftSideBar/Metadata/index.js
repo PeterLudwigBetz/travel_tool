@@ -5,8 +5,20 @@ import inactiveSettingsIcon from '../../../images/icons/settings_inactive.svg';
 import inactiveLogoutIcon from '../../../images/icons/logout_inactive.svg';
 import activeAccommodationIcon from '../../../images/icons/accommodation-blue.svg';
 import inactiveAccommodationIcon from '../../../images/icons/accomodation-grey.svg';
+import activeDashboardIcon from '../../../images/icons/dashboard.svg';
+import inactiveDashboardIcon  from '../../../images/icons/dashboard_inactive.svg';
 
 const NavItemsMetadata = [
+  // Dashboard
+  {
+    text: 'Dashboard',
+    link_to: '/dashboard',
+    activateOnLogin: true,
+    icons: {
+      active: activeDashboardIcon,
+      inactive: inactiveDashboardIcon
+    }
+  },
   // Requests
   {
     text: 'Requests',

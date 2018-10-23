@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DashboardHeader /> renders as expected 1`] = `
+<div
+  className="DashboardHeader"
+>
+  <h2
+    className="title"
+  >
+    Dashboard
+  </h2>
+  <div
+    className="actions"
+  >
+    <button
+      className="action-btn"
+      type="button"
+    >
+      Lagos
+      <img
+        alt="Lagos"
+        src="location_active.svg"
+      />
+    </button>
+    <button
+      className="action-btn"
+      type="button"
+    >
+      This Week
+      <img
+        alt="This Week"
+        src="calendar_active.svg"
+      />
+    </button>
+    <button
+      className="action-btn"
+      type="button"
+    >
+      <img
+        src="download.svg"
+      />
+    </button>
+  </div>
+</div>
+`;
