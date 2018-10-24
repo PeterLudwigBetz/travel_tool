@@ -59,6 +59,13 @@ import {
   watchUpdateUserCenterAsync
 } from './centersSaga';
 
+import{
+  watchPostSubmission,
+  watchFetchSubmission,
+  watchDownloadSubmission,
+} from './checklistSubmissionSaga';
+
+
 function* rootSaga() {
   yield all([
     userAuth(),
@@ -94,7 +101,11 @@ function* rootSaga() {
     watchCreateChecklist(),
     watchDeleteChecklist(),
     watchFetchCenters(),
-    watchUpdateUserCenterAsync()
+    watchUpdateUserCenterAsync(),
+    watchPostSubmission(),
+    watchFetchSubmission(),
+    watchDownloadSubmission()
+
   ]);
 }
 

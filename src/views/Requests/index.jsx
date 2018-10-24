@@ -7,7 +7,13 @@ import Utils from '../../helper/Utils';
 import Modal from '../../components/modal/Modal';
 import Base from '../Base';
 import { NewRequestForm } from '../../components/Forms';
-import {fetchUserRequests,createNewRequest,editRequest,fetchEditRequest} from '../../redux/actionCreator/requestActions';
+import {
+  fetchUserRequests,
+  createNewRequest,
+  editRequest,
+  fetchEditRequest,
+  fetchUserRequestDetails,
+} from '../../redux/actionCreator/requestActions';
 import updateUserProfile from '../../redux/actionCreator/userProfileActions';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 import { fetchRoleUsers } from '../../redux/actionCreator/roleActions';
@@ -54,6 +60,12 @@ export class Requests extends Base {
     const { fetchTravelChecklist, openModal } = this.props;
     fetchTravelChecklist(requestId);
     openModal(true, 'travel checklist');
+  }
+  
+  handleUploadSubmissionModal = (request) => {
+    const {openModal, fetchEditRequest } = this.props;
+    fetchUserRequestDetails(request.id);
+    openModal(true, 'upload submissions');
   }
 
 
@@ -122,6 +134,7 @@ export class Requests extends Base {
           editRequest={this.handleEditRequest}
           travelChecklists={travelChecklists}
           showTravelChecklist={this.handleShowTravelChecklist}
+          uploadTripSubmissions={this.handleUploadSubmissionModal}
           location={location}
           history={history}
           requestId={requestId}

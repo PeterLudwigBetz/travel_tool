@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import RequestsModal from '../RequestsModal/RequestsModal';
+import { CheckListSubmissionForm } from '../Forms';
+import travelChecklists from '../TravelCheckList/travelChecklistMockData';
 import Modal from '../modal/Modal';
 import './Table.scss';
 import withLoading from '../Hoc/withLoading';
@@ -58,6 +60,17 @@ export class Table extends Component {
     } = this.props;
     history.push(`${pathname}/${requestId}`);
   };
+
+  fetchChecklistData(destination){
+    // handles fetched trip details. Awaiting endpoint
+    return travelChecklists;
+  }
+
+  fetchRequestChecklist(trips){
+    const destinations=trips.map(trip=>{return this.fetchChecklistData(trip.destination);});
+    return destinations;
+  }
+
   renderNoRequests(message) {
     return <div className="table__requests--empty">{message}</div>;
   }
@@ -67,7 +80,7 @@ export class Table extends Component {
   }
 
   renderRequestStatus(request) {
-    const { editRequest, type, showTravelChecklist } = this.props;
+    const { editRequest, type, showTravelChecklist, uploadTripSubmissions } = this.props;
 
     const { menuOpen } = this.state;
     return (
@@ -88,6 +101,7 @@ export class Table extends Component {
           <TableMenu
             editRequest={editRequest}
             showTravelChecklist={showTravelChecklist}
+            uploadTripSubmissions={uploadTripSubmissions}
             requestStatus={request.status}
             type={type}
             menuOpen={menuOpen}
@@ -154,6 +168,7 @@ export class Table extends Component {
         <td className="mdl-data-table__cell--non-numeric table__requests__status table__data">
           {this.renderRequestStatus(request)}
         </td>
+        {this.renderUploadSubmissions(request)}
       </tr>
     );
   }
@@ -238,6 +253,34 @@ export class Table extends Component {
       >
         <TravelChecklist travelChecklists={travelChecklists} />
       </Modal>
+      );
+    }
+
+  renderUploadSubmissions(requestData) {
+    const { closeModal,
+      shouldOpen, modalType, } = this.props;
+    const trips = requestData.trips;
+    const checklistsData = this.fetchRequestChecklist(trips);
+    return (
+      <Modal
+        closeModal={closeModal}
+        width="607px"
+        customModalStyles="custom-overlay"
+        modalId="checklist-submission-modal"
+        modalContentId="checklist-submission-modal-content"
+        visibility={shouldOpen && modalType === 'upload submissions'?'visible':'invisible'}
+        title={modalType === 'upload submissions' ? 'Travel Checklist' : ''}
+        modalBar={<div className="table__modal-bar-text">{requestData.id}</div>}
+      >
+        <CheckListSubmissionForm
+          requestData={requestData}
+          trips={trips}
+          checklistsData={checklistsData}
+          shouldOpen={shouldOpen}
+          closeModal={closeModal}
+          modalType={modalType}
+        />
+      </Modal>
     );
   }
 
@@ -283,6 +326,7 @@ Table.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   // percentage: PropTypes.string
+  uploadTripSubmissions: PropTypes.func.isRequired,
 };
 
 Table.defaultProps = {
